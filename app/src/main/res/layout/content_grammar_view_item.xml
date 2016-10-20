@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:paddingLeft="10dp"
+    android:paddingRight="5dp"
+    android:background="#ffffff"
+    android:paddingTop="8dp"
+    android:longClickable="true"
+    android:paddingBottom="8dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/my_c_gvi_tv_line1"
+        android:textColor="@color/my_text_word"
+        android:textSize="15dp"
+        android:layout_gravity="center_vertical"
+        android:layout_alignParentTop="true" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/my_c_gvi_tv_line2"
+        android:textColor="@color/my_text_mean"
+        android:textSize="13dp"
+        android:gravity="center_vertical|left"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/my_c_gvi_tv_line1" />
+
+</RelativeLayout>

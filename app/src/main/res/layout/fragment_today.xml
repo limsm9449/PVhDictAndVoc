@@ -1,0 +1,68 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    tools:context="com.sleepingbear.pvhdictandvoc.DictionaryFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:id="@+id/my_f_today_rl1">
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="시작일자"
+                android:id="@+id/my_f_today_tv_date"
+                android:layout_alignParentLeft="true"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="10dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="New Text"
+                android:id="@+id/my_f_today_tv_sel_date"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="10dp"
+                android:textSize="15dp"
+                android:textColor="@android:color/black"
+                android:layout_toRightOf="@+id/my_f_today_tv_date" />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/my_f_today_ib_date"
+                android:src="@mipmap/ic_date_range"
+                android:background="@android:color/transparent"
+                android:adjustViewBounds="true"
+                android:layout_toRightOf="@+id/my_f_today_tv_sel_date"
+                android:layout_marginLeft="10dp" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/my_divider"
+            android:layout_marginTop="5dp"
+            android:id="@+id/my_f_today_ll1"
+            android:layout_below="@+id/my_f_today_rl1"></LinearLayout>
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/my_f_today_lv_dictionary"
+            android:divider="@color/my_divider"
+            android:dividerHeight="0.5dp"
+            android:layout_below="@+id/my_f_today_ll1"/>
+
+    </RelativeLayout>
+
+</FrameLayout>

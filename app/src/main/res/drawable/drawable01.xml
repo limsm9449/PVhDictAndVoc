@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@android:id/background">
+        <shape>
+            <gradient android:angle="270"
+                android:endColor="@color/FlatDarkCyan"
+                android:startColor="@color/FlatLightCyan"></gradient>
+        </shape>
+    </item>
+    <item android:id="@android:id/progress">
+        <clip>
+            <shape>
+                <gradient android:angle="270" android:endColor="@color/FlatDarkBlue" android:startColor="@color/FlatLightBlue">
+                </gradient>
+            </shape>
+        </clip>
+
+    </item>
+
+</layer-list>

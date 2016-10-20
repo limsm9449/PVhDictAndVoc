@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:background="#ffffff"
+    android:paddingLeft="10dp"
+    android:paddingTop="8dp"
+    android:paddingRight="5dp"
+    android:paddingBottom="8dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/my_c_msi_rl">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New Text"
+            android:id="@+id/my_c_msi_tv_foreign"
+            android:layout_alignParentTop="false"
+            android:layout_alignParentLeft="true"
+            android:textColor="#e65a5a"
+            android:textSize="15dp"
+            android:gravity="left"
+            android:layout_toLeftOf="@+id/my_c_msi_tv_date" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New Text"
+            android:id="@+id/my_c_msi_tv_date"
+            android:layout_alignParentTop="false"
+            android:layout_alignParentLeft="false"
+            android:textSize="13dp"
+            android:layout_marginLeft="10dp"
+            android:gravity="center"
+            android:layout_alignParentRight="true" />
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/my_c_msi_tv_han"
+        android:layout_alignParentBottom="false"
+        android:layout_alignParentRight="false"
+        android:layout_alignParentEnd="true"
+        android:textColor="#4f8ead"
+        android:textSize="14dp"
+        android:layout_alignParentLeft="false"
+        android:layout_centerVertical="true"
+        android:layout_below="@+id/my_c_msi_rl" />
+
+</RelativeLayout>

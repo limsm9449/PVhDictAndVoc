@@ -1,0 +1,25 @@
+<resources>>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+    </style>
+
+    <style name="Dic_DialogTheme" parent="@android:style/Theme.Dialog">
+        <item name="android:textColor">@color/FlatLightBlue</item>
+        <item name="android:windowBackground">@drawable/dialog_bg</item>
+        <item name="android:alertDialogStyle">@style/Dic_AlertDialogStyle</item>
+        <item name="android:colorPrimaryDark">@color/legacy_primary_dark</item>
+    </style>
+
+    <style name="MyMaterialTheme" parent="MyMaterialTheme.Base">
+        <item name="android:windowContentTransitions">true</item>
+        <item name="android:windowAllowEnterTransitionOverlap">true</item>
+        <item name="android:windowAllowReturnTransitionOverlap">true</item>
+        <item name="android:windowSharedElementEnterTransition">@android:transition/move</item>
+        <item name="android:windowSharedElementExitTransition">@android:transition/move</item>
+    </style>
+
+</resources>

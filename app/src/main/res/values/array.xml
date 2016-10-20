@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="dicKindCode">
+        <item>VH</item>
+        <item>HV</item>
+    </string-array>
+    <string-array name="dicKindValue">
+        <item>베한</item>
+        <item>한베</item>
+    </string-array>
+
+    <string-array name="dicMemoryCode">
+        <item>ALL</item>
+        <item>Y</item>
+        <item>N</item>
+    </string-array>
+    <string-array name="dicMemoryValue">
+        <item>전체</item>
+        <item>암기</item>
+        <item>미암기</item>
+    </string-array>
+
+    <string-array name="dicOrderValue">
+        <item>등록일 D</item>
+        <item>단어 D</item>
+        <item>뜻 D</item>
+        <item>등록일</item>
+        <item>단어</item>
+        <item>뜻</item>
+    </string-array>
+
+    <string-array name="studyKind">
+        <item>단답 학습</item>
+        <item>4지선다 학습</item>
+        <item>카드형 학습</item>
+        <item>카드형 OX 학습</item>
+        <item>카드형 4지선다 학습</item>
+    </string-array>
+
+    <string-array name="url">
+        <item>http://us.24h.com.vn/</item>
+        <item>http://vietnamnet.vn/</item>
+        <item>http://vnexpress.net/</item>
+    </string-array>
+    <string-array name="urlName">
+        <item>24h</item>
+        <item>vietnamnet</item>
+        <item>vnexpress</item>
+    </string-array>
+</resources>

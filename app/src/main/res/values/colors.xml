@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#00BCD4</color>
+    <color name="colorPrimaryDark">#00A0B4</color>
+    <color name="textColorPrimary">#FFFFFF</color>
+    <color name="windowBackground">#FFFFFF</color>
+    <color name="navigationBarColor">#000000</color>
+    <color name="colorAccent">#c8e8ff</color>
+
+    <color name="tab_text_act">#ffffff</color>
+    <color name="tab_text">#d1e7f7</color>
+
+    <color name="my_divider">#f17116</color>
+    <color name="my_dividerL">#c1590e</color>
+
+    <color name="my_toggle_outline">#ec4a04</color>
+    <color name="my_toggle">#ec4a04</color>
+    <color name="my_toggle_dark">#742604</color>
+    <color name="my_toggle_transparent">#030303</color>
+
+    <color name="my_button_outline">#ec4a04</color>
+    <color name="my_button_outline_disabled">#7b6e68</color>
+    <color name="my_button_dark">#742604</color>
+    <color name="my_button_transparent">#ec4a04</color>
+
+    <color name="my_spinner">#ec4a04</color>
+    <color name="my_spinner_outline">#ec4a04</color>
+
+    <color name="my_white">#ffffff</color>
+
+    <color name="my_dialog_outline">#ec4a04</color>
+
+    <color name="my_radiobutton">#ef9289</color>
+
+    <color name="my_text_word">#e65a5a</color>
+    <color name="my_text_mean">#4f8ead</color>
+    <color name="my_text_spelling">#424040</color>
+    <color name="my_text_question">#e65a5a</color>
+    <color name="my_text_answer">#4f8ead</color>
+
+    <color name="my_o_answer">#424040</color>
+    <color name="my_x_answer">#ec4a04</color>
+
+    <color name="colorActionBarText">#fafafa</color>
+
+    <color name="FlatLightCyan">#1abc9c</color>
+    <color name="FlatDarkCyan">#16a085</color>
+    <color name="FlatLightGreen">#2ecc71</color>
+    <color name="FlatDarkGreen">#27ae60</color>
+    <color name="FlatLightBlue">#3498db</color>
+    <color name="FlatDarkBlue">#2980b9</color>
+    <color name="FlatLightPurple">#9b59b6</color>
+    <color name="FlatDarkPurple">#8e44ad</color>
+    <color name="FlatLightNavy">#34495e</color>
+    <color name="FlatDarkNavy">#2c3e50</color>
+    <color name="FlatLightYellow">#f1c40f</color>
+    <color name="FlatDarkYellow">#f39c12</color>
+    <color name="FlatLightOrange">#e67e22</color>
+    <color name="FlatDarkOrange">#d35400</color>
+    <color name="FlatLightRed">#e74c3c</color>
+    <color name="FlatDarkRed">#c0392b</color>
+    <color name="FlatLightWhite">#ecf0f1</color>
+    <color name="FlatDarkWhite">#bdc3c7</color>
+    <color name="FlatLightGlay">#95a5a6</color>
+    <color name="FlatDarkGlay">#7f8c8d</color>
+    <color name="FlatLightPink">#ec6877</color>
+    <color name="FlatLightAqua">#68acec</color>
+
+    <color name="black_overlay">#66000000</color>
+    <color name="legacy_primary_dark">#8c2727</color>
+
+    <color name="DicMainToolBar">#d35400</color>
+    <color name="DicMainButtonArea">#e67e22</color>
+    <color name="DicMainButtonText">#ecf0f1</color>
+
+</resources>

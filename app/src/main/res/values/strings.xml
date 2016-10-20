@@ -1,0 +1,44 @@
+<resources>
+    <string name="app_name">베트남어 한국어 사전/단어장</string>
+    <string name="action_delete">데이타 삭제</string>
+    <string name="action_email">Email</string>
+    <string name="action_help">도움말</string>
+    <string name="action_sentence_write">Help</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="action_patch">패치 정보</string>
+
+    <string name="title_activity_fullscreen">FullscreenActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+
+    <string name="appName">VH Dict..</string>
+
+    <string name="action_dictionary">사전</string>
+    <string name="action_vocabulary">나의 단어장</string>
+    <string name="action_mySample">나의 예문</string>
+    <string name="action_study">단어 학습</string>
+    <string name="action_other">기타 기능</string>
+    <string name="action_category">카테고리</string>
+    <string name="action_grammar">문법</string>
+    <string name="action_board">게시판</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_word_view">WordViewActivity</string>
+    <string name="title_activity_study2">Study2Activity</string>
+    <string name="title_activity_study4">Study4Activity</string>
+    <string name="title_activity_vocabulary">VocabularyActivity</string>
+    <string name="title_activity_dic_category_view">DicKindActivity</string>
+    <string name="title_activity_sentence_view">SentenceViewActivity</string>
+    <string name="title_activity_study5">Study5Activity</string>
+    <string name="title_activity_web_view">베트남 사이트</string>
+    <string name="title_activity_help">도움말</string>
+    <string name="title_activity_dic_category">DicCategoryActivity</string>
+    <string name="title_activity_grammar">GrammarActivity</string>
+    <string name="title_activity_grammar_view">GrammarViewActivity</string>
+    <string name="title_activity_ad">AdActivity</string>
+    <string name="title_activity_patch">PatchActivity</string>
+    <string name="title_activity_my_sample">MySampleActivity</string>
+
+    <string name="banner_ad_unit_id">ca-app-pub-3860766380986792/1647308662</string>
+</resources>
