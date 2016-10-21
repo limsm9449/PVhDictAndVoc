@@ -133,7 +133,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
 
         ActionBar ab = (ActionBar) getSupportActionBar();
-        ab.setTitle("베한사전 & 단어장");
+        ab.setTitle("베한사전 & 단어장(유료)");
         //ab.setIcon(R.mipmap.ic_launcher);
 
         // ViewPaper 를 정의한다.
