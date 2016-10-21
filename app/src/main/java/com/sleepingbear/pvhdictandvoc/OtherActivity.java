@@ -21,6 +21,8 @@ import java.io.File;
 
 public class OtherActivity extends AppCompatActivity implements View.OnClickListener {
 
+    public String isChange = "N";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -142,6 +144,8 @@ public class OtherActivity extends AppCompatActivity implements View.OnClickList
 
                             Toast.makeText(getApplicationContext(), "백업 데이타를 정상적으로 가져왔습니다.", Toast.LENGTH_SHORT).show();
 
+                            isChange = "Y";
+
                             alertDialog.dismiss();
                         }
                     });
@@ -167,10 +171,18 @@ public class OtherActivity extends AppCompatActivity implements View.OnClickList
         int id = item.getItemId();
 
         if (id == android.R.id.home) {
-            finish();
+            onBackPressed();
         }
 
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this.getApplication(), DicCategoryActivity.class);
+        intent.putExtra("isChange", isChange);
+        setResult(RESULT_OK, intent);
+
+        finish();
+    }
 }

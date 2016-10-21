@@ -73,6 +73,9 @@ public class VocabularyFragment extends Fragment implements View.OnClickListener
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                if ( ((MainActivity)getActivity()).checkPermission() == false ) {
+                    return true;
+                }
                 final Cursor cur = (Cursor) adapter.getItem(position);
 
                 //layout 구성
@@ -288,30 +291,6 @@ public class VocabularyFragment extends Fragment implements View.OnClickListener
         ((AppCompatActivity)getActivity()).getSupportActionBar().setSubtitle("  단어장");
     }
 
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        switch ( requestCode ) {
-            case 0 :
-                if ( resultCode == Activity.RESULT_OK ) {
-                    changeListView();
-                }
-                break;
-            case 1 :
-                //if ( resultCode == Activity.RESULT_OK && "Y".equals(data.getStringExtra("isChange")) ) {
-                if ( resultCode == Activity.RESULT_OK ) {
-                    /*
-                    Bundle res = data.getExtras();
-                    if ( res.getBoolean("isChange") ) {
-                        changeListView();
-                    }
-                    */
-                    //무조건 갱신한다.
-                    changeListView();
-                }
-
-                break;
-        }
-    }
-
     @Override
     public void onClick(View v) {
         if ( v.getId() == R.id.my_f_dic_b_1 ) {
@@ -319,7 +298,7 @@ public class VocabularyFragment extends Fragment implements View.OnClickListener
             startActivity(intent);
         } else  if ( v.getId() == R.id.my_f_dic_b_2 ) {
             Intent intent = new Intent(this.getActivity().getApplication(), DicCategoryActivity.class);
-            startActivityForResult(intent, 1);
+            getActivity().startActivityForResult(intent, CommConstants.a_dicCategory);
         } else if ( v.getId() == R.id.my_f_dic_b_3 ) {
             Intent intent = new Intent(this.getActivity().getApplication(), GrammarActivity.class);
             startActivity(intent);
@@ -377,7 +356,7 @@ class VocabularyFlagmentCursorAdapter extends CursorAdapter {
                 bundle.putString("kindName", vViewHolder.kindName);
                 intent.putExtras(bundle);
 
-                mFragment.startActivityForResult(intent, 0);
+                mFragment.getActivity().startActivityForResult(intent, CommConstants.a_vocabulary);
             }
         });
 

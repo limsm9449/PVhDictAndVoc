@@ -15,12 +15,12 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 /*
-    2016.10.16 - db 62
+    2016.10.21 - db 63
  */
 class DbHelper extends SQLiteOpenHelper {
     private static String DB_NAME ="vhdictandvoc.db";
     private String DB_PATH = "";
-    private static final int DATABASE_VERSION = 62;
+    private static final int DATABASE_VERSION = 63;
     private final Context mContext;
 
     public DbHelper(Context context) {

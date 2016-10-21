@@ -39,6 +39,8 @@ public class VocabularyActivity extends AppCompatActivity implements View.OnClic
     private int mOrder = -1;
     private String mOrderName = "";
 
+    public String isChange = "N";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -148,6 +150,8 @@ public class VocabularyActivity extends AppCompatActivity implements View.OnClic
 
                                 adapter.dataChange();
 
+                                isChange = "Y";
+
                                 Toast.makeText(getApplicationContext(), "단어장을 삭제하였습니다.", Toast.LENGTH_SHORT).show();
                             }
                         })
@@ -204,10 +208,19 @@ public class VocabularyActivity extends AppCompatActivity implements View.OnClic
         int id = item.getItemId();
 
         if (id == android.R.id.home) {
-            finish();
+            onBackPressed();
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this.getApplication(), VocabularyActivity.class);
+        intent.putExtra("isChange", isChange);
+        setResult(RESULT_OK, intent);
+
+        finish();
     }
 }
 

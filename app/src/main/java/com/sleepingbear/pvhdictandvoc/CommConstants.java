@@ -20,4 +20,8 @@ public class CommConstants {
 
     public static String infoFileName = "vhdictandvoc.txt";
     public static String folderName = "/vhdictandvoc";
+
+    public final static int a_vocabulary = 1;
+    public final static int a_dicCategory = 2;
+    public final static int a_other = 3;
 }

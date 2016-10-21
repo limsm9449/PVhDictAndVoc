@@ -202,15 +202,13 @@ public class DicQuery {
     public static String getSubCategoryCount(String codeGroup) {
         StringBuffer sql = new StringBuffer();
 
-        sql.append("SELECT 1 _id, 2 ORD, CODE KIND, CODE_NAME KIND_NAME, " + CommConstants.sqlCR);
-        sql.append("            COALESCE((SELECT COUNT(*)" + CommConstants.sqlCR);
-        sql.append("                        FROM DIC_CATEGORY_WORD" + CommConstants.sqlCR);
-        sql.append("                       WHERE CODE = A.CODE),0) W_CNT, " + CommConstants.sqlCR);
-        sql.append("            COALESCE((SELECT COUNT(*)" + CommConstants.sqlCR);
-        sql.append("                        FROM DIC_CATEGORY_SENT" + CommConstants.sqlCR);
-        sql.append("                       WHERE CODE = A.CODE),0) S_CNT" + CommConstants.sqlCR);
+        sql.append("SELECT 1 _id, 2 ORD, A.CODE KIND, A.CODE_NAME KIND_NAME, " + CommConstants.sqlCR);
+        sql.append("            COALESCE(B.CNT,0) W_CNT,  " + CommConstants.sqlCR);
+        sql.append("            COALESCE(C.CNT,0) S_CNT " + CommConstants.sqlCR);
         sql.append("  FROM DIC_CODE A" + CommConstants.sqlCR);
-        sql.append(" WHERE CODE_GROUP = '" + codeGroup + "'" + CommConstants.sqlCR);
+        sql.append("       LEFT OUTER JOIN ( SELECT CODE, COUNT(*) CNT FROM DIC_CATEGORY_WORD GROUP BY CODE ) B ON ( B.CODE = A.CODE )" + CommConstants.sqlCR);
+        sql.append("       LEFT OUTER JOIN ( SELECT CODE, COUNT(*) CNT FROM DIC_CATEGORY_SENT GROUP BY CODE ) C ON ( C.CODE = A.CODE )" + CommConstants.sqlCR);
+        sql.append(" WHERE A.CODE_GROUP = '" + codeGroup + "'" + CommConstants.sqlCR);
         sql.append(" ORDER BY 1,4" + CommConstants.sqlCR);
 
         DicUtils.dicSqlLog(sql.toString());
