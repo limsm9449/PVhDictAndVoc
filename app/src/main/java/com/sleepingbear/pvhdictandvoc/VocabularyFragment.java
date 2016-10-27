@@ -287,10 +287,6 @@ public class VocabularyFragment extends Fragment implements View.OnClickListener
         listView.setSelection(0);
     }
 
-    public void setActionBarTitle() {
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setSubtitle("  단어장");
-    }
-
     @Override
     public void onClick(View v) {
         if ( v.getId() == R.id.my_f_dic_b_1 ) {

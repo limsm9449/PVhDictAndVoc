@@ -346,26 +346,6 @@ public class DictionaryFragment extends Fragment implements View.OnClickListener
 
             changeListView();
         }
-
-        setActionBarTitle();
-    }
-
-    public void setActionBarTitle() {
-        String title = "";
-        if ( "A".equals(mVhKind) ) {
-            title += "All";
-        } else if ( "VH".equals(mVhKind) ) {
-            title += "베트남어->한국어";
-        } else {
-            title += "한국어->베트남어";
-        }
-        if ( "W".equals(mWsKind) ) {
-            title += ", 단어";
-        } else {
-            title += ", 예문";
-        }
-
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setSubtitle("  사전 - " + title);
     }
 
     private class DicSearchTask extends AsyncTask<Void, Void, Void> {

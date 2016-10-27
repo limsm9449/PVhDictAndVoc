@@ -158,10 +158,6 @@ public class TodayFragment extends Fragment implements View.OnClickListener {
         }
     }
 
-    public void setActionBarTitle() {
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setSubtitle("  오늘의 단어");
-    }
-
 }
 
 class TodayCursorAdapter extends CursorAdapter {

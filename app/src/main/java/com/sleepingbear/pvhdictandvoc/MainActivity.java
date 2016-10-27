@@ -267,21 +267,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             if (position == 0) {
                 //단어장
                 if ( ((VocabularyFragment) adapter.getItem(position)) != null ) {
-                    ((VocabularyFragment) adapter.getItem(position)).setActionBarTitle();
                     ((VocabularyFragment) adapter.getItem(position)).changeListView();
                 }
             } else if (position == 1) {
                 //사전
                 fab.setVisibility(View.INVISIBLE);
-                if ( ((DictionaryFragment) adapter.getItem(position)) != null ) {
-                    ((DictionaryFragment) adapter.getItem(position)).setActionBarTitle();
-                }
             } else if (position == 2) {
                 //오늘의 단어
                 fab.setVisibility(View.INVISIBLE);
-                if ( ((TodayFragment) adapter.getItem(position)) != null ) {
-                    ((TodayFragment) adapter.getItem(position)).setActionBarTitle();
-                }
             }
         } catch ( Exception e ) {
             e.printStackTrace();
