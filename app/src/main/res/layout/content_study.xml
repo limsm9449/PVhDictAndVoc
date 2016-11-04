@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto" android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:showIn="@layout/activity_study1"
+    tools:showIn="@layout/activity_study"
     tools:context="com.sleepingbear.pvhdictandvoc.StudyActivity">
 
     <RelativeLayout
@@ -220,7 +220,8 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/my_f_stu_rl_5">
+            android:layout_below="@+id/my_f_stu_rl_5"
+            android:layout_marginTop="50dp">
 
             <Button
                 android:layout_width="wrap_content"
@@ -229,7 +230,8 @@
                 android:id="@+id/my_f_stu_b_start"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
-                android:background="@drawable/my_button" />
+                android:background="@drawable/my_button"
+                android:textColor="@color/textColorPrimary" />
         </RelativeLayout>
 
     </RelativeLayout>
