@@ -56,7 +56,7 @@ public class DicCategoryViewActivity extends AppCompatActivity {
             sql.append("       B.WORD," + CommConstants.sqlCR);
             sql.append("       B.MEAN," + CommConstants.sqlCR);
             sql.append("       B.ENTRY_ID," + CommConstants.sqlCR);
-            sql.append("       B.SPELLING" + CommConstants.sqlCR);
+            sql.append("       B.SPELLING," + CommConstants.sqlCR);
             sql.append("       'Y' IS_DIC" + CommConstants.sqlCR);
             sql.append("  FROM DIC_CATEGORY_WORD A, DIC B" + CommConstants.sqlCR);
             sql.append(" WHERE A.ENTRY_ID = B.ENTRY_ID" + CommConstants.sqlCR);

@@ -30,7 +30,7 @@ public class PatchActivity extends AppCompatActivity {
 
         StringBuffer patch = new StringBuffer();
 
-        patch.append("* 2016.10.21" + CommConstants.sqlCR);
+        patch.append("* 2016.11.7" + CommConstants.sqlCR);
         patch.append("" + CommConstants.sqlCR);
         patch.append("- (유료)베한 사전 및 단어장 오픈" + CommConstants.sqlCR);
 
