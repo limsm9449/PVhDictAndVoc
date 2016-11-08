@@ -28,11 +28,14 @@ public class PatchActivity extends AppCompatActivity {
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setVisibility(View.GONE);
 
+
         StringBuffer patch = new StringBuffer();
 
         patch.append("* 2016.11.7" + CommConstants.sqlCR);
         patch.append("" + CommConstants.sqlCR);
         patch.append("- (유료)베한 사전 및 단어장 오픈" + CommConstants.sqlCR);
+
+
 
         ((TextView) this.findViewById(R.id.my_c_patch_tv1)).setText(patch.toString());
     }
