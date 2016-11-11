@@ -31,6 +31,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -72,7 +73,7 @@ public class DictionaryFragment extends Fragment implements View.OnClickListener
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if ( keyCode == KeyEvent.KEYCODE_ENTER ) {
-                    changeListView();
+                    changeListView(true);
                 }
 
                 return false;
@@ -84,7 +85,7 @@ public class DictionaryFragment extends Fragment implements View.OnClickListener
             public void onClick(View v) {
                 et_search.setText("");
 
-                changeListView();
+                changeListView(true);
             }
         });
 
@@ -104,16 +105,21 @@ public class DictionaryFragment extends Fragment implements View.OnClickListener
         rb_sentence.setOnClickListener(this);
 
         //리스트 내용 변경
-        changeListView();
+        changeListView(false);
 
         return mainView;
     }
 
-    public void changeListView() {
-        if (task != null ) return;
+    public void changeListView(boolean isKeyin) {
+        if ( isKeyin ) {
+            ((RelativeLayout)mainView.findViewById(R.id.my_f_dic_rl_msg)).setVisibility(View.GONE);
 
-        task = new DicSearchTask();
-        task.execute();
+            if (task != null) {
+                return;
+            }
+            task = new DicSearchTask();
+            task.execute();
+        }
     }
 
     public void getData() {
@@ -324,27 +330,27 @@ public class DictionaryFragment extends Fragment implements View.OnClickListener
     public void onClick(View v) {
         if ( v.getId() == R.id.my_f_dic_rb_a ) {
             mVhKind = "A";
-            changeListView();
+            changeListView(true);
         } else if ( v.getId() == R.id.my_f_dic_rb_vh ) {
             mVhKind = "VH";
-            changeListView();
+            changeListView(true);
         } else if ( v.getId() == R.id.my_f_dic_rb_hv ) {
             mVhKind = "HV";
-            changeListView();
+            changeListView(true);
         } else if ( v.getId() == R.id.my_f_dic_rb_word ) {
             mWsKind = "W";
 
             RadioGroup rg = (RadioGroup) mainView.findViewById(R.id.my_f_dic_rg_vhKind);
             rg.setVisibility(View.VISIBLE);
 
-            changeListView();
+            changeListView(true);
         } else if ( v.getId() == R.id.my_f_dic_rb_sentence ) {
             mWsKind = "S";
 
             RadioGroup rg = (RadioGroup) mainView.findViewById(R.id.my_f_dic_rg_vhKind);
             rg.setVisibility(View.GONE);
 
-            changeListView();
+            changeListView(true);
         }
     }
 

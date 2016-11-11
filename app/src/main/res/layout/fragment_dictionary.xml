@@ -161,6 +161,20 @@
                 android:background="@color/my_divider"
                 android:layout_marginTop="5dp"></LinearLayout>
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/my_f_dic_rl_msg">
+
+                <TextView
+                    android:text="검색할 단어를 입력해주세요.\n단어를 입력하지 않고 검색(Enter)을 하시면 전체 단어를 검색합니다."
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView11"
+                    android:textSize="14sp"
+                    android:textColor="@android:color/holo_red_light" />
+            </RelativeLayout>
+
             <ListView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
