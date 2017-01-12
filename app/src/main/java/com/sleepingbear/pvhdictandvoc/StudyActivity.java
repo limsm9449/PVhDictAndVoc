@@ -4,8 +4,10 @@ import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -41,6 +43,8 @@ public class StudyActivity extends AppCompatActivity implements View.OnClickList
     private ArrayList<String> mVocKindNameAl;
 
     ArrayAdapter studyAdapter;
+
+    private SharedPreferences prefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,7 +110,18 @@ public class StudyActivity extends AppCompatActivity implements View.OnClickList
         ImageButton ib_fromdate = (ImageButton) findViewById(R.id.my_f_stu_ib_fromdate);
         ib_fromdate.setOnClickListener(this);
         TextView tv_sel_fromdate = (TextView) findViewById(R.id.my_f_stu_tv_sel_fromdate);
-        tv_sel_fromdate.setText(DicUtils.getDelimiterDate(DicUtils.getAddDay(DicUtils.getCurrentDate(), -60),"."));
+
+        //시작일자는 preferences에서 가져온다.
+        String fromDate = DicUtils.getDelimiterDate(DicUtils.getAddDay(DicUtils.getCurrentDate(), -60),".");
+        prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        if ( prefs.contains("fromDate") ) {
+            tv_sel_fromdate.setText(prefs.getString("fromDate", fromDate));
+        } else {
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putString("fromDate", fromDate);
+            editor.commit();
+            tv_sel_fromdate.setText(fromDate);
+        }
         mFromDate = tv_sel_fromdate.getText().toString();
 
         ImageButton ib_todate = (ImageButton) findViewById(R.id.my_f_stu_ib_todate);
@@ -153,6 +168,11 @@ public class StudyActivity extends AppCompatActivity implements View.OnClickList
                             TextView tv_sel_fromdate = (TextView) findViewById(R.id.my_f_stu_tv_sel_fromdate);
                             tv_sel_fromdate.setText(year + "." + (monthOfYear + 1> 9 ? "" : "0") + (monthOfYear + 1) + "." + (dayOfMonth> 9 ? "" : "0") + dayOfMonth);
                             mFromDate = tv_sel_fromdate.getText().toString();
+
+                            //preferences에 저장
+                            SharedPreferences.Editor editor = prefs.edit();
+                            editor.putString("fromDate", mFromDate);
+                            editor.commit();
                         }
                     },
                     Integer.parseInt(DicUtils.getYear(date)),

@@ -336,7 +336,7 @@ public class Study5Activity extends AppCompatActivity implements View.OnClickLis
                 public void run() {
                     try {
                         while (true) {
-                            Thread.sleep(1000);
+                            Thread.sleep(2000);
 
                             Message msg = handler.obtainMessage();
                             msg.arg1 = 0;

@@ -434,12 +434,11 @@ class Study2CursorAdapter extends CursorAdapter {
             }
         }
 
+        ((RadioButton)view.findViewById(R.id.my_c_s2i_rb_answer1)).setTextColor(context.getResources().getColor(R.color.my_text_answer));
+        ((RadioButton)view.findViewById(R.id.my_c_s2i_rb_answer2)).setTextColor(context.getResources().getColor(R.color.my_text_answer));
+        ((RadioButton)view.findViewById(R.id.my_c_s2i_rb_answer3)).setTextColor(context.getResources().getColor(R.color.my_text_answer));
+        ((RadioButton)view.findViewById(R.id.my_c_s2i_rb_answer4)).setTextColor(context.getResources().getColor(R.color.my_text_answer));
         if ( mAnswerAl.get(cursor.getPosition()).isAnswerView ) {
-            ((RadioButton)view.findViewById(R.id.my_c_s2i_rb_answer1)).setTextColor(context.getResources().getColor(R.color.my_text_answer));
-            ((RadioButton)view.findViewById(R.id.my_c_s2i_rb_answer2)).setTextColor(context.getResources().getColor(R.color.my_text_answer));
-            ((RadioButton)view.findViewById(R.id.my_c_s2i_rb_answer3)).setTextColor(context.getResources().getColor(R.color.my_text_answer));
-            ((RadioButton)view.findViewById(R.id.my_c_s2i_rb_answer4)).setTextColor(context.getResources().getColor(R.color.my_text_answer));
-
             if ( mAnswerAl.get(cursor.getPosition()).answer == 1 ) {
                 ((RadioButton)view.findViewById(R.id.my_c_s2i_rb_answer1)).setTextColor(Color.RED);
             } else if ( mAnswerAl.get(cursor.getPosition()).answer == 2 ) {
@@ -464,13 +463,13 @@ class Study2CursorAdapter extends CursorAdapter {
                 (mAnswerAl.get(cursor.getPosition()).chkAnswer == 2 ? true : false)  + "," +
                 (mAnswerAl.get(cursor.getPosition()).chkAnswer == 3 ? true : false)  + "," +
                 (mAnswerAl.get(cursor.getPosition()).chkAnswer == 4 ? true : false)  + ","  );
-        */
 
         String logStr = "";
         for ( int i = 0; i < mAnswerAl.size(); i++ ) {
             logStr += mAnswerAl.get(i).chkAnswer + ", ";
         }
-        //DicUtils.dicLog("bindview : " + cursor.getPosition() + " -> " + logStr);
+        DicUtils.dicLog("bindview : " + cursor.getPosition() + " -> " + logStr);
+        */
 
         //암기 체크박스
         String memorization = cursor.getString(cursor.getColumnIndexOrThrow("MEMORIZATION"));
