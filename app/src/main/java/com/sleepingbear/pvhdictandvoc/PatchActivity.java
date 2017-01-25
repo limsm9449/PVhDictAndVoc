@@ -31,8 +31,12 @@ public class PatchActivity extends AppCompatActivity {
 
         StringBuffer patch = new StringBuffer();
 
-        patch.append("* 2016.11.7" + CommConstants.sqlCR);
+        patch.append("* 신규 패치" + CommConstants.sqlCR);
         patch.append("" + CommConstants.sqlCR);
+        patch.append("- 검색단어 입력후 X 버튼 클릭시 재조회로 불편함이 있어 입력을 받도록 수정" + CommConstants.sqlCR);
+        patch.append("" + CommConstants.sqlCR);
+        patch.append("" + CommConstants.sqlCR);
+
         patch.append("- (유료)베한 사전 및 단어장 오픈" + CommConstants.sqlCR);
 
 
