@@ -33,10 +33,11 @@ public class PatchActivity extends AppCompatActivity {
 
         patch.append("* 신규 패치" + CommConstants.sqlCR);
         patch.append("" + CommConstants.sqlCR);
-        patch.append("- 검색단어 입력후 X 버튼 클릭시 재조회로 불편함이 있어 입력을 받도록 수정" + CommConstants.sqlCR);
+        patch.append("- 검색된 사전에서 롱클릭을 하면 바로 단어장으로 등록을 할 수 있습니다." + CommConstants.sqlCR);
         patch.append("" + CommConstants.sqlCR);
         patch.append("" + CommConstants.sqlCR);
 
+        patch.append("- 검색단어 입력후 X 버튼 클릭시 재조회로 불편함이 있어 입력을 받도록 수정" + CommConstants.sqlCR);
         patch.append("- (유료)베한 사전 및 단어장 오픈" + CommConstants.sqlCR);
 
 
