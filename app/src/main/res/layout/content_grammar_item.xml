@@ -21,7 +21,7 @@
             android:id="@+id/my_c_gi_tv_grammar"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="false"
-            android:textColor="#e65a5a"
+            android:textColor="@color/my_text_word"
             android:textSize="13dp"
             android:gravity="center_vertical"
             android:layout_alignParentBottom="false" />
@@ -34,7 +34,7 @@
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="false"
             android:layout_alignParentEnd="false"
-            android:textColor="#4f8ead"
+            android:textColor="@color/my_text_mean"
             android:textSize="13dp"
             android:layout_alignParentLeft="false"
             android:layout_alignWithParentIfMissing="false"

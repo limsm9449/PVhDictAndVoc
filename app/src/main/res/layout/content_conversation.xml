@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content_conversation"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.sleepingbear.pvhdictandvoc.ConversationActivity"
+    tools:showIn="@layout/activity_conversation">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal|top"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:layout_alignParentTop="true">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="5dp">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:id="@+id/my_f_conv_rl_search"
+                    android:layout_toLeftOf="@+id/my_ib_search">
+
+                    <EditText
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:id="@+id/my_f_conv_et_search"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentRight="true"
+                        android:background="@drawable/my_edittext"
+                        android:layout_marginLeft="5dp"
+                        android:paddingLeft="10dp"
+                        android:singleLine="true"
+                        android:paddingRight="30dp" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/my_iv_clear"
+                        android:layout_alignParentRight="true"
+                        android:src="@android:drawable/ic_delete" />
+
+                </RelativeLayout>
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/ic_search_black_24dp"
+                    android:id="@+id/my_ib_search"
+                    android:layout_alignParentEnd="false"
+                    android:background="@android:color/transparent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_alignParentRight="false"
+                    android:layout_toLeftOf="@+id/my_iv_random"
+                    android:layout_alignParentBottom="false"
+                    android:layout_alignParentTop="false"
+                    android:layout_marginTop="2dp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/ic_shuffle_black_24dp"
+                    android:id="@+id/my_iv_random"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginRight="40dp"
+                    android:layout_alignParentRight="true" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/ic_visibility_black_24dp"
+                    android:id="@+id/my_iv_view"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="2dp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@drawable/ic_visibility_off_black_24dp"
+                    android:id="@+id/my_iv_hide"
+                    android:layout_alignParentTop="false"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_alignParentRight="true" />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/my_divider"
+                android:layout_marginTop="5dp"></LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/my_f_conv_rl_msg">
+
+                <TextView
+                    android:text="검색할 단어를 입력해주세요."
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView11"
+                    android:textSize="17sp"
+                    android:textColor="@android:color/holo_red_light" />
+            </RelativeLayout>
+
+            <ListView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/my_f_conv_lv"
+                android:divider="@color/my_divider"
+                android:dividerHeight="0.5dp"
+                android:layout_alignParentLeft="false"
+                android:layout_alignParentTop="false" />
+        </LinearLayout>
+    </RelativeLayout>
+</RelativeLayout>

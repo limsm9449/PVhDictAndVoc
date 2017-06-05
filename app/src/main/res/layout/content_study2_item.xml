@@ -31,7 +31,7 @@
                     android:layout_height="wrap_content"
                     android:text="New Text"
                     android:id="@+id/my_c_s2i_tv_question"
-                    android:textColor="@color/my_text_question"
+                    android:textColor="@color/my_text_word"
                     android:textSize="15dp"
                     android:layout_alignParentLeft="true"
                     android:layout_toLeftOf="@+id/my_c_s2i_tv_answer" />

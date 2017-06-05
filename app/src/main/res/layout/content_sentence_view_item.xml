@@ -31,7 +31,7 @@
                     android:text="Word"
                     android:id="@+id/my_c_svi_word"
                     android:textSize="15dp"
-                    android:textColor="#e65a5a"
+                    android:textColor="@color/my_text_word"
                     android:textStyle="bold|normal" />
 
                 <TextView
@@ -40,9 +40,9 @@
                     android:text="Spelling"
                     android:id="@+id/my_c_svi_spelling"
                     android:textSize="13dp"
-                    android:textStyle="bold|normal"
+                    android:textStyle="normal"
                     android:layout_marginLeft="10dp"
-                    android:textColor="#FF9E9C9C" />
+                    android:textColor="@color/my_text_spelling" />
             </LinearLayout>
 
             <TextView
@@ -50,7 +50,7 @@
                 android:layout_height="wrap_content"
                 android:text="Mean"
                 android:id="@+id/my_c_svi_mean"
-                android:textColor="#4f8ead"
+                android:textColor="@color/my_text_mean"
                 android:textSize="13dp"
                 android:layout_marginTop="5dp" />
         </LinearLayout>

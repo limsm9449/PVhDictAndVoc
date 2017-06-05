@@ -31,7 +31,7 @@
                     android:layout_height="wrap_content"
                     android:text="Viet Sentence"
                     android:id="@+id/my_c_sv_tv_viet"
-                    android:textColor="#e65a5a"
+                    android:textColor="@color/my_text_word"
                     android:textSize="15dp"
                     android:textIsSelectable="true"
                     android:layout_marginLeft="10dp" />
@@ -39,16 +39,14 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Viet Spelling"
-                    android:id="@+id/my_c_sv_tv_viet_spelling"
+                    android:text="Han Sentence"
+                    android:id="@+id/my_c_sv_tv_spelling"
                     android:layout_marginLeft="10dp"
-                    android:textAlignment="gravity"
+                    android:textColor="@color/my_text_spelling"
                     android:textSize="13dp"
-                    android:textStyle="normal"
-                    android:textColor="#424040"
-                    android:layout_toRightOf="@+id/textView"
-                    android:layout_centerVertical="true"
-                    android:layout_toLeftOf="@+id/imageButton2" />
+                    android:textStyle="bold"
+                    android:textIsSelectable="true"
+                    android:layout_centerVertical="true" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -56,7 +54,7 @@
                     android:text="Han Sentence"
                     android:id="@+id/my_c_sv_tv_han"
                     android:layout_marginLeft="10dp"
-                    android:textColor="#4f8ead"
+                    android:textColor="@color/my_text_mean"
                     android:textSize="13dp"
                     android:textStyle="bold"
                     android:textIsSelectable="true"
@@ -78,7 +76,7 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
-            android:background="@color/my_dividerL"
+            android:background="@color/my_divider"
             android:layout_alignParentTop="true"
             android:layout_above="@+id/my_a_cat_lv_category"
             android:layout_marginTop="5dp" />

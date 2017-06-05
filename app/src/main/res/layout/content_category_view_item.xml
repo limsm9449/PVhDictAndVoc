@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:paddingLeft="10dp"
+    android:paddingTop="8dp"
+    android:paddingRight="5dp"
+    android:paddingBottom="8dp"
+    android:descendantFocusability="blocksDescendants">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/my_rl">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New Text"
+            android:id="@+id/my_tv_line1"
+            android:textColor="@color/my_text_word"
+            android:textSize="15dp"
+            android:layout_gravity="center_vertical" />
+
+        <TextView
+            android:text="TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/my_tv_spelling"
+            android:layout_toRightOf="@+id/my_tv_line1"
+            android:layout_marginLeft="10dp"
+            android:textColor="@color/my_text_spelling" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/my_tv_line2"
+        android:textColor="@color/my_text_mean"
+        android:textSize="13dp"
+        android:gravity="center_vertical|left"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/my_rl" />
+
+</RelativeLayout>

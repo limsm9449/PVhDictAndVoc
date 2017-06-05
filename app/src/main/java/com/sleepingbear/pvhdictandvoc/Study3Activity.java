@@ -6,12 +6,12 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -26,8 +26,6 @@ import android.widget.TextView;
 public class Study3Activity extends AppCompatActivity implements View.OnClickListener {
     private String mVocKind;
     private String mMemorization;
-    private String mFromDate;
-    private String mToDate;
     private boolean mIsPlay = false;
 
     private String mWordMean = "WORD";
@@ -61,8 +59,6 @@ public class Study3Activity extends AppCompatActivity implements View.OnClickLis
         Bundle b = this.getIntent().getExtras();
         mVocKind = b.getString("vocKind");
         mMemorization = b.getString("memorization");
-        mFromDate = b.getString("fromDate");
-        mToDate = b.getString("toDate");
         mWordMean = "WORD";
 
         ActionBar ab = (ActionBar) getSupportActionBar();
@@ -100,6 +96,12 @@ public class Study3Activity extends AppCompatActivity implements View.OnClickLis
         } else if ( "N".equals(mMemorization) ) {
             ((RadioButton) findViewById(R.id.my_a_study3_rb_m_not)).setChecked(true);
         }
+
+        //UI 수정
+        int fontSize = Integer.parseInt( DicUtils.getPreferencesValue( this, CommConstants.preferences_font ) );
+        tv_question.setTextSize(fontSize);
+        tv_spelling.setTextSize(fontSize);
+        tv_answer.setTextSize(fontSize);
 
         sb = (SeekBar) findViewById(R.id.my_a_study3_sb);
         sb.getProgressDrawable().setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
@@ -241,7 +243,7 @@ public class Study3Activity extends AppCompatActivity implements View.OnClickLis
             finish();
         } else if (id == R.id.action_help) {
             Bundle bundle = new Bundle();
-            bundle.putString("SCREEN", "STUDY3");
+            bundle.putString("SCREEN", CommConstants.screen_study3);
 
             Intent intent = new Intent(getApplication(), HelpActivity.class);
             intent.putExtras(bundle);
@@ -267,10 +269,10 @@ public class Study3Activity extends AppCompatActivity implements View.OnClickLis
         sql.append("       B.SEQ," + CommConstants.sqlCR);
         if ( "WORD".equals(mWordMean) ) {
             sql.append("       B.WORD QUESTION," + CommConstants.sqlCR);
-            sql.append("       REPLACE(B.MEAN, '<br>', ' ') ANSWER," + CommConstants.sqlCR);
+            sql.append("       B.MEAN ANSWER," + CommConstants.sqlCR);
         } else {
             sql.append("       B.WORD ANSWER," + CommConstants.sqlCR);
-            sql.append("       REPLACE(B.MEAN, '<br>', ' ') QUESTION," + CommConstants.sqlCR);
+            sql.append("       B.MEAN QUESTION," + CommConstants.sqlCR);
         }
         sql.append("       B.ENTRY_ID," + CommConstants.sqlCR);
         sql.append("       B.SPELLING," + CommConstants.sqlCR);
@@ -281,8 +283,6 @@ public class Study3Activity extends AppCompatActivity implements View.OnClickLis
         if (mMemorization.length() == 1) {
             sql.append("   AND A.MEMORIZATION = '" + mMemorization + "' " + CommConstants.sqlCR);
         }
-        sql.append("   AND A.INS_DATE >= '" + mFromDate + "' " + CommConstants.sqlCR);
-        sql.append("   AND A.INS_DATE <= '" + mToDate + "' " + CommConstants.sqlCR);
         sql.append(" ORDER BY A.RANDOM_SEQ" + CommConstants.sqlCR);
         mCursor = mDb.rawQuery(sql.toString(), null);
         if ( mCursor.moveToNext() ) {

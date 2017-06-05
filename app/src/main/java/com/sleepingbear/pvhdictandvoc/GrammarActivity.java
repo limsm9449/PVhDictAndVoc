@@ -7,19 +7,16 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.widget.CursorAdapter;
-import android.support.v4.widget.SimpleCursorAdapter;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 public class GrammarActivity extends AppCompatActivity {
@@ -60,11 +57,26 @@ public class GrammarActivity extends AppCompatActivity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // 상단 메뉴 구성
+        getMenuInflater().inflate(R.menu.menu_help, menu);
+
+        return true;
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
         if (id == android.R.id.home) {
             finish();
+        } else if (id == R.id.action_help) {
+            Bundle bundle = new Bundle();
+            bundle.putString("SCREEN", CommConstants.screen_grammar);
+
+            Intent intent = new Intent(getApplication(), HelpActivity.class);
+            intent.putExtras(bundle);
+            startActivity(intent);
         }
 
         return super.onOptionsItemSelected(item);
@@ -74,6 +86,7 @@ public class GrammarActivity extends AppCompatActivity {
 
 
 class GrammarCursorAdapter extends CursorAdapter {
+    int fontSize = 0;
     private Cursor mCursor;
     private Activity mActivity;
 
@@ -91,6 +104,8 @@ class GrammarCursorAdapter extends CursorAdapter {
         mContext = context;
         mCursor = cursor;
         mActivity = activity;
+
+        fontSize = Integer.parseInt( DicUtils.getPreferencesValue( context, CommConstants.preferences_font ) );
     }
 
     @Override
@@ -131,5 +146,9 @@ class GrammarCursorAdapter extends CursorAdapter {
 
         ((TextView) view.findViewById(R.id.my_c_gi_tv_grammar)).setText(cursor.getString(cursor.getColumnIndexOrThrow("GRAMMAR")));
         ((TextView) view.findViewById(R.id.my_c_gi_tv_mean)).setText(cursor.getString(cursor.getColumnIndexOrThrow("MEAN")));
+
+        //사이즈 설정
+        ((TextView) view.findViewById(R.id.my_c_gi_tv_grammar)).setTextSize(fontSize);
+        ((TextView) view.findViewById(R.id.my_c_gi_tv_mean)).setTextSize(fontSize);
     }
 }

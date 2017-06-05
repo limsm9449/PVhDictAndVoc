@@ -26,7 +26,8 @@
                 android:text="단어장"
                 android:id="@+id/my_f_stu_tv_vockind"
                 android:layout_alignParentLeft="true"
-                android:layout_centerInParent="true" />
+                android:layout_centerInParent="true"
+                android:textSize="16sp" />
 
             <Spinner
                 android:layout_width="wrap_content"
@@ -46,14 +47,6 @@
             android:layout_below="@+id/my_f_stu_rl_1"
             android:layout_marginTop="10dp">
 
-            <TextView
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:text="학습 종류"
-                android:id="@+id/my_f_stu_tv_studykind"
-                android:layout_alignParentLeft="true"
-                android:layout_centerInParent="true" />
-
             <Spinner
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
@@ -63,6 +56,16 @@
                 android:layout_alignParentEnd="false"
                 android:layout_alignParentLeft="false"
                 android:layout_toRightOf="@+id/my_f_stu_tv_studykind" />
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="학습 종류"
+                android:id="@+id/my_f_stu_tv_studykind"
+                android:layout_centerVertical="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:textSize="16sp" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -78,7 +81,8 @@
                 android:text="암기 여부"
                 android:id="@+id/my_f_stu_tv_memorization"
                 android:layout_alignParentLeft="true"
-                android:layout_centerInParent="true" />
+                android:layout_centerInParent="true"
+                android:textSize="16sp" />
 
             <RadioGroup
                 android:layout_width="120dp"
@@ -143,85 +147,8 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/my_f_stu_rl_4"
-            android:layout_marginTop="10dp"
-            android:layout_below="@+id/my_f_stu_rl_3">
-
-            <TextView
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:text="시작일자"
-                android:id="@+id/my_f_stu_tv_fromdate"
-                android:layout_alignParentLeft="true"
-                android:layout_centerInParent="true" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="New Text"
-                android:id="@+id/my_f_stu_tv_sel_fromdate"
-                android:layout_centerInParent="true"
-                android:layout_marginLeft="10dp"
-                android:textSize="15dp"
-                android:layout_toRightOf="@+id/my_f_stu_tv_fromdate"
-                android:textColor="@android:color/black" />
-
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/my_f_stu_ib_fromdate"
-                android:layout_alignParentRight="false"
-                android:src="@mipmap/ic_date_range"
-                android:background="@android:color/transparent"
-                android:adjustViewBounds="true"
-                android:layout_toRightOf="@+id/my_f_stu_tv_sel_fromdate"
-                android:layout_marginLeft="10dp" />
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/my_f_stu_rl_4"
-            android:layout_centerHorizontal="true"
-            android:id="@+id/my_f_stu_rl_5"
-            android:layout_marginTop="10dp">
-
-            <TextView
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:text="종료일자"
-                android:id="@+id/my_f_stu_tv_todate"
-                android:layout_alignParentLeft="true"
-                android:layout_centerInParent="true" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="New Text"
-                android:id="@+id/my_f_stu_tv_sel_todate"
-                android:layout_centerInParent="true"
-                android:layout_marginLeft="10dp"
-                android:textSize="15dp"
-                android:layout_toRightOf="@+id/my_f_stu_tv_todate"
-                android:textColor="@android:color/black" />
-
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/my_f_stu_ib_todate"
-                android:layout_alignParentRight="false"
-                android:src="@mipmap/ic_date_range"
-                android:background="@android:color/transparent"
-                android:layout_toRightOf="@+id/my_f_stu_tv_sel_todate"
-                android:layout_marginLeft="10dp" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/my_f_stu_rl_5"
-            android:layout_marginTop="50dp">
+            android:layout_below="@+id/my_f_stu_rl_3"
+            android:layout_alignParentBottom="true">
 
             <Button
                 android:layout_width="wrap_content"

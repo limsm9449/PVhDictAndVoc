@@ -25,10 +25,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="New Text"
-                android:id="@+id/my_c_s1i_tv_question"
+                android:id="@+id/my_tv_question"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentLeft="false"
-                android:textColor="#e65a5a"
+                android:textColor="@color/my_text_word"
                 android:textSize="15dp"
                 android:gravity="center_vertical"
                 android:layout_alignParentBottom="false" />
@@ -37,13 +37,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="New Text"
-                android:id="@+id/my_c_s1i_tv_answer"
-                android:layout_alignParentEnd="false"
+                android:id="@+id/my_tv_answer"
+                android:layout_alignParentRight="false"
                 android:textColor="#4f8ead"
                 android:textSize="13dp"
                 android:layout_alignParentBottom="true"
                 android:layout_marginTop="5dp"
-                android:layout_below="@+id/my_c_s1i_tv_question" />
+                android:layout_below="@+id/my_tv_question" />
 
         </RelativeLayout>
 
@@ -60,7 +60,7 @@
             <CheckBox
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/my_c_s1i_cb_memorization"
+                android:id="@+id/my_cb_memorization"
                 android:button="@drawable/my_checkbox_img"
                 android:textSize="10dp"
                 android:layout_alignParentTop="false"

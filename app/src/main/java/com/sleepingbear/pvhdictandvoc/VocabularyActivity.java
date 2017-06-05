@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.CursorAdapter;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -25,7 +24,6 @@ import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.util.HashMap;
 
 public class VocabularyActivity extends AppCompatActivity implements View.OnClickListener {
@@ -146,7 +144,7 @@ public class VocabularyActivity extends AppCompatActivity implements View.OnClic
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 DicDb.delDicVoc(db, entryId, kind);
-                                DicUtils.writeInfoToFile(getApplicationContext(), "MYWORD_DELETE" + ":" + kind + ":" + entryId);
+                                //DicUtils.writeInfoToFile(getApplicationContext(), "MYWORD_DELETE" + ":" + kind + ":" + entryId);
 
                                 adapter.dataChange();
 
@@ -268,7 +266,7 @@ class VocabularyCursorAdapter extends CursorAdapter {
                 DicDb.updMemory(mDb, entryId, (((CheckBox) v.findViewById(R.id.my_c_vi_cb_memorization)).isChecked() ? "Y" : "N"));
 
                 //기록...
-                DicUtils.writeInfoToFile(context, "MEMORY" + ":" + entryId + ":" + (((CheckBox) v.findViewById(R.id.my_c_vi_cb_memorization)).isChecked() ? "Y" : "N"));
+                //DicUtils.writeInfoToFile(context, "MEMORY" + ":" + entryId + ":" + (((CheckBox) v.findViewById(R.id.my_c_vi_cb_memorization)).isChecked() ? "Y" : "N"));
 
                 dataChange();
             }

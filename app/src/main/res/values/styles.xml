@@ -6,8 +6,8 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:windowActionBarOverlay">true</item>
-        <item name="android:windowContentOverlay">@null</item>
+
+        <item name="android:buttonStyle">@style/My.Widget.Button</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -19,75 +19,19 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-    <style name="FullscreenTheme" parent="AppTheme">
-        <item name="android:actionBarStyle">@style/FullscreenActionBarStyle</item>
-        <item name="android:windowActionBarOverlay">true</item>
-        <item name="android:windowBackground">@null</item>
-        <item name="metaButtonBarStyle">?android:attr/buttonBarStyle</item>
-        <item name="metaButtonBarButtonStyle">?android:attr/buttonBarButtonStyle</item>
-    </style>
+    <style name="My.Widget.Button" parent="android:Widget.Button">
+        <!-- button background, touch feed back -->
+        <item name="android:background">@drawable/my_btn_default_holo_light</item>
 
-    <style name="FullscreenActionBarStyle" parent="Widget.AppCompat.ActionBar">
-        <item name="android:background">@color/black_overlay</item>
-    </style>
+        <!-- button minimum size -->
+        <item name="android:minWidth">96dp</item>
+        <item name="android:minHeight">48dp</item>
 
-    <style name="Dic_DialogTheme" parent="@android:style/Theme.Dialog">
-        <item name="android:textColor">@color/FlatLightBlue</item>
-
-    </style>
-
-    <style name="Dic_AlertDialogStyle">
-        <item name="android:textColor">@color/FlatLightBlue</item>
-        <item name="android:fullBright">@android:color/transparent</item>
-        <item name="android:fullDark">@android:color/transparent</item>
-        <item name="android:topBright">@android:color/transparent</item>
-        <item name="android:topDark">@android:color/transparent</item>
-        <item name="android:centerBright">@android:color/transparent</item>
-        <item name="android:centerDark">@android:color/transparent</item>
-        <item name="android:centerMedium">@android:color/transparent</item>
-        <item name="android:bottomBright">@android:color/transparent</item>
-        <item name="android:bottomDark">@android:color/transparent</item>
-        <item name="android:bottomMedium">@android:color/transparent</item>
-    </style>
-
-    <style name="MyMaterialTheme" parent="MyMaterialTheme.Base"></style>
-
-    <style name="MyMaterialTheme.Base" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="windowNoTitle">true</item>
-        <item name="windowActionBar">false</item>
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-    </style>
-
-    <style name="MyCustomTabLayout" parent="Widget.Design.TabLayout">
-        <item name="tabTextAppearance">@style/MyCustomTabText</item>
-        <item name="tabSelectedTextColor">@color/tab_text_act</item>
-    </style>
-
-    <style name="MyCustomTabText" parent="TextAppearance.AppCompat.Button">
-        <item name="android:textSize">14sp</item>
-        <item name="android:textColor">@color/tab_text</item>
-        <item name="android:textStyle">normal|bold</item>
-    </style>
-
-    <style name="spinnerDropDownItemStyle" parent="android:TextAppearance.Widget.TextView.SpinnerItem"></style>
-
-    <style name="myButton" parent="@android:style/Widget.Button">
-        <item name="android:gravity">center_vertical|center_horizontal</item>
-        <item name="android:textColor">#FFFFFFFF</item>
-        <item name="android:shadowColor">#FF000000</item>
-        <item name="android:shadowDx">0</item>
-        <item name="android:shadowDy">-1</item>
-        <item name="android:shadowRadius">0.2</item>
-        <item name="android:textSize">16dip</item>
+        <!-- button text style -->
+        <item name="android:textSize">16sp</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:background">@drawable/my_button</item>
-        <item name="android:focusable">true</item>
-        <item name="android:clickable">true</item>
+        <item name="android:textColor">#ffffff</item>
     </style>
-
-    <style name="MyMaterialTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="MyMaterialTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 

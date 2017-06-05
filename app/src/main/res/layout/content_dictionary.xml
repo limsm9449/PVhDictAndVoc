@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content_dictionary"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.sleepingbear.pvhdictandvoc.DictionaryActivity"
+    tools:showIn="@layout/activity_dictionary">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal|top"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:layout_alignParentTop="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:id="@+id/my_dictionary_rl_search"
+                android:layout_toLeftOf="@+id/my_dictionary_rl_check"
+                android:layout_marginRight="5dp">
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:id="@+id/my_et_search"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentRight="true"
+                    android:background="@drawable/my_edittext"
+                    android:layout_marginLeft="5dp"
+                    android:paddingLeft="10dp"
+                    android:singleLine="true"
+                    android:paddingRight="30dp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/my_iv_clear"
+                    android:layout_alignParentRight="true"
+                    android:src="@android:drawable/ic_delete" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:id="@+id/my_dictionary_rl_check"
+                android:elevation="1dp"
+                android:layout_alignParentRight="true">
+
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="단어"
+                    android:id="@+id/my_cb_word"
+                    android:checked="true"
+                    android:layout_marginRight="10dp" />
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/my_divider"
+            android:layout_marginTop="5dp"></LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/my_dictionary_rl_msg">
+
+            <TextView
+                android:text="검색할 단어를 입력해주세요."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView11"
+                android:textSize="17sp"
+                android:textColor="@android:color/holo_red_light" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/my_dictionary_rl_web">
+
+            <TextView
+                android:text="검색된 단어가 없습니다.\n웹에서 검색을 하실려면 오른쪽 버튼을 클릭해주세요."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView12"
+                android:textSize="17sp"
+                android:textColor="@android:color/holo_red_light"
+                android:layout_alignParentLeft="true"
+                android:layout_toLeftOf="@+id/my_iv_web" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_search_black_24dp"
+                android:layout_centerVertical="true"
+                android:id="@+id/my_iv_web"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp" />
+        </RelativeLayout>
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/my_lv"
+            android:divider="@color/my_divider"
+            android:dividerHeight="0.5dp"
+            android:layout_alignParentLeft="false"
+            android:layout_alignParentTop="false" />
+    </LinearLayout>
+
+</RelativeLayout>

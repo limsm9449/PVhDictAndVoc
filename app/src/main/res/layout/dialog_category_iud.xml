@@ -125,12 +125,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_toLeftOf="@+id/my_d_category_b_save">
+            android:layout_toLeftOf="@+id/my_dc__b_save">
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/my_d_category_et_save"
+                android:id="@+id/my_dc_et_voc_name"
                 android:layout_centerVertical="true"
                 android:layout_centerHorizontal="true"
                 android:layout_alignParentLeft="false"
@@ -140,21 +140,21 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="해당 단어장을 vhdictandvoc 디렉토리로 내보냅니다."
+                android:text="해당 단어장을 english 디렉토리로 내보냅니다."
                 android:id="@+id/textView10"
                 android:layout_centerInParent="true"
                 android:layout_alignParentLeft="true"
                 android:layout_marginLeft="10dp"
                 android:textSize="12dp"
                 android:layout_alignParentBottom="false"
-                android:layout_below="@+id/my_d_category_et_save" />
+                android:layout_below="@+id/my_dc_et_voc_name" />
         </RelativeLayout>
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:text="내보내기"
-            android:id="@+id/my_d_category_b_save"
+            android:id="@+id/my_dc__b_save"
             android:layout_gravity="center_horizontal"
             android:layout_alignParentRight="true"
             android:layout_centerInParent="true"

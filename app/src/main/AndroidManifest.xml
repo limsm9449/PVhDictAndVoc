@@ -12,15 +12,10 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/MyMaterialTheme">
-        <meta-data
-            android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />
-
+        android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,85 +24,151 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".SettingsActivity"
+            android:label="@string/title_activity_settings" />
+        <activity
             android:name=".WordViewActivity"
             android:label="@string/title_activity_word_view"
-            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Study1Activity"
-            android:screenOrientation="portrait" />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Study2Activity"
             android:label="@string/title_activity_study2"
-            android:screenOrientation="portrait"
-            android:theme="@style/MyMaterialTheme" />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Study3Activity"
-            android:screenOrientation="portrait" />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Study4Activity"
             android:label="@string/title_activity_study4"
-            android:screenOrientation="portrait"
-            android:theme="@style/MyMaterialTheme" />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".VocabularyActivity"
             android:label="@string/title_activity_vocabulary"
-            android:screenOrientation="portrait"
-            android:theme="@style/MyMaterialTheme" />
-        <activity
-            android:name=".DicCategoryViewActivity"
-            android:label="@string/title_activity_dic_category_view"
-            android:screenOrientation="portrait"
-            android:theme="@style/MyMaterialTheme" />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".SentenceViewActivity"
             android:label="@string/title_activity_sentence_view"
-            android:screenOrientation="portrait"
-            android:theme="@style/MyMaterialTheme" />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Study5Activity"
             android:label="@string/title_activity_study5"
-            android:screenOrientation="portrait"
-            android:theme="@style/MyMaterialTheme" />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".WebViewActivity"
-            android:label="@string/title_activity_web_view"
-            android:screenOrientation="portrait"
-            android:theme="@style/MyMaterialTheme" />
+            android:name=".Study6Activity"
+            android:label="@string/title_activity_study6"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".HelpActivity"
             android:label="@string/title_activity_help"
-            android:screenOrientation="portrait"
-            android:theme="@style/MyMaterialTheme" />
-        <activity
-            android:name=".DicCategoryActivity"
-            android:label="@string/title_activity_dic_category"
-            android:screenOrientation="portrait"
-            android:theme="@style/MyMaterialTheme" />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".GrammarActivity"
             android:label="@string/title_activity_grammar"
-            android:screenOrientation="portrait"
-            android:theme="@style/MyMaterialTheme" />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".GrammarViewActivity"
             android:label="@string/title_activity_grammar_view"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".StudyActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/MyMaterialTheme" />
-        <activity android:name=".LogActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".OtherActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".StudyActivity"
-            android:screenOrientation="portrait"/>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".PatchActivity"
             android:label="@string/title_activity_patch"
-            android:theme="@style/MyMaterialTheme" />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".MySampleActivity"
-            android:label="@string/title_activity_my_sample"
-            android:theme="@style/MyMaterialTheme"></activity>
+            android:name=".DictionaryActivity"
+            android:label="@string/title_activity_dictionary"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <service android:name=".MySpeechService">
+            <intent-filter>
+                <action android:name="com.sleepingbear.vhdictandvoc.MySpeechService" />
+            </intent-filter>
+        </service>
+        <activity
+            android:name=".VocabularyNoteActivity"
+            android:label="@string/title_activity_vocabulary_note"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".VocabularyNoteViewActivity"
+            android:label="@string/title_activity_vocabulary_note_view"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".NaverConversationActivity"
+            android:label="@string/title_activity_naver_conversation"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".NaverConversationViewActivity"
+            android:label="@string/title_activity_naver_conversation_view"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".DictionaryHistoryActivity"
+            android:label="@string/title_activity_dictionary_history"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".WebDictionaryActivity"
+            android:label="@string/title_activity_web_dictionary"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".WebTranslateActivity"
+            android:label="@string/title_activity_web_translate"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ConversationActivity"
+            android:label="@string/title_activity_conversation"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ConversationStudyActivity"
+            android:label="@string/title_activity_conversation_study"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ConversationNoteActivity"
+            android:label="@string/title_activity_conversation_note"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ConversationNoteStudyActivity"
+            android:label="@string/title_activity_conversation_note_study"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ConversationNoteViewActivity"
+            android:label="@string/title_activity_conversation_note_view"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".NewsActivity"
+            android:label="@string/title_activity_news"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".NewsClickWordActivity"
+            android:label="@string/title_activity_news_click_word"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".NewsWebViewActivity"
+            android:label="@string/title_activity_news_web_view"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".PatternActivity"
+            android:label="@string/title_activity_pattern"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".PatternViewActivity"
+            android:label="@string/title_activity_pattern_view"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".TodayActivity"
+            android:label="@string/title_activity_today"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".CategoryActivity"
+            android:label="@string/title_activity_category"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".CategoryViewActivity"
+            android:label="@string/title_activity_category_view"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

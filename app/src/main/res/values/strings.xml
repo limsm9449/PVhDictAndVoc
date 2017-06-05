@@ -1,44 +1,58 @@
 <resources>
-    <string name="app_name">베한 사전/단어장(유료)</string>
-    <string name="action_delete">데이타 삭제</string>
-    <string name="action_email">Email</string>
+    <string name="app_name">최고의 베트남어 학습(유료)</string>
+
     <string name="action_help">도움말</string>
-    <string name="action_sentence_write">Help</string>
-    <string name="title_activity_main2">Main2Activity</string>
-    <string name="action_patch">패치 정보</string>
+    <string name="action_copy">복사</string>
+    <string name="action_all_copy">전체복사</string>
+    <string name="action_word_search">단어검색</string>
+    <string name="action_word_view">단어보기</string>
+    <string name="action_sentence_view">문장보기</string>
+    <string name="action_tts">TTS</string>
+    <string name="action_tts_all">전체 TTS</string>
+    <string name="action_translate">번역</string>
+    <string name="action_edit">수정모드</string>
+    <string name="action_exit">취소</string>
+    <string name="action_refresh">동기화</string>
+    <string name="action_web_dictionary">웹사전</string>
+    <string name="action_settings">환경 설정</string>
+    <string name="action_share">어플 공유</string>
+    <string name="action_patch">패치 내역</string>
+    <string name="action_sentence_write">aa</string>
 
-    <string name="title_activity_fullscreen">FullscreenActivity</string>
-    <string name="dummy_button">Dummy Button</string>
-    <string name="dummy_content">DUMMY\nCONTENT</string>
-
-    <string name="appName">VH Dict..</string>
-
-    <string name="action_dictionary">사전</string>
-    <string name="action_vocabulary">나의 단어장</string>
-    <string name="action_mySample">나의 예문</string>
-    <string name="action_study">단어 학습</string>
-    <string name="action_other">기타 기능</string>
-    <string name="action_category">카테고리</string>
-    <string name="action_grammar">문법</string>
-    <string name="action_board">게시판</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_word_view">WordViewActivity</string>
     <string name="title_activity_study2">Study2Activity</string>
     <string name="title_activity_study4">Study4Activity</string>
     <string name="title_activity_vocabulary">VocabularyActivity</string>
-    <string name="title_activity_dic_category_view">DicKindActivity</string>
     <string name="title_activity_sentence_view">SentenceViewActivity</string>
     <string name="title_activity_study5">Study5Activity</string>
+    <string name="title_activity_study6">Study6Activity</string>
     <string name="title_activity_web_view">베트남 사이트</string>
     <string name="title_activity_help">도움말</string>
-    <string name="title_activity_dic_category">DicCategoryActivity</string>
-    <string name="title_activity_grammar">GrammarActivity</string>
-    <string name="title_activity_grammar_view">GrammarViewActivity</string>
-    <string name="title_activity_ad">AdActivity</string>
-    <string name="title_activity_patch">PatchActivity</string>
-    <string name="title_activity_my_sample">MySampleActivity</string>
-
-    <string name="banner_ad_unit_id">ca-app-pub-3860766380986792/1647308662</string>
+    <string name="title_activity_grammar">문법</string>
+    <string name="title_activity_grammar_view">문법 상세</string>
+    <string name="title_activity_patch">패치 내역</string>
+    <string name="title_activity_settings">환경 설정</string>
+    <string name="title_activity_vocabulary_note">단어장</string>
+    <string name="title_activity_vocabulary_note_view">단어장 상세</string>
+    <string name="title_activity_naver_conversation">네이버 회화</string>
+    <string name="title_activity_naver_conversation_view">네이버 회화 상세</string>
+    <string name="title_activity_dictionary">사전</string>
+    <string name="title_activity_dictionary_history">검색 History</string>
+    <string name="title_activity_web_dictionary">웹 사전</string>
+    <string name="title_activity_conversation">회화 검색</string>
+    <string name="title_activity_conversation_study">회화 학습</string>
+    <string name="title_activity_conversation_note">회화 노트</string>
+    <string name="title_activity_conversation_note_study">회화 학습</string>
+    <string name="title_activity_web_translate">번역</string>
+    <string name="title_activity_conversation_note_view">회화노트 상세</string>
+    <string name="title_activity_news">베트남 뉴스</string>
+    <string name="title_activity_news_click_word">뉴스 클릭 단어</string>
+    <string name="title_activity_news_web_view">뉴스</string>
+    <string name="title_activity_pattern">회화패턴</string>
+    <string name="title_activity_pattern_view">회화패턴 예제</string>
+    <string name="title_activity_today">오늘의 단어</string>
+    <string name="title_activity_category">카테고리별</string>
+    <string name="title_activity_category_view">카테고리별 상세</string>
 </resources>

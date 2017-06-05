@@ -114,5 +114,4 @@
             android:layout_above="@+id/my_a_cat_lv_category" />
 
     </LinearLayout>
-
 </RelativeLayout>

@@ -15,5 +15,4 @@
         android:divider="@color/my_divider"
         android:dividerHeight="0.5dp"
         android:layout_alignParentTop="true" />
-
 </RelativeLayout>

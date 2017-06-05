@@ -36,16 +36,54 @@
         <item>카드형 학습</item>
         <item>카드형 OX 학습</item>
         <item>카드형 4지선다 학습</item>
+        <item>카드형 4지선다 TTS 학습</item>
     </string-array>
 
-    <string-array name="url">
-        <item>http://us.24h.com.vn/</item>
-        <item>http://vietnamnet.vn/</item>
-        <item>http://vnexpress.net/</item>
+    <string-array name="fontSize">
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
+        <item>20</item>
+        <item>21</item>
+        <item>22</item>
+        <item>23</item>
+        <item>24</item>
+        <item>25</item>
     </string-array>
-    <string-array name="urlName">
-        <item>24h</item>
-        <item>vietnamnet</item>
-        <item>vnexpress</item>
+    <string-array name="fontSizeName">
+        <item>13</item>
+        <item>14</item>
+        <item>15</item>
+        <item>16</item>
+        <item>17</item>
+        <item>18</item>
+        <item>19</item>
+        <item>20</item>
+        <item>21</item>
+        <item>22</item>
+        <item>23</item>
+        <item>24</item>
+        <item>25</item>
     </string-array>
+
+    <string-array name="webDic">
+        <item>Naver</item>
+        <item>Daum</item>
+    </string-array>
+
+    <string-array name="wordView">
+        <item>Naver</item>
+        <item>Daum</item>
+        <item>예제</item>
+    </string-array>
+
+    <string-array name="webTranslate">
+        <item>Naver</item>
+        <item>Google</item>
+    </string-array>
+
 </resources>

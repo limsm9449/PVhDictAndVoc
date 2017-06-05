@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:paddingLeft="10dp"
+    android:paddingTop="8dp"
+    android:paddingRight="5dp"
+    android:paddingBottom="8dp"
+    android:descendantFocusability="blocksDescendants"
+    android:background="#ffffff">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/my_f_today_rl"
+        android:layout_alignParentTop="true"
+        android:layout_centerVertical="true"
+        android:focusable="false">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New Text"
+            android:id="@+id/my_tv_viet"
+            android:layout_alignParentTop="false"
+            android:layout_alignParentLeft="true"
+            android:textColor="@color/my_text_word"
+            android:textSize="15dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New Text"
+            android:id="@+id/my_tv_spelling"
+            android:layout_alignParentTop="false"
+            android:layout_alignParentLeft="false"
+            android:textSize="13dp"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/my_tv_viet"
+            android:layout_toLeftOf="@+id/my_tv_date"
+            android:gravity="left"
+            android:textColor="@color/my_text_spelling" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New Text"
+            android:id="@+id/my_tv_date"
+            android:layout_alignParentTop="false"
+            android:layout_alignParentLeft="false"
+            android:textSize="11dp"
+            android:layout_marginLeft="10dp"
+            android:layout_alignParentRight="true"
+            android:textColor="#FF9E9C9C"
+            android:layout_marginRight="10dp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/my_f_today_rl"
+        android:layout_marginTop="5dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="New Text"
+            android:id="@+id/my_tv_mean"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="false"
+            android:layout_alignParentEnd="true"
+            android:textColor="@color/my_text_mean"
+            android:textSize="13dp"
+            android:layout_alignParentLeft="false"
+            android:gravity="center_vertical"
+            android:textIsSelectable="false" />
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -2,11 +2,9 @@ package com.sleepingbear.pvhdictandvoc;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.preference.PreferenceManager;
-import android.util.Log;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -15,12 +13,12 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 /*
-    2016.10.21 - db 63
+    2016.10.16 - db 62
  */
 class DbHelper extends SQLiteOpenHelper {
     private static String DB_NAME ="vhdictandvoc.db";
     private String DB_PATH = "";
-    private static final int DATABASE_VERSION = 63;
+    private static final int DATABASE_VERSION = 74;
     private final Context mContext;
 
     public DbHelper(Context context) {
@@ -29,7 +27,6 @@ class DbHelper extends SQLiteOpenHelper {
         mContext = context;
 
         DB_PATH = "/data/data/" + context.getPackageName() + "/databases/";
-        DicUtils.dicLog(DB_PATH);
 
         initialize();
     }

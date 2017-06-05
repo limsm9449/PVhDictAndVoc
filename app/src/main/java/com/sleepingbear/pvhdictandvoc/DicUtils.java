@@ -1,18 +1,16 @@
 package com.sleepingbear.pvhdictandvoc;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.os.Environment;
+import android.preference.PreferenceManager;
 import android.util.Log;
-import android.widget.CheckBox;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -23,6 +21,44 @@ import java.util.regex.PatternSyntaxException;
  * Created by Administrator on 2015-11-27.
  */
 public class DicUtils {
+    public static void setDbChange(Context mContext) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(mContext);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString(CommConstants.flag_dbChange, "Y");
+        editor.commit();
+
+        dicLog(DicUtils.class.toString() + " setDbChange : " + "Y");
+    }
+
+    public static String getDbChange(Context mContext) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(mContext);
+        return prefs.getString(CommConstants.flag_dbChange, "N");
+    }
+
+    public static void clearDbChange(Context mContext) {
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(mContext);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString(CommConstants.flag_dbChange, "N");
+        editor.commit();
+    }
+
+    public static String getPreferencesValue(Context context, String preference) {
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
+
+        String rtn = sharedPref.getString( preference, "" );
+        if ( "".equals( rtn ) ) {
+            if ( preference.equals(CommConstants.preferences_font) ) {
+                rtn = "17";
+            } else {
+                rtn = "";
+            }
+        }
+
+        DicUtils.dicLog(rtn);
+
+        return rtn;
+    }
+
     public static String getString(String str) {
         if (str == null)
             return "";
@@ -174,6 +210,165 @@ public class DicUtils {
         return rtn;
     }
 
+    /**
+     * 데이타 복원
+     * @param ctx
+     * @param db
+     * @param fileName
+     */
+    public static void readInfoFromFile(Context ctx, SQLiteDatabase db, String fileName) {
+        dicLog(DicUtils.class.toString() + " : " + "readInfoFromFile start, " + fileName);
+
+        //데이타 복구
+        FileInputStream fis = null;
+        try {
+            //데이타 초기화
+            DicDb.initMyConversationNote(db);
+            DicDb.initConversationNote(db);
+            DicDb.initVocabulary(db);
+            DicDb.initDicClickWord(db);
+            DicDb.initHistory(db);
+
+            if ( "".equals(fileName) ) {
+                fis = ctx.openFileInput(CommConstants.infoFileName);
+            } else {
+                fis = new FileInputStream(new File(fileName));
+            }
+
+            InputStreamReader isr = new InputStreamReader(fis);
+            BufferedReader buffreader = new BufferedReader(isr);
+
+            //출력...
+            String readString = buffreader.readLine();
+            while (readString != null) {
+                dicLog(readString);
+
+                String[] row = readString.split(":");
+                if ( row[0].equals("CATEGORY_INSERT") ) {
+                    int maxCode = Integer.parseInt(row[1].substring(2,5));
+                    String insMaxCode = "VOC" + DicUtils.lpadding(Integer.toString(maxCode + 1), 4, "0");
+                    DicDb.insCode(db, "MY_VOC", insMaxCode, row[2]);
+                } else if ( row[0].equals("MYWORD_INSERT") ) {
+                    int maxCode = Integer.parseInt(row[1].substring(2,5));
+                    String insMaxCode = "VOC" + DicUtils.lpadding(Integer.toString(maxCode + 1), 4, "0");
+                    DicDb.insDicVoc(db, insMaxCode, row[3], row[2], "N");
+                } else if ( row[0].equals("MEMORY") ) {
+                    DicDb.updMemory(db, row[1], row[2]);
+                } else if ( row[0].equals(CommConstants.tag_code_ins) ) {
+                    DicDb.insCode(db, row[1], row[2], row[3]);
+                } else if ( row[0].equals(CommConstants.tag_note_ins) ) {
+                    DicDb.insConversationToNote(db, row[1], row[2]);
+                } else if ( row[0].equals(CommConstants.tag_voc_ins) ) {
+                    DicDb.insDicVoc(db, row[1], row[2], row[3], row[4]);
+                } else if ( row[0].equals(CommConstants.tag_history_ins) ) {
+                    DicDb.insSearchHistory(db, row[1], row[2]);
+                } else if ( row[0].equals(CommConstants.tag_click_word_ins) ) {
+                    DicDb.insDicClickWord(db, row[1], row[2]);
+                }
+
+                readString = buffreader.readLine();
+            }
+
+            isr.close();
+            fis.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        dicLog(DicUtils.class.toString() + " : " + "readInfoFromFile end");
+    }
+
+    /**
+     * 데이타 기록
+     * @param ctx
+     * @param db
+     */
+    public static void writeInfoToFile(Context ctx, SQLiteDatabase db, String fileName) {
+        System.out.println("writeNewInfoToFile start");
+
+        try {
+            FileOutputStream fos = null;
+
+            if ( "".equals(fileName) ) {
+                fos = ctx.openFileOutput(CommConstants.infoFileName, ctx.MODE_PRIVATE);
+            } else {
+                File saveFile = new File(fileName);
+                try {
+                    saveFile.createNewFile();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } finally {
+                }
+                fos = new FileOutputStream(saveFile);
+            }
+
+            Cursor cursor = db.rawQuery(DicQuery.getWriteData(), null);
+            while (cursor.moveToNext()) {
+                String writeData = cursor.getString(cursor.getColumnIndexOrThrow("WRITE_DATA"));
+                DicUtils.dicLog(writeData);
+                if ( writeData != null ) {
+                    fos.write((writeData.getBytes()));
+                    fos.write("\n".getBytes());
+                }
+            }
+            cursor.close();
+
+            fos.close();
+        } catch (Exception e) {
+            DicUtils.dicLog("File 에러=" + e.toString());
+        }
+
+        System.out.println("writeNewInfoToFile end");
+    }
+
+
+
+    public static boolean isHangule(String pStr) {
+        boolean isHangule = false;
+        String str = (pStr == null ? "" : pStr);
+        try {
+            if(str.matches(".*[ㄱ-ㅎㅏ-ㅣ가-힣]+.*")) {
+                isHangule = true;
+            } else {
+                isHangule = false;
+            }
+        } catch (PatternSyntaxException e) {
+            e.printStackTrace();
+        }
+
+        return isHangule;
+    }
+
+    public static String getBtnString(String word){
+        String rtn = "";
+
+        if ( word.length() == 1 ) {
+            rtn = "  " + word + "  ";
+        } else if ( word.length() == 2 ) {
+            rtn = "  " + word + " ";
+        } else if ( word.length() == 3 ) {
+            rtn = " " + word + " ";
+        } else if ( word.length() == 4 ) {
+            rtn = " " + word;
+        } else {
+            rtn = " " + word + " ";
+        }
+
+        return rtn;
+    }
+
+    public static String getEngString(String word) {
+        if ( word == null || "".equals(word) ) {
+            return "";
+        } else {
+            return word.replaceAll("[áàảãạăắằẳẵặâấầẩẫậ]", "a").replaceAll("[óòỏõọôốồổỗộơớờởỡợȏ]", "o").replaceAll("[éèẻẽẹêếềểễệ]", "e").replaceAll("[úùủũụưứừửữự]", "u").replaceAll("[íìỉĩị]", "i").replaceAll("[ýỳỷỹỵ]", "y");
+        }
+    }
+
+}
+
+
+/*
     public static void writeInfoToFile(Context ctx, String saveData) {
         try {
             FileOutputStream fos = ctx.openFileOutput(CommConstants.infoFileName, ctx.MODE_APPEND);
@@ -184,10 +379,14 @@ public class DicUtils {
             DicUtils.dicLog("File 에러=" + e.toString());
         }
     }
+    */
 
+    /*
     public static void readInfoFromFile(Context ctx, SQLiteDatabase db) {
         readInfoFromFile(ctx, db, "");
     }
+    */
+    /*
     public static void readInfoFromFile(Context ctx, SQLiteDatabase db, String fileName) {
         dicLog(DicUtils.class.toString() + " : " + "readInfoFromFile start");
 
@@ -274,12 +473,14 @@ public class DicUtils {
         //데이타 기록
         writeNewInfoToFile(ctx, db);
     }
+    */
 
-    /**
-     * 데이타 기록
-     * @param ctx
-     * @param db
-     */
+/**
+ * 데이타 기록
+ * @param ctx
+ * @param db
+ */
+    /*
     public static void writeNewInfoToFile(Context ctx, SQLiteDatabase db) {
         System.out.println("writeNewInfoToFile start");
 
@@ -357,21 +558,4 @@ public class DicUtils {
             DicUtils.dicLog("File 에러=" + e.toString());
         }
     }
-
-    public static boolean isHangule(String pStr) {
-        boolean isHangule = false;
-        String str = (pStr == null ? "" : pStr);
-        try {
-            if(str.matches(".*[ㄱ-ㅎㅏ-ㅣ가-힣]+.*")) {
-                isHangule = true;
-            } else {
-                isHangule = false;
-            }
-        } catch (PatternSyntaxException e) {
-            e.printStackTrace();
-        }
-
-        return isHangule;
-    }
-
-}
+    */
