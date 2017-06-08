@@ -19,7 +19,7 @@ public class HelpActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        ActionBar ab = (ActionBar) getSupportActionBar();
+        ActionBar ab = getSupportActionBar();
         ab.setHomeButtonEnabled(true);
         ab.setDisplayHomeAsUpEnabled(true);
 
@@ -41,34 +41,20 @@ public class HelpActivity extends AppCompatActivity {
         }
 
         tempSb.delete(0, tempSb.length());
-        if ( kind.equals(CommConstants.dictionaryKind_f) ) {
-            tempSb.append("* 베한 사전" + CommConstants.sqlCR);
-            tempSb.append("- 베한 사전을 검색합니다." + CommConstants.sqlCR);
-            tempSb.append(" .단어를 클릭하시면 단어 상세를 보실 수 있습니다." + CommConstants.sqlCR);
-            tempSb.append(" .단어를 길게 클릭하시면 웹사전 검색, 단어장에 추가할 수 있습니다." + CommConstants.sqlCR);
-            tempSb.append(" .없는 단어일 경우 하단에 메세지가 나오고, 오른쪽 버튼을 클릭하시면 웹사전으로 검색하실 수 있습니다." + CommConstants.sqlCR);
-            tempSb.append("" + CommConstants.sqlCR);
-        } else {
-            tempSb.append("* 한베 사전" + CommConstants.sqlCR);
-            tempSb.append("- 한베 사전을 검색합니다." + CommConstants.sqlCR);
-            tempSb.append("" + CommConstants.sqlCR);
-        }
+        tempSb.append("* 베트남 사전" + CommConstants.sqlCR);
+        tempSb.append("- 성조가 있는 단어 검색, 성조가 없는 단어 검색, 예문을 검색합니다." + CommConstants.sqlCR);
+        tempSb.append(" .단어를 클릭하시면 단어 상세, 예문을 클릭하시면 예문 상세를 보실 수 있습니다." + CommConstants.sqlCR);
+        tempSb.append(" .단어를 길게 클릭하시면 웹사전 검색, 단어장에 추가할 수 있고, 예문을 길게 클릭하시면 회화노트에 등록 및 TTS를 들을 수 있습니다." + CommConstants.sqlCR);
+        tempSb.append(" .없는 단어일 경우 하단에 메세지가 나오고, 오른쪽 버튼을 클릭하시면 웹사전으로 검색하실 수 있습니다." + CommConstants.sqlCR);
+        tempSb.append("" + CommConstants.sqlCR);
         if ( screen.equals(CommConstants.screen_dictionary) ) {
             CurrentSb.append(tempSb.toString());
         } else {
-            allSb.append("* 베한 사전" + CommConstants.sqlCR);
-            allSb.append("- 베한 사전을 검색합니다." + CommConstants.sqlCR);
-            allSb.append(" .단어를 클릭하시면 단어 상세를 보실 수 있습니다." + CommConstants.sqlCR);
-            allSb.append(" .단어를 길게 클릭하시면 웹사전 검색, 단어장에 추가할 수 있습니다." + CommConstants.sqlCR);
-            allSb.append(" .없는 단어일 경우 하단에 메세지가 나오고, 오른쪽 버튼을 클릭하시면 웹사전으로 검색하실 수 있습니다." + CommConstants.sqlCR);
-            allSb.append("" + CommConstants.sqlCR);
-            allSb.append("* 한베 사전" + CommConstants.sqlCR);
-            allSb.append("- 한베 사전을 검색합니다." + CommConstants.sqlCR);
-            allSb.append("" + CommConstants.sqlCR);
+            allSb.append(tempSb.toString());
         }
 
         tempSb.delete(0, tempSb.length());
-        tempSb.append("* 베한 검색 History" + CommConstants.sqlCR);
+        tempSb.append("* 사전 검색 History" + CommConstants.sqlCR);
         tempSb.append("- 베한 사전에서 검색한 단어를 조회합니다." + CommConstants.sqlCR);
         tempSb.append(" .단어를 클릭하시면 베한 사전으로 이동합니다." + CommConstants.sqlCR);
         tempSb.append(" .상단의 편집버튼(연필모양)을 클릭해서 검색 단어를 삭제하실 수 있습니다." + CommConstants.sqlCR);

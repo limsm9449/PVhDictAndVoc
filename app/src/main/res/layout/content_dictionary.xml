@@ -55,17 +55,61 @@
                 android:layout_height="30dp"
                 android:id="@+id/my_dictionary_rl_check"
                 android:elevation="1dp"
-                android:layout_alignParentRight="true">
+                android:layout_alignParentRight="false"
+                android:layout_toLeftOf="@+id/my_f_dic_rg_wsKind">
 
                 <CheckBox
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="단어"
-                    android:id="@+id/my_cb_word"
+                    android:text="성조"
+                    android:id="@+id/my_cb_tone"
                     android:checked="true"
                     android:layout_marginRight="10dp" />
             </RelativeLayout>
 
+            <RadioGroup
+                android:layout_width="70dp"
+                android:layout_height="30dp"
+                android:checkedButton="@+id/my_rb_word"
+                android:id="@+id/my_f_dic_rg_wsKind"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginBottom="1dp"
+                android:orientation="horizontal"
+                android:background="@drawable/my_toggle_outline"
+                android:layout_alignParentLeft="false"
+                android:layout_alignParentRight="true">
+
+                <RadioButton
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:text="단어"
+                    android:id="@+id/my_rb_word"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginBottom="1dp"
+                    android:background="@drawable/my_toggle_bg"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="1dp"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:textColor="@color/my_white"
+                    android:layout_marginRight="1dp" />
+
+                <RadioButton
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:text="예문"
+                    android:id="@+id/my_rb_sentence"
+                    android:background="@drawable/my_toggle_bg"
+                    android:layout_weight="1"
+                    android:layout_marginTop="1dp"
+                    android:layout_marginRight="1dp"
+                    android:layout_marginBottom="1dp"
+                    android:button="@null"
+                    android:gravity="center"
+                    android:textColor="@color/my_white" />
+            </RadioGroup>
         </RelativeLayout>
 
         <LinearLayout

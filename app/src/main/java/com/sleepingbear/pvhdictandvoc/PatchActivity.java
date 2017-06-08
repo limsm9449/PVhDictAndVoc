@@ -19,7 +19,7 @@ public class PatchActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        ActionBar ab = (ActionBar) getSupportActionBar();
+        ActionBar ab = getSupportActionBar();
         ab.setTitle("패치 내용");
         ab.setHomeButtonEnabled(true);
         ab.setDisplayHomeAsUpEnabled(true);
@@ -30,7 +30,8 @@ public class PatchActivity extends AppCompatActivity {
         StringBuffer patch = new StringBuffer();
 
         patch.append("* 신규 패치" + CommConstants.sqlCR);
-        patch.append("" + CommConstants.sqlCR);
+        patch.append("- 베한사전, 한베 사전을 통합했습니다." + CommConstants.sqlCR);
+        patch.append("- 성조로 검색, 성조없이 검색, 예문 검색이 가능하도록 변경했습니다." + CommConstants.sqlCR);
         patch.append("" + CommConstants.sqlCR);
         patch.append("" + CommConstants.sqlCR);
 

@@ -12,9 +12,7 @@ public class CommConstants {
     public static String defaultVocabularyCode = "VOC0001";
 
     public static String dictionaryKind_f = "VH";
-    public static String dictionaryKind_f_title = "베한 사전";
     public static String dictionaryKind_h = "HV";
-    public static String dictionaryKind_h_title = "한베 사전";
 
     public static String screen_dictionary = "SCREEN_DICTIONARY";
     public static String screen_dictionaryHistory = "SCREEN_DICTIONARY_HISTORY";
@@ -31,8 +29,6 @@ public class CommConstants {
     public static String screen_conversationNoteView = "SCREEN_CONVERSATION_NOTE_VIEW";
     public static String screen_naverConversation = "SCREEN_NAVER_CONVERSATION";
     public static String screen_naverConversationView = "SCREEN_NAVER_CONVERSATION_VIEW";
-    public static String screen_daumVocabulary = "SCREEN_DAUM_VOCABULARY";
-    public static String screen_daumVocabularyView = "SCREEN_DAUM_VOCABULARY_VIEW";
     public static String screen_vocabularyNote = "SCREEN_VOCABULARY_NOTE";
     public static String screen_vocabularyNoteView = "SCREEN_VOCABULARY_NOTE_VIEW";
     public static String screen_study1 = "SCREEN_STUDY1";
@@ -41,8 +37,6 @@ public class CommConstants {
     public static String screen_study4 = "SCREEN_STUDY4";
     public static String screen_study5 = "SCREEN_STUDY5";
     public static String screen_study6 = "SCREEN_STUDY6";
-    public static String screen_idiom = "SCREEN_IDIOM";
-    public static String screen_idiomView = "SCREEN_IDIOM_VIEW";
     public static String screen_wordView = "SCREEN_WORD_VIEW";
     public static String screen_sentenceView = "SCREEN_SENTENCE_VIEW";
     public static String screen_grammar = "SCREEN_GRAMMAR";

@@ -31,24 +31,30 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 
 import java.util.Locale;
 
 public class DictionaryActivity extends AppCompatActivity implements View.OnClickListener, TextToSpeech.OnInitListener {
     private DbHelper dbHelper;
     private SQLiteDatabase db;
-    private TextToSpeech myTTS;
-    private String dictionaryKind;
     private EditText et_search;
     private DictionaryActivityCursorAdapter adapter;
     private Cursor cursor;
     private DictionaryActivitySearchTask task;
     private boolean isEmptyCondition;
-    private int dSelect = 1;
+    private int dSelect = 0;
+    private int mSelect = 0;
     private int webDictionaryIdx = 0;
+    private TextToSpeech myTTS;
+
+    private String mWsKind = "W";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,26 +67,16 @@ public class DictionaryActivity extends AppCompatActivity implements View.OnClic
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setVisibility(View.GONE);
 
-        ActionBar ab = (ActionBar) getSupportActionBar();
+        ActionBar ab = getSupportActionBar();
         ab.setHomeButtonEnabled(true);
         ab.setDisplayHomeAsUpEnabled(true);
 
         Bundle b = getIntent().getExtras();
-        dictionaryKind = b.getString("KIND");
-        if ( dictionaryKind == null ) {
-            dictionaryKind = CommConstants.dictionaryKind_f;
-        }
-
-        if ( dictionaryKind.equals(CommConstants.dictionaryKind_f) ) {
-            ab.setTitle(CommConstants.dictionaryKind_f_title);
-            myTTS = new TextToSpeech(this, this);
-        } else {
-            ab.setTitle(CommConstants.dictionaryKind_h_title);
-            ((CheckBox) findViewById(R.id.my_cb_word)).setVisibility(View.GONE);
-        }
 
         dbHelper = new DbHelper(getApplicationContext());
         db = dbHelper.getWritableDatabase();
+
+        myTTS = new TextToSpeech(this, this);
 
         et_search = (EditText) findViewById(R.id.my_et_search);
         et_search.addTextChangedListener(textWatcherInput);
@@ -107,9 +103,6 @@ public class DictionaryActivity extends AppCompatActivity implements View.OnClic
             }
         });
 
-        ((CheckBox) findViewById(R.id.my_cb_word)).setOnClickListener(this);
-        ((ImageView) findViewById(R.id.my_iv_web)).setOnClickListener(this);
-
         if ( !"".equals(b.getString("word")) ) {
             et_search.setText(b.getString("word"));
             changeListView(true);
@@ -122,7 +115,11 @@ public class DictionaryActivity extends AppCompatActivity implements View.OnClic
             changeListView(false);
         }
 
-        ((RelativeLayout)findViewById(R.id.my_dictionary_rl_web)).setVisibility(View.GONE);
+        findViewById(R.id.my_rb_word).setOnClickListener(this);
+        findViewById(R.id.my_rb_sentence).setOnClickListener(this);
+        findViewById(R.id.my_cb_tone).setOnClickListener(this);
+        findViewById(R.id.my_iv_web).setOnClickListener(this);
+        findViewById(R.id.my_dictionary_rl_web).setVisibility(View.GONE);
     }
 
     @Override
@@ -146,7 +143,6 @@ public class DictionaryActivity extends AppCompatActivity implements View.OnClic
         } else if (id == R.id.action_help) {
             Bundle bundle = new Bundle();
             bundle.putString("SCREEN", CommConstants.screen_dictionary);
-            bundle.putString("KIND", dictionaryKind);
 
             Intent intent = new Intent(getApplication(), HelpActivity.class);
             intent.putExtras(bundle);
@@ -156,33 +152,9 @@ public class DictionaryActivity extends AppCompatActivity implements View.OnClic
         return super.onOptionsItemSelected(item);
     }
 
-    public void onInit(int status) {
-        if ( dictionaryKind.equals(CommConstants.dictionaryKind_f) ) {
-            Locale loc = new Locale("en");
-
-            if (status == TextToSpeech.SUCCESS) {
-                int result = myTTS.setLanguage(new Locale("vi", "VN"));
-                if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
-                    Log.e("TTS", "This Language is not supported");
-                }
-            } else {
-                Log.e("TTS", "Initilization Failed!");
-            }
-        }
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-
-        if ( dictionaryKind.equals(CommConstants.dictionaryKind_f) ) {
-            myTTS.shutdown();
-        }
-    }
-
     public void changeListView(boolean isKeyin) {
         if ( isKeyin ) {
-            ((RelativeLayout)findViewById(R.id.my_dictionary_rl_msg)).setVisibility(View.GONE);
+            findViewById(R.id.my_dictionary_rl_msg).setVisibility(View.GONE);
 
             if (task != null) {
                 return;
@@ -201,59 +173,67 @@ public class DictionaryActivity extends AppCompatActivity implements View.OnClic
         if ( "".equals(searchText) ) {
             isEmptyCondition = true;
         } else {
-            if ( searchText.indexOf(" ") < 0 ) {
-                sql.append("SELECT 1 ORD_KIND, SEQ _id, WORD, MEAN, ENTRY_ID, SPELLING, HANMUN, ORD" + CommConstants.sqlCR);
-                sql.append("  FROM DIC" + CommConstants.sqlCR);
-                sql.append(" WHERE 1 = 1" + CommConstants.sqlCR);
-                sql.append("   AND KIND = '" + dictionaryKind + "'" + CommConstants.sqlCR);
-                if (!"".equals(et_search.getText().toString())) {
-                    sql.append(" AND WORD LIKE '" + et_search.getText().toString() + "%'" + CommConstants.sqlCR);
+            if ( "W".equals(mWsKind) ) {
+                if (searchText.indexOf(" ") < 0) {
+                    if (((CheckBox) findViewById(R.id.my_cb_tone)).isChecked()) {
+                        sql.append("SELECT SEQ _id, WORD, MEAN, ENTRY_ID, SPELLING, HANMUN, ORD" + CommConstants.sqlCR);
+                        sql.append("  FROM DIC" + CommConstants.sqlCR);
+                        sql.append(" WHERE 1 = 1" + CommConstants.sqlCR);
+                        if (!"".equals(et_search.getText().toString())) {
+                            sql.append(" AND WORD LIKE '%" + et_search.getText().toString() + "%'" + CommConstants.sqlCR);
+                        }
+                        sql.append(" ORDER BY ORD" + CommConstants.sqlCR);
+                    } else {
+                        sql.append("SELECT SEQ _id, WORD, MEAN, ENTRY_ID, SPELLING, HANMUN, ORD" + CommConstants.sqlCR);
+                        sql.append("  FROM DIC" + CommConstants.sqlCR);
+                        sql.append(" WHERE 1 = 1" + CommConstants.sqlCR);
+                        if (!"".equals(et_search.getText().toString())) {
+                            sql.append(" AND WORD_ENG LIKE '%" + DicUtils.getEngString(et_search.getText().toString()) + "%'" + CommConstants.sqlCR);
+                        }
+                        sql.append(" ORDER BY ORD" + CommConstants.sqlCR);
+                    }
+                } else {
+                    // 여러 단어일때...
+                    String word = "";
+                    String[] splitStr = DicUtils.sentenceSplit(et_search.getText().toString().replaceAll("'", ""));
+                    for (int m = 0; m < splitStr.length; m++) {
+                        if (" ".equals(splitStr[m]) || "".equals(splitStr[m])) {
+                            continue;
+                        }
+                        // 3 단어
+                        word += DicUtils.getSentenceWord(splitStr, 3, m) + ",";
+                        // 2 단어
+                        word += DicUtils.getSentenceWord(splitStr, 2, m) + ",";
+                        // 1 단어
+                        word += DicUtils.getSentenceWord(splitStr, 1, m);
+                    }
+                    if (((CheckBox) findViewById(R.id.my_cb_tone)).isChecked()) {
+                        sql.append("SELECT SEQ _id, WORD, MEAN, ENTRY_ID, SPELLING, HANMUN, KIND, ORD FROM DIC " + CommConstants.sqlCR);
+                        sql.append(" WHERE WORD IN ('" + word.toLowerCase().replaceAll(",", "','") + "')" + CommConstants.sqlCR);
+                        sql.append(" ORDER BY ORD" + CommConstants.sqlCR);
+                    } else {
+                        word = DicUtils.getEngString(word);
+                        sql.append("SELECT SEQ _id, WORD, MEAN, ENTRY_ID, SPELLING, HANMUN, KIND, ORD FROM DIC " + CommConstants.sqlCR);
+                        sql.append(" WHERE WORD_ENG IN ('" + word.toLowerCase().replaceAll(",", "','") + "')" + CommConstants.sqlCR);
+                        sql.append(" ORDER BY ORD" + CommConstants.sqlCR);
+                    }
                 }
-                sql.append(" UNION" + CommConstants.sqlCR);
-                sql.append("SELECT 2 ORD_KIND, SEQ _id, WORD, MEAN, ENTRY_ID, SPELLING, HANMUN, ORD" + CommConstants.sqlCR);
-                sql.append("  FROM DIC" + CommConstants.sqlCR);
-                sql.append(" WHERE 1 = 1" + CommConstants.sqlCR);
-                sql.append("   AND KIND = '" + dictionaryKind + "'" + CommConstants.sqlCR);
-                if (!"".equals(et_search.getText().toString())) {
-                    sql.append(" AND WORD_ENG LIKE '" + DicUtils.getEngString(et_search.getText().toString()) + "%'" + CommConstants.sqlCR);
-                }
-                sql.append(" ORDER BY ORD_KIND, ORD" + CommConstants.sqlCR);
             } else {
-                // 여러 단어일때...
-                Cursor wordCursor = null;
-                String word = "";
-                String tOneWord = "";
-                String oneWord = "";
-                String[] splitStr = DicUtils.sentenceSplit(et_search.getText().toString().replaceAll("'", ""));
-                for ( int m = 0; m < splitStr.length; m++ ) {
-                    if ( " ".equals(splitStr[m]) || "".equals(splitStr[m]) ) {
-                        continue;
-                    }
-                    // 3 단어
-                    word += DicUtils.getSentenceWord(splitStr, 3, m) + ",";
-                    // 2 단어
-                    word += DicUtils.getSentenceWord(splitStr, 2, m) + ",";
-                    // 1 단어
-                    tOneWord = DicUtils.getSentenceWord(splitStr, 1, m);
-                    word += tOneWord + ",";
-                    oneWord += tOneWord + ",";
+                if (((CheckBox) findViewById(R.id.my_cb_tone)).isChecked()) {
+                    String word = et_search.getText().toString().replaceAll(" ","%");
 
-                    // 끝이 S 이면 복수일 경우가 있어 삭제하고 단수로 조회
-                    if ( "s".equals(tOneWord.substring(tOneWord.length() - 1)) ) {
-                        word += tOneWord.substring(0, tOneWord.length() - 1) + ",";
-                    }
-                }
+                    sql.append("SELECT SEQ _id, SENTENCE1, SENTENCE2, 'SAMPLE' KIND" + CommConstants.sqlCR);
+                    sql.append("  FROM DIC_SAMPLE" + CommConstants.sqlCR);
+                    sql.append(" WHERE ( SENTENCE1 LIKE '%" + word + "%' OR SENTENCE2 LIKE '%" + word + "%' )"  + CommConstants.sqlCR);
+                    sql.append(" ORDER BY SENTENCE2" + CommConstants.sqlCR);
+                } else {
+                    String word = DicUtils.getEngString(et_search.getText().toString().replaceAll(" ","%"));
 
-                sql.append("SELECT 1 ORD_KIND, SEQ _id, WORD, MEAN, ENTRY_ID, SPELLING, HANMUN, KIND, ORD FROM DIC " + CommConstants.sqlCR);
-                if (!"".equals(et_search.getText().toString())) {
-                    sql.append(" WHERE WORD LIKE '" + et_search.getText().toString() + "%'" + CommConstants.sqlCR);
+                    sql.append("SELECT SEQ _id, SENTENCE1, SENTENCE2, 'SAMPLE' KIND" + CommConstants.sqlCR);
+                    sql.append("  FROM DIC_SAMPLE" + CommConstants.sqlCR);
+                    sql.append(" WHERE ( SENTENCE1_ENG LIKE '%" + word + "%' OR SENTENCE2 LIKE '%" + word + "%' )"  + CommConstants.sqlCR);
+                    sql.append(" ORDER BY SENTENCE2" + CommConstants.sqlCR);
                 }
-                sql.append("UNION " + CommConstants.sqlCR);
-                sql.append("SELECT 2 ORD_KIND, SEQ _id, WORD, MEAN, ENTRY_ID, SPELLING, HANMUN, KIND, ORD FROM DIC " + CommConstants.sqlCR);
-                if (!"".equals(et_search.getText().toString())) {
-                    sql.append(" WHERE WORD LIKE '" + DicUtils.getEngString(et_search.getText().toString()) + "%'" + CommConstants.sqlCR);
-                }
-                sql.append(" ORDER BY ORD_KIND, ORD" + CommConstants.sqlCR);
             }
             DicUtils.dicLog(sql.toString());
 
@@ -261,10 +241,8 @@ public class DictionaryActivity extends AppCompatActivity implements View.OnClic
 
             //결과가 나올때까지 기달리게 할려고 다음 로직을 추가한다. 안하면 progressbar가 사라짐.. cursor도  Thread 방식으로 돌아가나봄
             if ( cursor.getCount() != 0 ) {
-                if ( dictionaryKind.equals(CommConstants.dictionaryKind_f) ) {
-                    DicDb.insSearchHistory(db, et_search.getText().toString().trim().toLowerCase());
-                    DicUtils.setDbChange(getApplicationContext()); //변경여부 체크
-                }
+                DicDb.insSearchHistory(db, et_search.getText().toString().trim().toLowerCase());
+                DicUtils.setDbChange(getApplicationContext()); //변경여부 체크
             }
         }
     }
@@ -280,13 +258,13 @@ public class DictionaryActivity extends AppCompatActivity implements View.OnClic
         } else {
             if (cursor.getCount() == 0) {
                 Toast.makeText(this, "검색된 데이타가 없습니다.", Toast.LENGTH_SHORT).show();
-                ((RelativeLayout)findViewById(R.id.my_dictionary_rl_web)).setVisibility(View.VISIBLE);
+                findViewById(R.id.my_dictionary_rl_web).setVisibility(View.VISIBLE);
             } else {
-                ((RelativeLayout)findViewById(R.id.my_dictionary_rl_web)).setVisibility(View.GONE);
+                findViewById(R.id.my_dictionary_rl_web).setVisibility(View.GONE);
             }
 
             ListView dictionaryListView = (ListView) findViewById(R.id.my_lv);
-            adapter = new DictionaryActivityCursorAdapter(this, cursor, 0);
+            adapter = new DictionaryActivityCursorAdapter(this, cursor, 0, mWsKind);
             dictionaryListView.setAdapter(adapter);
 
             dictionaryListView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
@@ -309,15 +287,25 @@ public class DictionaryActivity extends AppCompatActivity implements View.OnClic
             DicUtils.dicLog("onItemClick");
 
             Cursor cur = (Cursor) adapter.getItem(position);
-            cur.moveToPosition(position);
 
-            Intent intent = new Intent(getApplication(), WordViewActivity.class);
-            Bundle bundle = new Bundle();
-            bundle.putString("entryId", cur.getString(cur.getColumnIndexOrThrow("ENTRY_ID")));
-            bundle.putString("seq", cur.getString(cur.getColumnIndexOrThrow("_id")));
-            intent.putExtras(bundle);
+            if ( "SAMPLE".equals(cur.getString(cur.getColumnIndexOrThrow("KIND"))) ) {
+                Intent intent = new Intent(getApplication(), SentenceViewActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("foreign", cur.getString(cur.getColumnIndexOrThrow("SENTENCE1")));
+                bundle.putString("han", cur.getString(cur.getColumnIndexOrThrow("SENTENCE2")));
+                bundle.putString("sampleSeq", cur.getString(cur.getColumnIndexOrThrow("_id")));
+                intent.putExtras(bundle);
 
-            startActivity(intent);
+                startActivity(intent);
+            } else {
+                Intent intent = new Intent(getApplication(), WordViewActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("entryId", cur.getString(cur.getColumnIndexOrThrow("ENTRY_ID")));
+                bundle.putString("seq", cur.getString(cur.getColumnIndexOrThrow("_id")));
+                intent.putExtras(bundle);
+
+                startActivity(intent);
+            }
         }
     };
 
@@ -326,7 +314,50 @@ public class DictionaryActivity extends AppCompatActivity implements View.OnClic
         public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
             DicUtils.dicLog("onItemLongClick");
 
-            if ( dictionaryKind.equals(CommConstants.dictionaryKind_f) ) {
+            Cursor cur = (Cursor) adapter.getItem(i);
+
+            if ( "SAMPLE".equals(cur.getString(cur.getColumnIndexOrThrow("KIND"))) ) {
+                final String sampleSeq = cur.getString(cur.getColumnIndexOrThrow("_id"));
+                final String foreign = cur.getString(cur.getColumnIndexOrThrow("SENTENCE1"));
+                final String han = cur.getString(cur.getColumnIndexOrThrow("SENTENCE2"));
+
+                //메뉴 선택 다이얼로그 생성
+                Cursor cursor = db.rawQuery(DicQuery.getNoteKindContextMenu(false), null);
+                final String[] kindCodes = new String[cursor.getCount()];
+                final String[] kindCodeNames = new String[cursor.getCount()];
+
+                int idx = 0;
+                while (cursor.moveToNext()) {
+                    kindCodes[idx] = cursor.getString(cursor.getColumnIndexOrThrow("KIND"));
+                    kindCodeNames[idx] = cursor.getString(cursor.getColumnIndexOrThrow("KIND_NAME"));
+                    idx++;
+                }
+                cursor.close();
+
+                final android.support.v7.app.AlertDialog.Builder dlg = new android.support.v7.app.AlertDialog.Builder(DictionaryActivity.this);
+                dlg.setTitle("메뉴 선택");
+                dlg.setSingleChoiceItems(kindCodeNames, mSelect, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        mSelect = arg1;
+                    }
+                });
+                dlg.setNeutralButton("TTS", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        myTTS.speak(foreign, TextToSpeech.QUEUE_FLUSH, null);
+                    }
+                });
+                dlg.setNegativeButton("취소", null);
+                dlg.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        DicDb.insConversationToNote(db, kindCodes[mSelect], sampleSeq);
+                        DicUtils.setDbChange(getApplicationContext()); //변경여부 체크
+                    }
+                });
+                dlg.show();
+            } else {
                 //단어장 다이얼로그 생성
                 Cursor cursor = db.rawQuery(DicQuery.getVocabularyCategory(), null);
 
@@ -352,7 +383,7 @@ public class DictionaryActivity extends AppCompatActivity implements View.OnClic
                 dlg.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Cursor cur = (Cursor) adapter.getCursor();
+                        Cursor cur = adapter.getCursor();
                         DicDb.insDicVoc(db, cur.getString(cur.getColumnIndexOrThrow("ENTRY_ID")), kindCodes[dSelect]);
                         DicUtils.setDbChange(getApplicationContext()); //변경여부 체크
                     }
@@ -360,7 +391,7 @@ public class DictionaryActivity extends AppCompatActivity implements View.OnClic
 
                 dlg.show();
             }
-            //return ture 설정하면 Long클릭 후 클릭은 처리 안됨
+
             return true;
         }
     };
@@ -386,7 +417,7 @@ public class DictionaryActivity extends AppCompatActivity implements View.OnClic
 
     @Override
     public void onClick(View v) {
-        if ( v.getId() == R.id.my_cb_word ) {
+        if ( v.getId() == R.id.my_cb_tone ) {
             changeListView(true);
         } else if ( v.getId() == R.id.my_iv_web ) {
             final String[] kindCodes = new String[]{"Naver","Daum"};
@@ -405,7 +436,7 @@ public class DictionaryActivity extends AppCompatActivity implements View.OnClic
                 public void onClick(DialogInterface dialog, int which) {
                     Bundle bundle = new Bundle();
 
-                    bundle.putString("kind", dictionaryKind);
+                    bundle.putString("kind", (DicUtils.isHangule(et_search.getText().toString().trim()) ? CommConstants.dictionaryKind_h : CommConstants.dictionaryKind_f));
                     bundle.putString("site", kindCodes[webDictionaryIdx]);
                     bundle.putString("word", et_search.getText().toString().trim().toLowerCase());
 
@@ -415,7 +446,35 @@ public class DictionaryActivity extends AppCompatActivity implements View.OnClic
                 }
             });
             dlg.show();
+        } else if ( v.getId() == R.id.my_rb_word ) {
+            mWsKind = "W";
+
+            changeListView(true);
+        } else if ( v.getId() == R.id.my_rb_sentence ) {
+            mWsKind = "S";
+
+            changeListView(true);
+        } else if ( v.getId() == R.id.my_cb_tone ) {
+            changeListView(true);
         }
+    }
+    public void onInit(int status) {
+        Locale loc = new Locale("en");
+
+        if (status == TextToSpeech.SUCCESS) {
+            int result = myTTS.setLanguage(new Locale("vi", "VN"));
+            if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
+                Log.e("TTS", "This Language is not supported");
+            }
+        } else {
+            Log.e("TTS", "Initilization Failed!");
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        myTTS.shutdown();
     }
 
     private class DictionaryActivitySearchTask extends AsyncTask<Void, Void, Void> {
@@ -457,10 +516,13 @@ public class DictionaryActivity extends AppCompatActivity implements View.OnClic
 
 
 class DictionaryActivityCursorAdapter extends CursorAdapter {
+    private String mWsKind = "";
     int fontSize = 0;
 
-    public DictionaryActivityCursorAdapter(Context context, Cursor cursor, int flags) {
+    public DictionaryActivityCursorAdapter(Context context, Cursor cursor, int flags, String _mWsKind) {
         super(context, cursor, 0);
+
+        mWsKind = _mWsKind;
 
         fontSize = Integer.parseInt( DicUtils.getPreferencesValue( context, CommConstants.preferences_font ) );
     }
@@ -472,17 +534,26 @@ class DictionaryActivityCursorAdapter extends CursorAdapter {
 
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
-        String word = String.valueOf(cursor.getString(cursor.getColumnIndexOrThrow("WORD")));
-        String mean = String.valueOf(cursor.getString(cursor.getColumnIndexOrThrow("MEAN")));
-        String spelling = String.valueOf(cursor.getString(cursor.getColumnIndexOrThrow("SPELLING")));
-        String hanmun = String.valueOf(cursor.getString(cursor.getColumnIndexOrThrow("HANMUN")));
+        if ( "W".equals(mWsKind) ) {
+            String word = String.valueOf(cursor.getString(cursor.getColumnIndexOrThrow("WORD")));
+            String mean = String.valueOf(cursor.getString(cursor.getColumnIndexOrThrow("MEAN")));
+            String spelling = String.valueOf(cursor.getString(cursor.getColumnIndexOrThrow("SPELLING")));
+            String hanmun = String.valueOf(cursor.getString(cursor.getColumnIndexOrThrow("HANMUN")));
 
-        ((TextView) view.findViewById(R.id.my_tv_foreign)).setText(word);
-        ((TextView) view.findViewById(R.id.my_tv_mean)).setText(mean);
-        if ( !"".equals(hanmun) ) {
-            ((TextView) view.findViewById(R.id.my_tv_spelling)).setText(spelling + " " + hanmun);
+            ((TextView) view.findViewById(R.id.my_tv_foreign)).setText(word);
+            ((TextView) view.findViewById(R.id.my_tv_mean)).setText(mean);
+
+            view.findViewById(R.id.my_tv_spelling).setVisibility(View.VISIBLE);
+            if (!"".equals(hanmun)) {
+                ((TextView) view.findViewById(R.id.my_tv_spelling)).setText(spelling + " " + hanmun);
+            } else {
+                ((TextView) view.findViewById(R.id.my_tv_spelling)).setText(spelling);
+            }
         } else {
-            ((TextView) view.findViewById(R.id.my_tv_spelling)).setText(spelling);
+            view.findViewById(R.id.my_tv_spelling).setVisibility(View.GONE);
+
+            ((TextView) view.findViewById(R.id.my_tv_foreign)).setText(String.valueOf(cursor.getString(cursor.getColumnIndexOrThrow("SENTENCE1"))));
+            ((TextView) view.findViewById(R.id.my_tv_mean)).setText(String.valueOf(cursor.getString(cursor.getColumnIndexOrThrow("SENTENCE2"))));
         }
 
         //사이즈 설정
