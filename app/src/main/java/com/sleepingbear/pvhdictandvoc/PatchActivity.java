@@ -30,11 +30,12 @@ public class PatchActivity extends AppCompatActivity {
         StringBuffer patch = new StringBuffer();
 
         patch.append("* 신규 패치" + CommConstants.sqlCR);
-        patch.append("- 사전 검색시 문장의 단어가 몇개 빠지는 문제점 수정" + CommConstants.sqlCR);
-        patch.append("- 사전 검색 데이타에서 상세 화면으로 전환시 발생하는 오류 수정" + CommConstants.sqlCR);
+        patch.append("- 단어장에서 신규 추가시 오류 수정" + CommConstants.sqlCR);
         patch.append("" + CommConstants.sqlCR);
         patch.append("" + CommConstants.sqlCR);
 
+        patch.append("- 사전 검색시 문장의 단어가 몇개 빠지는 문제점 수정" + CommConstants.sqlCR);
+        patch.append("- 사전 검색 데이타에서 상세 화면으로 전환시 발생하는 오류 수정" + CommConstants.sqlCR);
         patch.append("- 베한사전, 한베 사전을 통합했습니다." + CommConstants.sqlCR);
         patch.append("- 성조로 검색, 성조없이 검색, 예문 검색이 가능하도록 변경했습니다." + CommConstants.sqlCR);
         patch.append("* 2017.06.05 : 화면 UI 및 기능 개선" + CommConstants.sqlCR);

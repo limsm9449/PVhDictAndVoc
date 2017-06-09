@@ -205,8 +205,9 @@ public class DicQuery {
         String insCategoryCode = "";
         Cursor maxCategoryCursor = mDb.rawQuery(sql.toString(), null);
         if ( maxCategoryCursor.moveToNext() ) {
-            int maxCategory = Integer.parseInt(maxCategoryCursor.getString(maxCategoryCursor.getColumnIndexOrThrow("CODE")).substring(2,5));
-            insCategoryCode = "MY" + DicUtils.lpadding(Integer.toString(maxCategory + 1), 3, "0");
+            String max = maxCategoryCursor.getString(maxCategoryCursor.getColumnIndexOrThrow("CODE"));
+            int maxCategory = Integer.parseInt(max.substring(3,max.length()));
+            insCategoryCode = "VOC" + DicUtils.lpadding(Integer.toString(maxCategory + 1), 4, "0");
         }
 
         return insCategoryCode;
