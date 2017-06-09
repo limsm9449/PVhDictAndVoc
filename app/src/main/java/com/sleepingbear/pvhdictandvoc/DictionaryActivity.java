@@ -176,7 +176,7 @@ public class DictionaryActivity extends AppCompatActivity implements View.OnClic
             if ( "W".equals(mWsKind) ) {
                 if (searchText.indexOf(" ") < 0) {
                     if (((CheckBox) findViewById(R.id.my_cb_tone)).isChecked()) {
-                        sql.append("SELECT SEQ _id, WORD, MEAN, ENTRY_ID, SPELLING, HANMUN, ORD" + CommConstants.sqlCR);
+                        sql.append("SELECT SEQ _id, WORD, MEAN, ENTRY_ID, SPELLING, HANMUN, KIND, ORD" + CommConstants.sqlCR);
                         sql.append("  FROM DIC" + CommConstants.sqlCR);
                         sql.append(" WHERE 1 = 1" + CommConstants.sqlCR);
                         if (!"".equals(et_search.getText().toString())) {
@@ -184,7 +184,7 @@ public class DictionaryActivity extends AppCompatActivity implements View.OnClic
                         }
                         sql.append(" ORDER BY ORD" + CommConstants.sqlCR);
                     } else {
-                        sql.append("SELECT SEQ _id, WORD, MEAN, ENTRY_ID, SPELLING, HANMUN, ORD" + CommConstants.sqlCR);
+                        sql.append("SELECT SEQ _id, WORD, MEAN, ENTRY_ID, SPELLING, HANMUN, KIND, ORD" + CommConstants.sqlCR);
                         sql.append("  FROM DIC" + CommConstants.sqlCR);
                         sql.append(" WHERE 1 = 1" + CommConstants.sqlCR);
                         if (!"".equals(et_search.getText().toString())) {
@@ -205,7 +205,7 @@ public class DictionaryActivity extends AppCompatActivity implements View.OnClic
                         // 2 단어
                         word += DicUtils.getSentenceWord(splitStr, 2, m) + ",";
                         // 1 단어
-                        word += DicUtils.getSentenceWord(splitStr, 1, m);
+                        word += DicUtils.getSentenceWord(splitStr, 1, m) + ",";
                     }
                     if (((CheckBox) findViewById(R.id.my_cb_tone)).isChecked()) {
                         sql.append("SELECT SEQ _id, WORD, MEAN, ENTRY_ID, SPELLING, HANMUN, KIND, ORD FROM DIC " + CommConstants.sqlCR);
