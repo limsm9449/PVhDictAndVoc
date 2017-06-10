@@ -454,8 +454,6 @@ public class DictionaryActivity extends AppCompatActivity implements View.OnClic
             mWsKind = "S";
 
             changeListView(true);
-        } else if ( v.getId() == R.id.my_cb_tone ) {
-            changeListView(true);
         }
     }
     public void onInit(int status) {

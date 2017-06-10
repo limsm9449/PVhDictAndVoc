@@ -36,6 +36,7 @@
                 android:id="@+id/my_b_foreign_dic"
                 android:background="@drawable/my_button"
                 android:layout_weight="1"
+                android:layout_marginLeft="2dp"
                 android:layout_marginRight="3dp" />
 
             <Button
