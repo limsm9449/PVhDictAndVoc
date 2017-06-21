@@ -48,5 +48,9 @@
             android:key="key_review"
             android:title="어플 리뷰"
             android:summary="어플 관련 리뷰를 달아주세요."/>
+        <Preference
+            android:key="key_apps"
+            android:title="기타 어플.."
+            android:summary="다른 학습 어플을 확인해 보세요."/>
     </PreferenceCategory>
 </PreferenceScreen>

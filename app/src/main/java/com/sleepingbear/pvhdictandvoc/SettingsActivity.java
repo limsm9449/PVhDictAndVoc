@@ -74,7 +74,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
 
             final EditText et_saveName = ((EditText) dialog_layout.findViewById(R.id.my_d_dm_et_save));
             et_saveName.setText("backup_" + DicUtils.getCurrentDate() + ".txt");
-            ((Button) dialog_layout.findViewById(R.id.my_d_dm_b_save)).setOnClickListener(new View.OnClickListener() {
+            dialog_layout.findViewById(R.id.my_d_dm_b_save).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     String saveFileName = et_saveName.getText().toString();
@@ -116,7 +116,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
                 }
             });
 
-            ((Button) dialog_layout.findViewById(R.id.my_d_dm_b_close)).setOnClickListener(new View.OnClickListener() {
+            dialog_layout.findViewById(R.id.my_d_dm_b_close).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     alertDialog.dismiss();
@@ -216,6 +216,10 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
             startActivity(intent);
         } else if ( preference.getKey().equals("key_review") ) {
             startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + getPackageName())));
+        } else if ( preference.getKey().equals("key_apps") ) {
+            String url ="http://blog.naver.com/limsm9449/221031416154";
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+            startActivity(intent);
         }
 
         return false;
