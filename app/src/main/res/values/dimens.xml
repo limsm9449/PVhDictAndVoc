@@ -14,4 +14,7 @@
     <dimen name="tab_padding_bottom">16dp</dimen>
     <dimen name="tab_label">14sp</dimen>
     <dimen name="custom_tab_layout_height">72dp</dimen>
+
+    <dimen name="alert_dialog_button_size_n">18sp</dimen>
+    <dimen name="alert_dialog_button_size_p">20sp</dimen>
 </resources>
