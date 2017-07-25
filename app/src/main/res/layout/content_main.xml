@@ -36,7 +36,6 @@
                 android:id="@+id/my_b_foreign_dic"
                 android:background="@drawable/my_button"
                 android:layout_weight="1"
-                android:layout_marginLeft="2dp"
                 android:layout_marginRight="3dp" />
 
             <Button
@@ -46,8 +45,7 @@
                 android:id="@+id/my_b_dic_history"
                 android:background="@drawable/my_button"
                 android:layout_weight="1"
-                android:layout_marginLeft="2dp"
-                android:layout_marginRight="3dp" />
+                android:layout_marginLeft="2dp"/>
 
         </LinearLayout>
 
@@ -64,7 +62,6 @@
                 android:id="@+id/my_b_web_dic"
                 android:background="@drawable/my_button"
                 android:layout_weight="1"
-                android:layout_marginLeft="2dp"
                 android:layout_marginRight="3dp" />
 
             <Button
@@ -184,8 +181,7 @@
                 android:id="@+id/my_b_naver_conv"
                 android:background="@drawable/my_button"
                 android:layout_weight="1"
-                android:layout_marginLeft="2dp"
-                android:layout_marginRight="3dp"/>
+                android:layout_marginLeft="2dp"/>
 
         </LinearLayout>
 
