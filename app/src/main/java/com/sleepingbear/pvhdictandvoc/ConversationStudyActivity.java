@@ -52,7 +52,7 @@ public class ConversationStudyActivity extends AppCompatActivity implements View
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setVisibility(View.GONE);
 
-        ActionBar ab = (ActionBar) getSupportActionBar();
+        ActionBar ab = getSupportActionBar();
         ab.setHomeButtonEnabled(true);
         ab.setDisplayHomeAsUpEnabled(true);
 
@@ -67,18 +67,18 @@ public class ConversationStudyActivity extends AppCompatActivity implements View
         my_tv_han.setTextSize(fontSize);
         my_tv_foreign.setTextSize(fontSize);
 
-        ((ImageView) findViewById(R.id.my_iv_left)).setOnClickListener(this);
-        ((ImageView) findViewById(R.id.my_iv_right)).setOnClickListener(this);
+        findViewById(R.id.my_iv_left).setOnClickListener(this);
+        findViewById(R.id.my_iv_right).setOnClickListener(this);
 
-        ((ImageView) findViewById(R.id.my_iv_view)).setOnClickListener(this);
-        ((ImageView) findViewById(R.id.my_iv_hide)).setOnClickListener(this);
+        findViewById(R.id.my_iv_view).setOnClickListener(this);
+        findViewById(R.id.my_iv_hide).setOnClickListener(this);
 
-        ((ImageView) findViewById(R.id.my_iv_view)).setVisibility(View.VISIBLE);
-        ((ImageView) findViewById(R.id.my_iv_hide)).setVisibility(View.GONE);
+        findViewById(R.id.my_iv_view).setVisibility(View.VISIBLE);
+        findViewById(R.id.my_iv_hide).setVisibility(View.GONE);
 
-        ((RadioButton) findViewById(R.id.my_rb_easy)).setOnClickListener(this);
-        ((RadioButton) findViewById(R.id.my_rb_normal)).setOnClickListener(this);
-        ((RadioButton) findViewById(R.id.my_rb_difficult)).setOnClickListener(this);
+        findViewById(R.id.my_rb_easy).setOnClickListener(this);
+        findViewById(R.id.my_rb_normal).setOnClickListener(this);
+        findViewById(R.id.my_rb_difficult).setOnClickListener(this);
 
         //리스트 내용 변경
         changeListView(true);
@@ -135,8 +135,8 @@ public class ConversationStudyActivity extends AppCompatActivity implements View
         DicUtils.dicLog("onClick");
         switch (v.getId()) {
             case R.id.my_iv_left:
-                ((ImageView) findViewById(R.id.my_iv_hide)).setVisibility(View.GONE);
-                ((ImageView) findViewById(R.id.my_iv_view)).setVisibility(View.VISIBLE);
+                findViewById(R.id.my_iv_hide).setVisibility(View.GONE);
+                findViewById(R.id.my_iv_view).setVisibility(View.VISIBLE);
 
                 if ( !cursor.isFirst() ) {
                     cursor.moveToPrevious();
@@ -147,8 +147,8 @@ public class ConversationStudyActivity extends AppCompatActivity implements View
 
                 break;
             case R.id.my_iv_right:
-                ((ImageView) findViewById(R.id.my_iv_hide)).setVisibility(View.GONE);
-                ((ImageView) findViewById(R.id.my_iv_view)).setVisibility(View.VISIBLE);
+                findViewById(R.id.my_iv_hide).setVisibility(View.GONE);
+                findViewById(R.id.my_iv_view).setVisibility(View.VISIBLE);
 
                 if ( isStart ) {
                     DicDb.insConversationStudy(db, currSeq, DicUtils.getDelimiterDate(DicUtils.getCurrentDate(),"."));
@@ -163,13 +163,13 @@ public class ConversationStudyActivity extends AppCompatActivity implements View
                 break;
             case R.id.my_iv_view:
                 my_tv_foreign.setText(foreign);
-                ((ImageView) findViewById(R.id.my_iv_view)).setVisibility(View.GONE);
-                ((ImageView) findViewById(R.id.my_iv_hide)).setVisibility(View.VISIBLE);
+                findViewById(R.id.my_iv_view).setVisibility(View.GONE);
+                findViewById(R.id.my_iv_hide).setVisibility(View.VISIBLE);
 
                 break;
             case R.id.my_iv_hide:
-                ((ImageView) findViewById(R.id.my_iv_view)).setVisibility(View.VISIBLE);
-                ((ImageView) findViewById(R.id.my_iv_hide)).setVisibility(View.GONE);
+                findViewById(R.id.my_iv_view).setVisibility(View.VISIBLE);
+                findViewById(R.id.my_iv_hide).setVisibility(View.GONE);
 
                 conversationShow();
                 break;
@@ -204,7 +204,7 @@ public class ConversationStudyActivity extends AppCompatActivity implements View
 
                 if ( foreign.equals( currForeign.substring( 0, foreign.length() ) ) ) {
                     my_tv_foreign.setText(foreign);
-                    ((Button)v).setBackgroundColor(Color.rgb(189, 195, 195));
+                    v.setBackgroundColor(Color.rgb(189, 195, 195));
                 }
 
                 //정답이면...
@@ -225,7 +225,11 @@ public class ConversationStudyActivity extends AppCompatActivity implements View
                     ((TextView) dialog_layout.findViewById(R.id.my_tv_han)).setText(my_tv_han.getText());
                     ((TextView) dialog_layout.findViewById(R.id.my_tv_foreign)).setText(my_tv_foreign.getText());
 
-                    ((Button) dialog_layout.findViewById(R.id.my_b_next)).setOnClickListener(new View.OnClickListener() {
+                    int fontSize = Integer.parseInt( DicUtils.getPreferencesValue( getApplicationContext(), CommConstants.preferences_font ) );
+                    ((TextView) dialog_layout.findViewById(R.id.my_tv_han)).setTextSize(fontSize);
+                    ((TextView) dialog_layout.findViewById(R.id.my_tv_foreign)).setTextSize(fontSize);
+
+                    dialog_layout.findViewById(R.id.my_b_next).setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             if (!cursor.isLast()) {
@@ -238,13 +242,13 @@ public class ConversationStudyActivity extends AppCompatActivity implements View
                             alertDialog.dismiss();
                         }
                     });
-                    ((Button) dialog_layout.findViewById(R.id.my_b_close)).setOnClickListener(new View.OnClickListener() {
+                    dialog_layout.findViewById(R.id.my_b_close).setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             alertDialog.dismiss();
                         }
                     });
-                    ((Button) dialog_layout.findViewById(R.id.my_b_detail)).setOnClickListener(new View.OnClickListener() {
+                    dialog_layout.findViewById(R.id.my_b_detail).setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             Bundle bundle = new Bundle();
@@ -292,13 +296,13 @@ public class ConversationStudyActivity extends AppCompatActivity implements View
                 btn.setTextColor(Color.rgb(255, 255, 255));
                 btn.setText( DicUtils.getBtnString( foreignArr[i] ) );
                 btn.setAllCaps(false);
-                btn.setTextSize(13);
+                btn.setTextSize(18);
 
                 btn.setLayoutParams((new FlowLayout.LayoutParams(3, 3)));
 
                 btn.setId(i);
                 btn.setTag( DicUtils.getBtnString( foreignArr[i] ) );
-                btn.setGravity(Gravity.LEFT);
+                btn.setGravity(Gravity.TOP);
                 btn.setOnClickListener(this);
                 wordArea.addView(btn);
             }

@@ -30,10 +30,11 @@ public class PatchActivity extends AppCompatActivity {
         StringBuffer patch = new StringBuffer();
 
         patch.append("* 신규 패치" + CommConstants.sqlCR);
-        patch.append("- 안드로이드 7에서 다이얼로그 버튼이 안보이는 문제점 수정" + CommConstants.sqlCR);
+        patch.append("- 회화학습에서 단어 버튼의 크기를 변경" + CommConstants.sqlCR);
         patch.append("" + CommConstants.sqlCR);
         patch.append("" + CommConstants.sqlCR);
 
+        patch.append("- 안드로이드 7에서 다이얼로그 버튼이 안보이는 문제점 수정" + CommConstants.sqlCR);
         patch.append("- 단어장에서 신규 추가시 오류 수정" + CommConstants.sqlCR);
         patch.append("- 사전 검색시 문장의 단어가 몇개 빠지는 문제점 수정" + CommConstants.sqlCR);
         patch.append("- 사전 검색 데이타에서 상세 화면으로 전환시 발생하는 오류 수정" + CommConstants.sqlCR);

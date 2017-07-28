@@ -62,7 +62,7 @@
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:id="@+id/my_tv_han"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
@@ -85,7 +85,7 @@
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="wrap_content"
                 android:id="@+id/my_tv_foreign"
                 android:layout_weight="1"
                 android:gravity="center_vertical"

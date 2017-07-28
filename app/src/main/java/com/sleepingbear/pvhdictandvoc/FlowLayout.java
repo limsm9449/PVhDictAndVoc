@@ -57,7 +57,7 @@ public class FlowLayout extends ViewGroup {
                 //final int childw = (((String)child.getTag()).length() <= 3 ? 100 : ((String)child.getTag()).length() * 35);
                 final int childw = getWordWidth((String)child.getTag());
                 //line_height = Math.max(line_height, child.getMeasuredHeight() + lp.vertical_spacing);
-                line_height = Math.max(line_height, 140 + lp.vertical_spacing);
+                line_height = Math.max(line_height, 120 + lp.vertical_spacing);
                 //System.out.println(child.getMeasuredHeight());
                 if (xpos + childw > width) {
                     xpos = getPaddingLeft();
@@ -87,10 +87,7 @@ public class FlowLayout extends ViewGroup {
 
     @Override
     protected boolean checkLayoutParams(ViewGroup.LayoutParams p) {
-        if (p instanceof LayoutParams) {
-            return true;
-        }
-        return false;
+        return p instanceof LayoutParams;
     }
 
     @Override
@@ -107,13 +104,13 @@ public class FlowLayout extends ViewGroup {
                 //final int childw = (((String)child.getTag()).length() <= 3 ? 100 : ((String)child.getTag()).length() * 35);
                 final int childw = getWordWidth((String)child.getTag());
                 //final int childh = child.getMeasuredHeight();
-                final int childh = 140;
+                final int childh = 120;
                 //System.out.println(childh);
                 final LayoutParams lp = (LayoutParams) child.getLayoutParams();
                 if (xpos + childw > width) {
                     xpos = getPaddingLeft();
                     //ypos += line_height;
-                    ypos += 140 + lp.vertical_spacing;
+                    ypos += 120 + lp.vertical_spacing;
                 }
                 child.layout(xpos, ypos, xpos + childw, ypos + childh);
                 xpos += childw + lp.horizontal_spacing;
@@ -128,16 +125,15 @@ public class FlowLayout extends ViewGroup {
         String compWord3 = "abcdeghkmnopqsuvwxyz";
         String compWord4 = "fijltr";
 
-
         for ( int i = 0; i < word.length() ; i++ ) {
             if ( compWord1.indexOf(word.substring(i, i +1)) > -1 ) {
-                width += 33;
+                width += 36;
             } else if ( compWord2.indexOf(word.substring(i, i +1)) > -1 ) {
                 width += 25;
             } else if ( compWord3.indexOf(word.substring(i, i +1)) > -1 ) {
-                width += 30;
+                width += 32;
             } else if ( compWord4.indexOf(word.substring(i, i +1)) > -1 ) {
-                width += 18;
+                width += 23;
             } else {
                 width += 30;
             }

@@ -59,7 +59,7 @@ public class ConversationNoteStudyActivity extends AppCompatActivity implements 
         sampleSeq = b.getString("sampleSeq");
         sqlWhere = b.getString("sqlWhere");
 
-        ActionBar ab = (ActionBar) getSupportActionBar();
+        ActionBar ab = getSupportActionBar();
         ab.setTitle("회화 학습");
         ab.setHomeButtonEnabled(true);
         ab.setDisplayHomeAsUpEnabled(true);
@@ -73,12 +73,12 @@ public class ConversationNoteStudyActivity extends AppCompatActivity implements 
         my_tv_han.setTextSize(fontSize);
         my_tv_foreign.setTextSize(fontSize);
 
-        ((ImageView) this.findViewById(R.id.my_iv_left)).setOnClickListener(this);
-        ((ImageView) this.findViewById(R.id.my_iv_right)).setOnClickListener(this);
+        this.findViewById(R.id.my_iv_left).setOnClickListener(this);
+        this.findViewById(R.id.my_iv_right).setOnClickListener(this);
 
-        ((ImageView) this.findViewById(R.id.my_iv_view)).setOnClickListener(this);
-        ((ImageView) this.findViewById(R.id.my_iv_hide)).setOnClickListener(this);
-        ((ImageView) this.findViewById(R.id.my_iv_hide)).setVisibility(View.GONE);
+        this.findViewById(R.id.my_iv_view).setOnClickListener(this);
+        this.findViewById(R.id.my_iv_hide).setOnClickListener(this);
+        this.findViewById(R.id.my_iv_hide).setVisibility(View.GONE);
 
         //리스트 내용 변경
         changeListView();
@@ -102,11 +102,6 @@ public class ConversationNoteStudyActivity extends AppCompatActivity implements 
             }else {
                 cursor = db.rawQuery(DicQuery.getNoteList(kind), null);
             }
-
-            if ( cursor.getCount() == 1 ) {
-                ((ImageView) this.findViewById(R.id.my_iv_left)).setVisibility(View.GONE);
-                ((ImageView) this.findViewById(R.id.my_iv_right)).setVisibility(View.GONE);
-            }
         }
     }
 
@@ -115,8 +110,8 @@ public class ConversationNoteStudyActivity extends AppCompatActivity implements 
         DicUtils.dicLog("onClick");
         switch (v.getId()) {
             case R.id.my_iv_left:
-                ((ImageView) this.findViewById(R.id.my_iv_hide)).setVisibility(View.GONE);
-                ((ImageView) this.findViewById(R.id.my_iv_view)).setVisibility(View.VISIBLE);
+                this.findViewById(R.id.my_iv_hide).setVisibility(View.GONE);
+                this.findViewById(R.id.my_iv_view).setVisibility(View.VISIBLE);
 
                 if ( !cursor.isFirst() ) {
                     cursor.moveToPrevious();
@@ -125,8 +120,8 @@ public class ConversationNoteStudyActivity extends AppCompatActivity implements 
 
                 break;
             case R.id.my_iv_right:
-                ((ImageView) this.findViewById(R.id.my_iv_hide)).setVisibility(View.GONE);
-                ((ImageView) this.findViewById(R.id.my_iv_view)).setVisibility(View.VISIBLE);
+                this.findViewById(R.id.my_iv_hide).setVisibility(View.GONE);
+                this.findViewById(R.id.my_iv_view).setVisibility(View.VISIBLE);
 
                 if ( !cursor.isLast() ) {
                     cursor.moveToNext();
@@ -136,14 +131,14 @@ public class ConversationNoteStudyActivity extends AppCompatActivity implements 
                 }
                 break;
             case R.id.my_iv_view:
-                ((ImageView) this.findViewById(R.id.my_iv_view)).setVisibility(View.GONE);
-                ((ImageView) this.findViewById(R.id.my_iv_hide)).setVisibility(View.VISIBLE);
+                this.findViewById(R.id.my_iv_view).setVisibility(View.GONE);
+                this.findViewById(R.id.my_iv_hide).setVisibility(View.VISIBLE);
 
                 my_tv_foreign.setText(foreign);
                 break;
             case R.id.my_iv_hide:
-                ((ImageView) this.findViewById(R.id.my_iv_view)).setVisibility(View.VISIBLE);
-                ((ImageView) this.findViewById(R.id.my_iv_hide)).setVisibility(View.GONE);
+                this.findViewById(R.id.my_iv_view).setVisibility(View.VISIBLE);
+                this.findViewById(R.id.my_iv_hide).setVisibility(View.GONE);
 
                 conversationShow();
                 break;
@@ -164,7 +159,7 @@ public class ConversationNoteStudyActivity extends AppCompatActivity implements 
 
                 if ( foreign.equals( currForeign.substring( 0, foreign.length() ) ) ) {
                     my_tv_foreign.setText(foreign);
-                    ((Button)v).setBackgroundColor(Color.rgb(189, 195, 195));
+                    v.setBackgroundColor(Color.rgb(189, 195, 195));
                 }
 
                 if ( foreign.equals( currForeign) ) {
@@ -179,7 +174,11 @@ public class ConversationNoteStudyActivity extends AppCompatActivity implements 
                     ((TextView) dialog_layout.findViewById(R.id.my_tv_han)).setText(my_tv_han.getText());
                     ((TextView) dialog_layout.findViewById(R.id.my_tv_foreign)).setText(my_tv_foreign.getText());
 
-                    ((Button) dialog_layout.findViewById(R.id.my_b_next)).setOnClickListener(new View.OnClickListener() {
+                    int fontSize = Integer.parseInt( DicUtils.getPreferencesValue( getApplicationContext(), CommConstants.preferences_font ) );
+                    ((TextView) dialog_layout.findViewById(R.id.my_tv_han)).setTextSize(fontSize);
+                    ((TextView) dialog_layout.findViewById(R.id.my_tv_foreign)).setTextSize(fontSize);
+
+                    dialog_layout.findViewById(R.id.my_b_next).setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             if (!cursor.isLast()) {
@@ -192,7 +191,7 @@ public class ConversationNoteStudyActivity extends AppCompatActivity implements 
                             alertDialog.dismiss();
                         }
                     });
-                    ((Button) dialog_layout.findViewById(R.id.my_b_close)).setOnClickListener(new View.OnClickListener() {
+                    dialog_layout.findViewById(R.id.my_b_close).setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             alertDialog.dismiss();
@@ -202,7 +201,7 @@ public class ConversationNoteStudyActivity extends AppCompatActivity implements 
                             }
                         }
                     });
-                    ((Button) dialog_layout.findViewById(R.id.my_b_detail)).setOnClickListener(new View.OnClickListener() {
+                    dialog_layout.findViewById(R.id.my_b_detail).setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             Bundle bundle = new Bundle();
@@ -269,13 +268,13 @@ public class ConversationNoteStudyActivity extends AppCompatActivity implements 
                 btn.setTextColor(Color.rgb(255, 255, 255));
                 btn.setText( DicUtils.getBtnString( foreignArr[i] ) );
                 btn.setAllCaps(false);
-                btn.setTextSize(12);
+                btn.setTextSize(18);
 
                 btn.setLayoutParams((new FlowLayout.LayoutParams(3, 3)));
 
                 btn.setId(i);
                 btn.setTag( DicUtils.getBtnString( foreignArr[i] ) );
-                btn.setGravity(Gravity.LEFT);
+                btn.setGravity(Gravity.TOP);
                 btn.setOnClickListener(this);
                 wordArea.addView(btn);
             }
@@ -316,7 +315,7 @@ public class ConversationNoteStudyActivity extends AppCompatActivity implements 
     }
 
     private void finishActivity() {
-        this.finish();;
+        this.finish();
     }
 
     private class ConversationNoteStudySearchTask extends AsyncTask<Void, Void, Void> {
@@ -344,6 +343,11 @@ public class ConversationNoteStudyActivity extends AppCompatActivity implements 
 
         @Override
         protected void onPostExecute(Void result) {
+            if ( cursor.getCount() == 1 ) {
+                findViewById(R.id.my_iv_left).setVisibility(View.GONE);
+                findViewById(R.id.my_iv_right).setVisibility(View.GONE);
+            }
+
             cursor.moveToFirst();
             conversationShow();
 
