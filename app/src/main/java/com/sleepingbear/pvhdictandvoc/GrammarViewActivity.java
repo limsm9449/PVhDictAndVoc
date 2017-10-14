@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+
 import java.util.ArrayList;
 
 public class GrammarViewActivity extends AppCompatActivity {
@@ -32,7 +33,7 @@ public class GrammarViewActivity extends AppCompatActivity {
 
         Bundle b = this.getIntent().getExtras();
 
-        ActionBar ab = (ActionBar) getSupportActionBar();
+        ActionBar ab = getSupportActionBar();
         ab.setTitle("문법 상세");
         ab.setHomeButtonEnabled(true);
         ab.setDisplayHomeAsUpEnabled(true);
@@ -61,6 +62,8 @@ public class GrammarViewActivity extends AppCompatActivity {
 
         GrammarViewAdapter m_adapter = new GrammarViewAdapter(this, R.layout.content_grammar_view_item, al);
         ((ListView) this.findViewById(R.id.my_c_gv_lv1)).setAdapter(m_adapter);
+
+        DicUtils.setAdView(this);
     }
 
     @Override

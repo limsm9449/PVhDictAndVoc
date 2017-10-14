@@ -53,23 +53,25 @@ public class NewsClickWordActivity extends AppCompatActivity implements View.OnC
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setVisibility(View.GONE);
 
-        ActionBar ab = (ActionBar) getSupportActionBar();
+        ActionBar ab = getSupportActionBar();
         ab.setHomeButtonEnabled(true);
         ab.setDisplayHomeAsUpEnabled(true);
 
         dbHelper = new DbHelper(this);
         db = dbHelper.getWritableDatabase();
 
-        ((ImageView) findViewById(R.id.my_f_cw_all)).setOnClickListener(this);
-        ((ImageView) findViewById(R.id.my_f_cw_delete)).setOnClickListener(this);
-        ((ImageView) findViewById(R.id.my_f_cw_save)).setOnClickListener(this);
-        ((ImageView) findViewById(R.id.my_f_cw_new_save)).setOnClickListener(this);
+        findViewById(R.id.my_f_cw_all).setOnClickListener(this);
+        findViewById(R.id.my_f_cw_delete).setOnClickListener(this);
+        findViewById(R.id.my_f_cw_save).setOnClickListener(this);
+        findViewById(R.id.my_f_cw_new_save).setOnClickListener(this);
 
         editRl = (RelativeLayout) findViewById(R.id.my_f_clickword_rl);
         editRl.setVisibility(View.GONE);
 
         //리스트 내용 변경
         changeListView();
+
+        DicUtils.setAdView(this);
     }
 
     @Override
@@ -82,13 +84,13 @@ public class NewsClickWordActivity extends AppCompatActivity implements View.OnC
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        ((MenuItem)menu.findItem(R.id.action_edit)).setVisible(false);
-        ((MenuItem)menu.findItem(R.id.action_exit)).setVisible(false);
+        menu.findItem(R.id.action_edit).setVisible(false);
+        menu.findItem(R.id.action_exit).setVisible(false);
 
         if ( isEditing ) {
-            ((MenuItem)menu.findItem(R.id.action_exit)).setVisible(true);
+            menu.findItem(R.id.action_exit).setVisible(true);
         } else {
-            ((MenuItem)menu.findItem(R.id.action_edit)).setVisible(true);
+            menu.findItem(R.id.action_edit).setVisible(true);
         }
 
         return super.onPrepareOptionsMenu(menu);
@@ -159,18 +161,14 @@ public class NewsClickWordActivity extends AppCompatActivity implements View.OnC
         DicUtils.dicLog("onClick");
         switch (v.getId()) {
             case R.id.my_f_cw_all :
-                if ( isAllCheck ) {
-                    isAllCheck = false;
-                } else {
-                    isAllCheck = true;
-                }
+                isAllCheck = !isAllCheck;
                 adapter.allCheck(isAllCheck);
                 break;
             case R.id.my_f_cw_delete :
                 if ( !adapter.isCheck() ) {
                     Toast.makeText(this, "선택된 데이타가 없습니다.", Toast.LENGTH_SHORT).show();
                 } else {
-                    new android.app.AlertDialog.Builder(this)
+                    new android.support.v7.app.AlertDialog.Builder(this)
                             .setTitle("알림")
                             .setMessage("삭제하시겠습니까?")
                             .setPositiveButton("확인", new DialogInterface.OnClickListener() {
@@ -196,7 +194,7 @@ public class NewsClickWordActivity extends AppCompatActivity implements View.OnC
                     Toast.makeText(this, "선택된 데이타가 없습니다.", Toast.LENGTH_SHORT).show();
                 } else {
 
-                    LayoutInflater inflater = (LayoutInflater) getSystemService(this.LAYOUT_INFLATER_SERVICE);
+                    LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
                     final View dialog_layout = inflater.inflate(R.layout.dialog_category_add, (ViewGroup) findViewById(R.id.my_d_category_root));
 
                     //dialog 생성..
@@ -206,7 +204,7 @@ public class NewsClickWordActivity extends AppCompatActivity implements View.OnC
 
                     ((TextView) dialog_layout.findViewById(R.id.my_d_category_add_tv_title)).setText("단어장 추가");
                     final EditText et_ins = ((EditText) dialog_layout.findViewById(R.id.my_d_category_add_et_ins));
-                    ((Button) dialog_layout.findViewById(R.id.my_d_category_add_b_ins)).setOnClickListener(new View.OnClickListener() {
+                    dialog_layout.findViewById(R.id.my_d_category_add_b_ins).setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             if ("".equals(et_ins.getText().toString())) {
@@ -226,7 +224,7 @@ public class NewsClickWordActivity extends AppCompatActivity implements View.OnC
                             }
                         }
                     });
-                    ((Button) dialog_layout.findViewById(R.id.my_d_category_add_b_close)).setOnClickListener(new View.OnClickListener() {
+                    dialog_layout.findViewById(R.id.my_d_category_add_b_close).setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             alertDialog.dismiss();
@@ -379,9 +377,9 @@ class NewsClickwordCursorAdapter extends CursorAdapter {
         }
 
         if ( isEditing ) {
-            ((RelativeLayout) view.findViewById(R.id.my_f_ci_rl)).setVisibility(View.VISIBLE);
+            view.findViewById(R.id.my_f_ci_rl).setVisibility(View.VISIBLE);
         } else {
-            ((RelativeLayout) view.findViewById(R.id.my_f_ci_rl)).setVisibility(View.GONE);
+            view.findViewById(R.id.my_f_ci_rl).setVisibility(View.GONE);
         }
     }
 

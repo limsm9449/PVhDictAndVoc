@@ -28,6 +28,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
     private SQLiteDatabase db;
     private PreferenceScreen screen;
     private ListPreference mFontSize;
+    private ListPreference mWebViewFontSize;
 
 
 
@@ -39,14 +40,13 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
         screen = getPreferenceScreen();
 
         mFontSize = (ListPreference) screen.findPreference("key_fontSize");
+        mFontSize.setOnPreferenceChangeListener(this);
+
+        mWebViewFontSize = (ListPreference) screen.findPreference("key_webViewFontSize");
+        mWebViewFontSize.setOnPreferenceChangeListener(this);
 
         dbHelper = new DbHelper(this);
         db = dbHelper.getWritableDatabase();
-
-        //변화 이벤트가 일어났을 시 동작
-        mFontSize.setOnPreferenceChangeListener(this);
-
-
     }
 
     @Override
@@ -205,7 +205,26 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
                         }
                     })
                     .show();
+        } else if ( preference.getKey().equals("key_news_clear") ) {
+            new android.support.v7.app.AlertDialog.Builder(this)
+                    .setTitle("알림")
+                    .setMessage("뉴스 데이타를 초기화 하시겠습니까?\n초기화 후에는 복구할 수 없습니다.")
+                    .setPositiveButton("확인", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            DicDb.initNews(db);
 
+                            DicUtils.initNewsPreferences(getApplicationContext());
+
+                            Toast.makeText(getApplicationContext(), "뉴스 데이타가 초기화 되었습니다.", Toast.LENGTH_LONG).show();
+                        }
+                    })
+                    .setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                        }
+                    })
+                    .show();
         } else if ( preference.getKey().equals("key_mail") ) {
             Intent intent = new Intent(Intent.ACTION_SENDTO);
             intent.setType("text/plain");
@@ -234,6 +253,10 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
             ListPreference listPreference = (ListPreference) preference;
             int index = listPreference.findIndexOfValue(value);
             mFontSize.setSummary(index >= 0 ? listPreference.getEntries()[index] : null);
+        } else if ( preference == mWebViewFontSize ) {
+            ListPreference listPreference = (ListPreference) preference;
+            int index = listPreference.findIndexOfValue(value);
+            mWebViewFontSize.setSummary(index >= 0 ? listPreference.getEntries()[index] : null);
         }
         return true;
     }
@@ -241,5 +264,6 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
 
     private void updateSummary(){
         mFontSize.setSummary(mFontSize.getEntry());
+        mWebViewFontSize.setSummary(mWebViewFontSize.getEntry());
     }
 }

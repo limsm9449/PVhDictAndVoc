@@ -15,7 +15,6 @@ import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.Toast;
 
 public class WebTranslateActivity extends AppCompatActivity {
     private ActionBar ab;
@@ -34,7 +33,7 @@ public class WebTranslateActivity extends AppCompatActivity {
             sentence = "";
         }
 
-        ab = (ActionBar) getSupportActionBar();
+        ab = getSupportActionBar();
         ab.setTitle("Web 번역");
         ab.setHomeButtonEnabled(true);
         ab.setDisplayHomeAsUpEnabled(true);
@@ -49,6 +48,8 @@ public class WebTranslateActivity extends AppCompatActivity {
         webView.setWebViewClient(new WebTranslateActivity.MyWebViewClient());
 
         webTranslateLoad();
+
+        DicUtils.setAdView(this);
     }
 
     public void webTranslateLoad() {
@@ -95,7 +96,8 @@ public class WebTranslateActivity extends AppCompatActivity {
                     if ( webView.canGoBack() ) {
                         webView.goBack();
                     } else {
-                        Toast.makeText(getApplicationContext(), "상단의 Back 버튼을 클릭해주세요.", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getApplicationContext(), "상단의 Back 버튼을 클릭해주세요.", Toast.LENGTH_SHORT).show();
+                        finish();
                     }
                     return true;
             }

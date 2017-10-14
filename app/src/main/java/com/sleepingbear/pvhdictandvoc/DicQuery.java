@@ -110,7 +110,15 @@ public class DicQuery {
         sql.append("SELECT 1 _id, CODE KIND, CODE_NAME KIND_NAME," + CommConstants.sqlCR);
         sql.append("            COALESCE((SELECT COUNT(*)" + CommConstants.sqlCR);
         sql.append("                        FROM DIC_VOC" + CommConstants.sqlCR);
-        sql.append("                       WHERE KIND = A.CODE),0) CNT" + CommConstants.sqlCR);
+        sql.append("                       WHERE KIND = A.CODE),0) CNT," + CommConstants.sqlCR);
+        sql.append("            COALESCE((SELECT COUNT(*)" + CommConstants.sqlCR);
+        sql.append("                        FROM DIC_VOC" + CommConstants.sqlCR);
+        sql.append("                       WHERE KIND = A.CODE" + CommConstants.sqlCR);
+        sql.append("                         AND MEMORIZATION = 'Y'),0) M_CNT," + CommConstants.sqlCR);
+        sql.append("            COALESCE((SELECT COUNT(*)" + CommConstants.sqlCR);
+        sql.append("                        FROM DIC_VOC" + CommConstants.sqlCR);
+        sql.append("                       WHERE KIND = A.CODE" + CommConstants.sqlCR);
+        sql.append("                         AND MEMORIZATION = 'N'),0) UM_CNT" + CommConstants.sqlCR);
         sql.append("  FROM DIC_CODE A" + CommConstants.sqlCR);
         sql.append(" WHERE CODE_GROUP = '" + CommConstants.vocabularyCode + "'" + CommConstants.sqlCR);
         sql.append(" ORDER BY 1,3" + CommConstants.sqlCR);
@@ -320,9 +328,22 @@ public class DicQuery {
     public static String getCategoryList(String kind) {
         StringBuffer sql = new StringBuffer();
 
-        sql.append("SELECT SEQ _id, SEQ, CATEGORY, SAMPLES" + CommConstants.sqlCR);
-        sql.append("  FROM DIC_CATEGORY" + CommConstants.sqlCR);
-        sql.append(" WHERE KIND = '" + kind + "'" + CommConstants.sqlCR);
+        if ( "C04".equals(kind) ) {
+            sql.append("SELECT _id, _id SEQ, CATEGORY, '' SAMPLES, 'C04' KIND" + CommConstants.sqlCR);
+            sql.append("  FROM NAVER_CATEGORY" + CommConstants.sqlCR);
+        } else if ( "C05".equals(kind) ) {
+            sql.append("SELECT SEQ _id, SEQ, SUBSTR(LVL1,3,4)||'-'||LVL2 CATEGORY, '' SAMPLES, 'C05' KIND" + CommConstants.sqlCR);
+            sql.append("  FROM VSL" + CommConstants.sqlCR);
+            sql.append(" WHERE LVL1 IN ('G_VSL1','G_VSL2','G_VSL3','G_VSL4')" + CommConstants.sqlCR);
+        } else if ( "C06".equals(kind) ) {
+            sql.append("SELECT SEQ _id, SEQ, SUBSTR(LVL1,3,6)||'-'||LVL2 CATEGORY, '' SAMPLES, 'C06' KIND" + CommConstants.sqlCR);
+            sql.append("  FROM VSL" + CommConstants.sqlCR);
+            sql.append(" WHERE LVL1 IN ('G_VSL3_R','G_VSL4_R','G_VSL6')" + CommConstants.sqlCR);
+        } else {
+            sql.append("SELECT SEQ _id, SEQ, CATEGORY, SAMPLES, KIND" + CommConstants.sqlCR);
+            sql.append("  FROM DIC_CATEGORY" + CommConstants.sqlCR);
+            sql.append(" WHERE KIND = '" + kind + "'" + CommConstants.sqlCR);
+        }
         DicUtils.dicSqlLog(sql.toString());
 
         return sql.toString();
@@ -557,15 +578,17 @@ public class DicQuery {
     public static String getCategoryGroupKind() {
         StringBuffer sql = new StringBuffer();
 
-        sql.append("SELECT 1 _id, 'C01' KIND, '초급 단어' KIND_NAME" + CommConstants.sqlCR);
+        sql.append("SELECT 1 _id, 'C01' KIND, '단어' KIND_NAME" + CommConstants.sqlCR);
         sql.append(" UNION ALL" + CommConstants.sqlCR);
-        sql.append("SELECT 2 _id, 'C02' KIND, '중급 단어' KIND_NAME" + CommConstants.sqlCR);
+        sql.append("SELECT 2 _id, 'C02' KIND, '회화' KIND_NAME" + CommConstants.sqlCR);
         sql.append(" UNION ALL" + CommConstants.sqlCR);
-        sql.append("SELECT 3 _id, 'C03' KIND, '필수 단어' KIND_NAME" + CommConstants.sqlCR);
+        sql.append("SELECT 3 _id, 'C04' KIND, '네이버 회화' KIND_NAME" + CommConstants.sqlCR);
         sql.append(" UNION ALL" + CommConstants.sqlCR);
-        sql.append("SELECT 4 _id, 'C04' KIND, '카테고리별 단어' KIND_NAME" + CommConstants.sqlCR);
+        sql.append("SELECT 4 _id, 'C05' KIND, 'VSL 회화' KIND_NAME" + CommConstants.sqlCR);
         sql.append(" UNION ALL" + CommConstants.sqlCR);
-        sql.append("SELECT 5 _id, 'C05' KIND, '상활별 회화' KIND_NAME" + CommConstants.sqlCR);
+        sql.append("SELECT 5 _id, 'C03' KIND, '독해' KIND_NAME" + CommConstants.sqlCR);
+        sql.append(" UNION ALL" + CommConstants.sqlCR);
+        sql.append("SELECT 6 _id, 'C06' KIND, 'VSL 독해' KIND_NAME" + CommConstants.sqlCR);
 
         DicUtils.dicSqlLog(sql.toString());
 
@@ -583,6 +606,88 @@ public class DicQuery {
         sql.append("SELECT SEQ _id, WORD, MEAN, ENTRY_ID, SPELLING, TENSE, TYPE, (SELECT COUNT(*) FROM DIC_VOC WHERE ENTRY_ID = '" + entryId + "') MY_VOC, KIND" + CommConstants.sqlCR);
         sql.append("  FROM DIC" + CommConstants.sqlCR);
         sql.append(" WHERE ENTRY_ID = '" + entryId + "'" + CommConstants.sqlCR);
+
+        DicUtils.dicSqlLog(sql.toString());
+
+        return sql.toString();
+
+    }
+
+    public static String getVsl1Class() {
+        StringBuffer sql = new StringBuffer();
+
+        sql.append("SELECT 0 _id, '' LVL2, '전체 ' LVL3" + CommConstants.sqlCR);
+        sql.append(" UNION ALL" + CommConstants.sqlCR);
+        sql.append("SELECT SEQ _id, LVL2, LVL3" + CommConstants.sqlCR);
+        sql.append("  FROM VSL" + CommConstants.sqlCR);
+        sql.append(" WHERE LVL1 = 'G_CLASS'" + CommConstants.sqlCR);
+        sql.append(" ORDER BY 1" + CommConstants.sqlCR);
+
+        DicUtils.dicSqlLog(sql.toString());
+
+        return sql.toString();
+    }
+
+    public static String getVsl1Kind() {
+        StringBuffer sql = new StringBuffer();
+
+        sql.append("SELECT 0 _id, '' LVL2, '전체 ' LVL3" + CommConstants.sqlCR);
+        sql.append(" UNION ALL" + CommConstants.sqlCR);
+        sql.append("SELECT SEQ _id, LVL2, LVL3" + CommConstants.sqlCR);
+        sql.append("  FROM VSL" + CommConstants.sqlCR);
+        sql.append(" WHERE LVL1 = 'G_KIND'" + CommConstants.sqlCR);
+        sql.append(" ORDER BY 1" + CommConstants.sqlCR);
+
+        DicUtils.dicSqlLog(sql.toString());
+
+        return sql.toString();
+    }
+
+    public static String getVsl1ClassDetail(String gClass) {
+        StringBuffer sql = new StringBuffer();
+
+        sql.append("SELECT 0 _id, '' LVL2, '전체 ' LVL3" + CommConstants.sqlCR);
+        sql.append(" UNION ALL" + CommConstants.sqlCR);
+        sql.append("SELECT SEQ _id, LVL2, LVL3" + CommConstants.sqlCR);
+        sql.append("  FROM VSL" + CommConstants.sqlCR);
+        sql.append(" WHERE LVL1 = '" + gClass + "'" + CommConstants.sqlCR);
+        sql.append(" ORDER BY 1" + CommConstants.sqlCR);
+
+        DicUtils.dicSqlLog(sql.toString());
+
+        return sql.toString();
+    }
+
+    public static String getVslContents(String gClass, String gClassSub, String gKind) {
+        StringBuffer sql = new StringBuffer();
+
+        sql.append("SELECT SEQ _id, LVL3, SENTENCE1, SENTENCE2" + CommConstants.sqlCR);
+        sql.append("  FROM VSL" + CommConstants.sqlCR);
+        sql.append(" WHERE LVL1 LIKE 'VSL%'" + CommConstants.sqlCR);
+        if ( !"".equals(gClass) ) {
+            sql.append("   AND LVL1 = '" + gClass + "'" + CommConstants.sqlCR);
+        }
+        if ( !"".equals(gClassSub) ) {
+            sql.append("   AND LVL2 = '" + gClassSub + "'" + CommConstants.sqlCR);
+        }
+        if ( !"".equals(gKind) ) {
+            sql.append("   AND LVL3 = '" + gKind + "'" + CommConstants.sqlCR);
+        }
+        sql.append(" ORDER BY 1" + CommConstants.sqlCR);
+
+        DicUtils.dicSqlLog(sql.toString());
+
+        return sql.toString();
+    }
+
+    public static String getNewsList(String newsCode, String categoryCode) {
+        StringBuffer sql = new StringBuffer();
+
+        sql.append("SELECT  SEQ _id, SEQ, NEWS, CATEGORY, TITLE, DESC, URL, INS_DATE" + CommConstants.sqlCR);
+        sql.append("FROM    DIC_NEWS" + CommConstants.sqlCR);
+        sql.append("WHERE   NEWS = '" + newsCode +"'" + CommConstants.sqlCR);
+        sql.append("AND     CATEGORY = '" + categoryCode +"'" + CommConstants.sqlCR);
+        sql.append("ORDER   BY INS_DATE DESC, SEQ" + CommConstants.sqlCR);
 
         DicUtils.dicSqlLog(sql.toString());
 

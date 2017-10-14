@@ -12,7 +12,8 @@
         android:layout_height="match_parent"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginTop="50dp">
+        android:layout_marginTop="50dp"
+        android:layout_above="@+id/adView">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -162,4 +163,12 @@
         </RelativeLayout>
 
     </RelativeLayout>
+
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:adSize="BANNER"
+        app:adUnitId="@string/banner_ad_unit_id"
+        android:layout_alignParentBottom="true" />
 </RelativeLayout>

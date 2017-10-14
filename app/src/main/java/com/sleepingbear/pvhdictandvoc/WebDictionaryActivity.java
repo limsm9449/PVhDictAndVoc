@@ -19,7 +19,6 @@ import android.webkit.WebViewClient;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 public class WebDictionaryActivity extends AppCompatActivity {
     private WebView webView;
@@ -49,7 +48,7 @@ public class WebDictionaryActivity extends AppCompatActivity {
             site = "Naver";
         }
 
-        ab = (ActionBar) getSupportActionBar();
+        ab = getSupportActionBar();
         ab.setHomeButtonEnabled(true);
         ab.setDisplayHomeAsUpEnabled(true);
 
@@ -63,6 +62,8 @@ public class WebDictionaryActivity extends AppCompatActivity {
         webView.setWebViewClient(new WebDictionaryActivity.MyWebViewClient());
 
         webDictionaryLoad();
+
+        DicUtils.setAdView(this);
     }
 
     public void webDictionaryLoad() {
@@ -160,7 +161,8 @@ public class WebDictionaryActivity extends AppCompatActivity {
                     if ( webView.canGoBack() ) {
                         webView.goBack();
                     } else {
-                        Toast.makeText(getApplicationContext(), "상단의 Back 버튼을 클릭해주세요.", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getApplicationContext(), "상단의 Back 버튼을 클릭해주세요.", Toast.LENGTH_SHORT).show();
+                        finish();
                     }
                     return true;
             }

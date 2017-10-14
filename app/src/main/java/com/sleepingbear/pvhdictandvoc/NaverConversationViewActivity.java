@@ -22,6 +22,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+
 import java.util.HashMap;
 import java.util.Locale;
 
@@ -47,7 +48,7 @@ public class NaverConversationViewActivity extends AppCompatActivity implements 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setVisibility(View.GONE);
 
-        ActionBar ab = (ActionBar) getSupportActionBar();
+        ActionBar ab = getSupportActionBar();
         ab.setHomeButtonEnabled(true);
         ab.setDisplayHomeAsUpEnabled(true);
 
@@ -62,6 +63,8 @@ public class NaverConversationViewActivity extends AppCompatActivity implements 
         db = dbHelper.getWritableDatabase();
 
         getListView();
+
+        DicUtils.setAdView(this);
     }
 
     public void getListView() {
@@ -146,7 +149,7 @@ public class NaverConversationViewActivity extends AppCompatActivity implements 
                 dlg.show();
 
                 return false;
-            };
+            }
         });
         listView.setSelection(0);
     }
@@ -162,11 +165,11 @@ public class NaverConversationViewActivity extends AppCompatActivity implements 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         if ( isForeignView ) {
-            ((MenuItem) menu.findItem(R.id.action_view)).setVisible(false);
-            ((MenuItem) menu.findItem(R.id.action_hide)).setVisible(true);
+            menu.findItem(R.id.action_view).setVisible(false);
+            menu.findItem(R.id.action_hide).setVisible(true);
         } else {
-            ((MenuItem) menu.findItem(R.id.action_view)).setVisible(true);
-            ((MenuItem) menu.findItem(R.id.action_hide)).setVisible(false);
+            menu.findItem(R.id.action_view).setVisible(true);
+            menu.findItem(R.id.action_hide).setVisible(false);
         }
 
         return super.onPrepareOptionsMenu(menu);

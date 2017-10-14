@@ -21,7 +21,6 @@ import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
-import java.util.HashMap;
 
 public class SentenceViewActivity extends AppCompatActivity implements View.OnClickListener {
     int fontSize = 0;
@@ -45,7 +44,7 @@ public class SentenceViewActivity extends AppCompatActivity implements View.OnCl
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setVisibility(View.GONE);
 
-        ActionBar ab = (ActionBar) getSupportActionBar();
+        ActionBar ab = getSupportActionBar();
         ab.setTitle("문장 상세");
         ab.setHomeButtonEnabled(true);
         ab.setDisplayHomeAsUpEnabled(true);
@@ -60,7 +59,7 @@ public class SentenceViewActivity extends AppCompatActivity implements View.OnCl
         if ( sampleSeq == null ) {
             sampleSeq = DicDb.getSampleSeq(db, notHan);
             if ( "".equals(sampleSeq) ) {
-                ((ImageButton) findViewById(R.id.my_c_sv_ib_mysample)).setVisibility(View.GONE);
+                findViewById(R.id.my_c_sv_ib_mysample).setVisibility(View.GONE);
             }
         }
         changeListView();
@@ -80,6 +79,8 @@ public class SentenceViewActivity extends AppCompatActivity implements View.OnCl
             isMySample = false;
             mySample.setImageResource(android.R.drawable.star_off);
         }
+
+        DicUtils.setAdView(this);
     }
 
     public void changeListView() {
@@ -106,7 +107,7 @@ public class SentenceViewActivity extends AppCompatActivity implements View.OnCl
         }
 
         ((TextView) findViewById(R.id.my_c_sv_tv_viet)).setText(notHan);
-        ((TextView) findViewById(R.id.my_c_sv_tv_han)).setText(han);
+        ((TextView) findViewById(R.id.my_c_sv_tv_han)).setText("-> " + han);
 
         StringBuffer sql = new StringBuffer();
         if ( "".equals(word) ) {
@@ -120,6 +121,7 @@ public class SentenceViewActivity extends AppCompatActivity implements View.OnCl
 
         //스펠링을 찾는다.
         String spelling = "";
+        /*
         HashMap<String, String> words = new HashMap<String, String>();
         while ( wordCursor.moveToNext() ) {
             words.put(wordCursor.getString(wordCursor.getColumnIndexOrThrow("WORD")), wordCursor.getString(wordCursor.getColumnIndexOrThrow("SPELLING")));
@@ -147,6 +149,8 @@ public class SentenceViewActivity extends AppCompatActivity implements View.OnCl
             spelling += DicUtils.getSentenceWord(splitStr, 1, m) + " ";
         }
         ((TextView) findViewById(R.id.my_c_sv_tv_spelling)).setText("  -> " + spelling.replaceAll("[\\[\\]]", ""));
+        */
+        findViewById(R.id.my_c_sv_tv_spelling).setVisibility(View.GONE);
 
         ListView dicViewListView = (ListView) this.findViewById(R.id.my_c_sv_lv_list);
         sentenceViewAdapter = new SentenceViewCursorAdapter(this, wordCursor, 0);
@@ -197,7 +201,7 @@ public class SentenceViewActivity extends AppCompatActivity implements View.OnCl
                 dlg.show();
 
                 return true;
-            };
+            }
         });
     }
 

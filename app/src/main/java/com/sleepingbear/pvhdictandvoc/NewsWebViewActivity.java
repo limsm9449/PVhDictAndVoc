@@ -32,6 +32,7 @@ import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
@@ -175,15 +176,15 @@ fn("ta-justify");
             DicUtils.dicLog("url param");
 
             if ( currUrl.indexOf("https") > -1 ) {
-                currUrl = "https:\\" + param.getString("url");
+                currUrl = param.getString("url");
             } else {
-                currUrl = "http:\\" + param.getString("url");
+                currUrl = param.getString("url");
             }
         }
 
         DicUtils.dicLog(currUrl);
 
-        ActionBar ab = (ActionBar) getSupportActionBar();
+        ActionBar ab = getSupportActionBar();
         //ab.setDisplayOptions(ActionBar.DISPLAY_SHOW_HOME | ActionBar.DISPLAY_SHOW_TITLE | ActionBar.DISPLAY_SHOW_CUSTOM);
         ab.setTitle(currItem.getName());
         ab.setHomeButtonEnabled(true);
@@ -220,8 +221,8 @@ fn("ta-justify");
             }
         });
 
-        ((ImageButton) this.findViewById(R.id.my_c_webview_ib_add)).setOnClickListener(this);
-        ((ImageButton) this.findViewById(R.id.my_c_webview_ib_search)).setOnClickListener(this);
+        this.findViewById(R.id.my_c_webview_ib_add).setOnClickListener(this);
+        this.findViewById(R.id.my_c_webview_ib_search).setOnClickListener(this);
 
         webView = (WebView) this.findViewById(R.id.my_c_webview_wv);
         webView.getSettings().setJavaScriptEnabled(true);
@@ -235,6 +236,8 @@ fn("ta-justify");
         DicUtils.dicLog("First : " + currUrl);
 
         //registerForContextMenu(webView);
+
+        DicUtils.setAdView(this);
     }
 
 

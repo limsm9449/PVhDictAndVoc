@@ -39,25 +39,33 @@
         android:layout_height="wrap_content">
 
         <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
             android:id="@+id/my_et_upd_name"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"
-            android:layout_alignParentLeft="true"
-            android:layout_toLeftOf="@+id/my_b_upd"
-            android:layout_marginLeft="10dp" />
+            android:layout_centerVertical="false"
+            android:layout_centerHorizontal="false"
+            android:layout_alignParentLeft="false"
+            android:background="@drawable/my_edittext"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"/>
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="30dp"
-            android:text="수정"
+            android:text="단어장 수정"
             android:id="@+id/my_b_upd"
             android:layout_gravity="center_horizontal"
             android:layout_alignParentRight="true"
             android:background="@drawable/my_button"
             android:layout_marginRight="10dp"
-            android:layout_marginLeft="10dp" />
+            android:layout_marginLeft="10dp"
+            android:layout_below="@+id/my_et_upd_name" />
 
     </RelativeLayout>
 
@@ -120,21 +128,41 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/my_et_file_name"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentLeft="false"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/my_edittext"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp" />
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_toLeftOf="@+id/my_b_save">
+            android:layout_below="@+id/my_et_file_name">
 
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/my_et_file_name"
-                android:layout_centerVertical="true"
-                android:layout_centerHorizontal="true"
-                android:layout_alignParentLeft="false"
-                android:layout_marginLeft="10dp"
-                android:layout_alignParentTop="true" />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:text="내보내기"
+                android:id="@+id/my_b_save"
+                android:layout_gravity="center_horizontal"
+                android:layout_alignParentRight="true"
+                android:layout_centerInParent="true"
+                android:background="@drawable/my_button"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -146,20 +174,9 @@
                 android:layout_marginLeft="10dp"
                 android:textSize="12dp"
                 android:layout_alignParentBottom="false"
-                android:layout_below="@+id/my_et_file_name" />
+                android:layout_toLeftOf="@+id/my_b_save" />
         </RelativeLayout>
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:text="내보내기"
-            android:id="@+id/my_b_save"
-            android:layout_gravity="center_horizontal"
-            android:layout_alignParentRight="true"
-            android:layout_centerInParent="true"
-            android:background="@drawable/my_button"
-            android:layout_marginRight="10dp"
-            android:layout_marginLeft="10dp" />
     </RelativeLayout>
 
     <RelativeLayout

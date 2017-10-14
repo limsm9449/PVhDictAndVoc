@@ -24,6 +24,7 @@ import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import java.util.HashMap;
 
 public class VocabularyActivity extends AppCompatActivity implements View.OnClickListener {
@@ -52,7 +53,7 @@ public class VocabularyActivity extends AppCompatActivity implements View.OnClic
         Bundle b = this.getIntent().getExtras();
         kind = b.getString("kind");
 
-        ActionBar ab = (ActionBar) getSupportActionBar();
+        ActionBar ab = getSupportActionBar();
         ab.setTitle(b.getString("kindName"));
         ab.setHomeButtonEnabled(true);
         ab.setDisplayHomeAsUpEnabled(true);
@@ -90,6 +91,8 @@ public class VocabularyActivity extends AppCompatActivity implements View.OnClic
             }
         });
         spinner.setSelection(0);
+
+        DicUtils.setAdView(this);
     }
 
     public void getListView() {
@@ -161,7 +164,7 @@ public class VocabularyActivity extends AppCompatActivity implements View.OnClic
                         .show();
 
                 return true;
-            };
+            }
         });
 
         listView.setSelection(0);

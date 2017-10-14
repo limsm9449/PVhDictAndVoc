@@ -16,6 +16,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+
 import java.util.ArrayList;
 
 public class NewsActivity extends AppCompatActivity {
@@ -34,7 +35,7 @@ public class NewsActivity extends AppCompatActivity {
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setVisibility(View.GONE);
 
-        ActionBar ab = (ActionBar) getSupportActionBar();
+        ActionBar ab = getSupportActionBar();
         ab.setTitle("베트남 뉴스");
         ab.setHomeButtonEnabled(true);
         ab.setDisplayHomeAsUpEnabled(true);
@@ -43,16 +44,18 @@ public class NewsActivity extends AppCompatActivity {
 
         ArrayList<NewsVo> items = new ArrayList<>();
         int idx = 1;
-        items.add(new NewsVo("E" + idx++, "Youth Newspaper"));
+        items.add(new NewsVo("E" + idx++, "Tuoi Tre Newspaper"));
         items.add(new NewsVo("E" + idx++, "Nhan Dan Newspaper"));
         items.add(new NewsVo("E" + idx++, "Lao Dong Newspaper"));
-        items.add(new NewsVo("E" + idx++, "Vietnam News express"));
-        items.add(new NewsVo("E" + idx++, "Vietnam.net"));
+        items.add(new NewsVo("E" + idx++, "VN Express"));
+        items.add(new NewsVo("E" + idx++, "Vietnam Net"));
 
         adapter = new NewsAdapter(getApplicationContext(), 0, items);
         listView.setAdapter(adapter);
         listView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
         listView.setOnItemClickListener(itemClickListener);
+
+        DicUtils.setAdView(this);
     }
 
     @Override
@@ -84,7 +87,7 @@ public class NewsActivity extends AppCompatActivity {
     AdapterView.OnItemClickListener itemClickListener = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            NewsVo cur = (NewsVo) adapter.getItem(position);
+            NewsVo cur = adapter.getItem(position);
 
             DicUtils.dicLog(cur.getName());
 

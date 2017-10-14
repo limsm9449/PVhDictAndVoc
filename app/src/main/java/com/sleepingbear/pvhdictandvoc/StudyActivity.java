@@ -18,6 +18,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.Spinner;
+
 import java.util.ArrayList;
 
 public class StudyActivity extends AppCompatActivity implements View.OnClickListener {
@@ -47,7 +48,7 @@ public class StudyActivity extends AppCompatActivity implements View.OnClickList
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setVisibility(View.GONE);
 
-        ActionBar ab = (ActionBar) getSupportActionBar();
+        ActionBar ab = getSupportActionBar();
         ab.setTitle("학습");
         ab.setHomeButtonEnabled(true);
         ab.setDisplayHomeAsUpEnabled(true);
@@ -100,6 +101,8 @@ public class StudyActivity extends AppCompatActivity implements View.OnClickList
 
         Button b_start = (Button) findViewById(R.id.my_f_stu_b_start);
         b_start.setOnClickListener(this);
+
+        DicUtils.setAdView(this);
     }
 
     public void getVocKind() {

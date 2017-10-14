@@ -36,7 +36,7 @@ public class TodayActivity extends AppCompatActivity {
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setVisibility(View.GONE);
 
-        ActionBar ab = (ActionBar) getSupportActionBar();
+        ActionBar ab = getSupportActionBar();
         ab.setHomeButtonEnabled(true);
         ab.setDisplayHomeAsUpEnabled(true);
 
@@ -48,6 +48,8 @@ public class TodayActivity extends AppCompatActivity {
         db = dbHelper.getWritableDatabase();
 
         getListView();
+
+        DicUtils.setAdView(this);
     }
 
     public void getListView() {

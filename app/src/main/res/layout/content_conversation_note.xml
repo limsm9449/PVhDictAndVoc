@@ -47,8 +47,17 @@
             android:id="@+id/my_lv"
             android:divider="@color/my_divider"
             android:dividerHeight="0.5dp"
-            android:layout_below="@+id/my_f_conversation_note_ll" />
+            android:layout_below="@+id/my_f_conversation_note_ll"
+            android:layout_above="@+id/adView" />
 
+        <com.google.android.gms.ads.AdView
+            xmlns:ads="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/adView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            ads:adSize="BANNER"
+            ads:adUnitId="@string/banner_ad_unit_id"
+            android:layout_alignParentBottom="true" />
     </RelativeLayout>
 
 </RelativeLayout>

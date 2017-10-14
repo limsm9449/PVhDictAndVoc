@@ -13,7 +13,8 @@
         android:layout_height="match_parent"
         android:layout_gravity="left|top"
         android:layout_marginTop="5dp"
-        android:layout_alignParentTop="true">
+        android:layout_alignParentTop="true"
+        android:layout_above="@+id/adView">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -114,4 +115,13 @@
             android:layout_above="@+id/my_a_cat_lv_category" />
 
     </LinearLayout>
+
+    <com.google.android.gms.ads.AdView
+        xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/adView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        ads:adSize="BANNER"
+        ads:adUnitId="@string/banner_ad_unit_id"
+        android:layout_alignParentBottom="true" />
 </RelativeLayout>

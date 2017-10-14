@@ -24,6 +24,10 @@
     <color name="my_text_question">#e65a5a</color>
     <color name="my_text_answer">#4f8ead</color>
 
+    <color name="my_text_vsl_d">#367696</color>
+    <color name="my_text_vsl_w">#ed834d</color>
+    <color name="my_text_vsl_g">#a74919</color>
+
     <color name="my_o_answer">#424040</color>
     <color name="my_x_answer">#ec4a04</color>
 </resources>

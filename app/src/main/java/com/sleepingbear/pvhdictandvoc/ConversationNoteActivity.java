@@ -26,6 +26,7 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -66,7 +67,7 @@ public class ConversationNoteActivity extends AppCompatActivity implements View.
 
 
                 final EditText et_ins = ((EditText) dialog_layout.findViewById(R.id.my_et_ins_name));
-                ((Button) dialog_layout.findViewById(R.id.my_b_ins)).setOnClickListener(new View.OnClickListener() {
+                dialog_layout.findViewById(R.id.my_b_ins).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         if ("".equals(et_ins.getText().toString())) {
@@ -85,7 +86,7 @@ public class ConversationNoteActivity extends AppCompatActivity implements View.
                         }
                     }
                 });
-                ((Button) dialog_layout.findViewById(R.id.my_b_close)).setOnClickListener(new View.OnClickListener() {
+                dialog_layout.findViewById(R.id.my_b_close).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         alertDialog.dismiss();
@@ -97,7 +98,7 @@ public class ConversationNoteActivity extends AppCompatActivity implements View.
             }
         });
 
-        ActionBar ab = (ActionBar) getSupportActionBar();
+        ActionBar ab = getSupportActionBar();
         ab.setHomeButtonEnabled(true);
         ab.setDisplayHomeAsUpEnabled(true);
 
@@ -133,6 +134,8 @@ public class ConversationNoteActivity extends AppCompatActivity implements View.
 
         //리스트 내용 변경
         changeListView();
+
+        DicUtils.setAdView(this);
     }
 
     @Override
@@ -240,7 +243,7 @@ public class ConversationNoteActivity extends AppCompatActivity implements View.
         final Cursor cur = (Cursor) adapter.getItem(position);
 
         //layout 구성
-        LayoutInflater inflater = (LayoutInflater) getSystemService(this.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
         final View dialog_layout = inflater.inflate(R.layout.dialog_note_iud, null);
 
         //dialog 생성..
@@ -252,8 +255,8 @@ public class ConversationNoteActivity extends AppCompatActivity implements View.
             final EditText et_upd = ((EditText) dialog_layout.findViewById(R.id.my_et_upd_name));
             et_upd.setText(cur.getString(cur.getColumnIndexOrThrow("KIND_NAME")));
 
-            ((Button) dialog_layout.findViewById(R.id.my_b_upd)).setTag(cur.getString(cur.getColumnIndexOrThrow("KIND")));
-            ((Button) dialog_layout.findViewById(R.id.my_b_upd)).setOnClickListener(new View.OnClickListener() {
+            dialog_layout.findViewById(R.id.my_b_upd).setTag(cur.getString(cur.getColumnIndexOrThrow("KIND")));
+            dialog_layout.findViewById(R.id.my_b_upd).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if ("".equals(et_upd.getText().toString())) {
@@ -270,11 +273,11 @@ public class ConversationNoteActivity extends AppCompatActivity implements View.
                 }
             });
         } else {
-            ((EditText) dialog_layout.findViewById(R.id.my_et_upd_name)).setEnabled(false);
-            ((Button) dialog_layout.findViewById(R.id.my_b_upd)).setEnabled(false);
+            dialog_layout.findViewById(R.id.my_et_upd_name).setEnabled(false);
+            dialog_layout.findViewById(R.id.my_b_upd).setEnabled(false);
         }
-        ((Button) dialog_layout.findViewById(R.id.my_b_del)).setTag(cur.getString(cur.getColumnIndexOrThrow("KIND")));
-        ((Button) dialog_layout.findViewById(R.id.my_b_del)).setOnClickListener(new View.OnClickListener() {
+        dialog_layout.findViewById(R.id.my_b_del).setTag(cur.getString(cur.getColumnIndexOrThrow("KIND")));
+        dialog_layout.findViewById(R.id.my_b_del).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final String code = (String) v.getTag();
@@ -317,8 +320,8 @@ public class ConversationNoteActivity extends AppCompatActivity implements View.
         } else if ( "C02".equals(conversationNoteGroupCode) ) {
             et_saveName.setText(cur.getString(cur.getColumnIndexOrThrow("KIND")).replaceAll("[.]","") + "_회화학습");
         }
-        ((Button) dialog_layout.findViewById(R.id.my_b_save)).setTag(cur.getString(cur.getColumnIndexOrThrow("KIND")));
-        ((Button) dialog_layout.findViewById(R.id.my_b_save)).setOnClickListener(new View.OnClickListener() {
+        dialog_layout.findViewById(R.id.my_b_save).setTag(cur.getString(cur.getColumnIndexOrThrow("KIND")));
+        dialog_layout.findViewById(R.id.my_b_save).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 final String code = (String) v.getTag();
@@ -351,7 +354,6 @@ public class ConversationNoteActivity extends AppCompatActivity implements View.
                     File saveFile = new File(fileName);
                     if (saveFile.exists()) {
                         Toast.makeText(getApplication(), "파일명이 존재합니다.", Toast.LENGTH_SHORT).show();
-                        ;
                     } else {
                         try {
                             saveFile.createNewFile();
@@ -388,7 +390,7 @@ public class ConversationNoteActivity extends AppCompatActivity implements View.
             }
         });
 
-        ((Button) dialog_layout.findViewById(R.id.my_b_close)).setOnClickListener(new View.OnClickListener() {
+        dialog_layout.findViewById(R.id.my_b_close).setOnClickListener(new View.OnClickListener() {
                                                                                       @Override
                                                                                       public void onClick(View v) {
                                                                                           alertDialog.dismiss();

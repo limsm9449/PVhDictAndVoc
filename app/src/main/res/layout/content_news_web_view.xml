@@ -31,10 +31,10 @@
         android:layout_x="130dp"
         android:layout_y="357dp"
         android:id="@+id/my_c_webview_rl"
+        android:layout_above="@+id/adView"
         android:background="@color/colorPrimary"
         android:clickable="false"
-        android:layout_height="50dp"
-        android:layout_alignParentBottom="true">
+        android:layout_height="50dp">
 
         <TextView
             android:text="TextView"
@@ -75,4 +75,12 @@
 
     </RelativeLayout>
 
+    <com.google.android.gms.ads.AdView
+        xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/adView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        ads:adSize="BANNER"
+        ads:adUnitId="@string/banner_ad_unit_id"
+        android:layout_alignParentBottom="true" />
 </RelativeLayout>

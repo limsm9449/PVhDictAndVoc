@@ -113,6 +113,34 @@ public class HelpActivity extends AppCompatActivity {
         }
 
         tempSb.delete(0, tempSb.length());
+        tempSb.append("* 베트남 뉴스 Ver.2" + CommConstants.sqlCR);
+        tempSb.append("- 베트남 사이트를 웹으로 볼 경우 다양한 자료를 받아서 보여주기 때문에 속도가 느린 문제가 있습니다." + CommConstants.sqlCR);
+        tempSb.append("   그래서 속도 개선을 위해 텍스트만 받아서 카테고리별로 뉴스 제목을 보고 뉴스 기사를 볼 수 있도록 만들었습니다." + CommConstants.sqlCR);
+        tempSb.append(" .하단 버튼을 클릭해서 뉴스 종류를 선택한 후에 상단 콤보에서 카테고리를 선택하면 뉴스 제목을 볼 수 있습니다." + CommConstants.sqlCR);
+        tempSb.append("" + CommConstants.sqlCR);
+        if ( screen.equals(CommConstants.screen_news2) ) {
+            CurrentSb.append(tempSb.toString());
+        } else {
+            allSb.append(tempSb.toString());
+        }
+
+        tempSb.delete(0, tempSb.length());
+        tempSb.append("* 베트남 뉴스 상세" + CommConstants.sqlCR);
+        tempSb.append("- 베트남 뉴스를 보면서 필요한 단어 검색 기능이 있습니다." + CommConstants.sqlCR);
+        tempSb.append(" .뉴스를 보다가 모르는 단어를 클릭을 하면 하단에 클릭한 단어의 뜻이 보입니다. " + CommConstants.sqlCR);
+        tempSb.append(" .클릭단어의 뜻이 없을경우 하단 오른쪽의 검색 버튼을 클릭하면 Naver,Daum에서 단어 검색을 할 수 있습니다. " + CommConstants.sqlCR);
+        tempSb.append(" .하단 단어를 길게 클릭하시면 단어 상세를 보실 수 있습니다." + CommConstants.sqlCR);
+        tempSb.append(" .하단 단어 옆의 (+)를 클릭하시면 바로 단어장에 등록을 하실 수 있습니다." + CommConstants.sqlCR);
+        tempSb.append(" .뉴스의 단어를 길게 클릭하시면 단어보기, 단어검색(Naver,Daum), 번역, 문장보기, TTS, 전체TTS(4000자까지), 복사, 전체복사 기능을 사용하실 수 있습니다." + CommConstants.sqlCR);
+        tempSb.append(" .뉴스를 보면서 클릭한 단어는 '뉴스 클릭 단어' 화면에서 확인하실 수 있습니다." + CommConstants.sqlCR);
+        tempSb.append("" + CommConstants.sqlCR);
+        if ( screen.equals(CommConstants.screen_news2View) ) {
+            CurrentSb.append(tempSb.toString());
+        } else {
+            allSb.append(tempSb.toString());
+        }
+
+        tempSb.delete(0, tempSb.length());
         tempSb.append("* 뉴스 클릭 단어" + CommConstants.sqlCR);
         tempSb.append("- 베트남 뉴스를 보면서 클릭한 단어들에 대하여 관리하는 화면입니다." + CommConstants.sqlCR);
         tempSb.append(" .상단 수정 버튼(연필모양)를 클릭하시면 단어를 선택, 삭제, 단어장에 저장, 신규 단어장에 저장할 수 있습니다." + CommConstants.sqlCR);
@@ -225,6 +253,17 @@ public class HelpActivity extends AppCompatActivity {
         }
 
         tempSb.delete(0, tempSb.length());
+        tempSb.append("* VSL" + CommConstants.sqlCR);
+        tempSb.append("- 베트남 교재인 VSL을 학습할 수 있도록 만들었습니다." + CommConstants.sqlCR);
+        tempSb.append(" .회화의 경우는 음성을 다운로드해서 들어보실 수 있습니다." + CommConstants.sqlCR);
+        tempSb.append("" + CommConstants.sqlCR);
+        if ( screen.equals(CommConstants.screen_vsl) ) {
+            CurrentSb.append(tempSb.toString());
+        } else {
+            allSb.append(tempSb.toString());
+        }
+
+        tempSb.delete(0, tempSb.length());
         tempSb.append("* 카테고리별 단어" + CommConstants.sqlCR);
         tempSb.append("- 초급 단어, 중급 단어, 필수 단어, 카테고리별 단어, 상활별 회화를 볼 수 있습니다." + CommConstants.sqlCR);
         tempSb.append("" + CommConstants.sqlCR);
@@ -239,28 +278,6 @@ public class HelpActivity extends AppCompatActivity {
         tempSb.append("- 단어나 회화를 볼 수 있습니다." + CommConstants.sqlCR);
         tempSb.append("" + CommConstants.sqlCR);
         if ( screen.equals(CommConstants.screen_categoryView) ) {
-            CurrentSb.append(tempSb.toString());
-        } else {
-            allSb.append(tempSb.toString());
-        }
-
-        tempSb.delete(0, tempSb.length());
-        tempSb.append("* 네이버 회화" + CommConstants.sqlCR);
-        tempSb.append("- 네이버 회화를 카테고리를 보실 수 있습니다." + CommConstants.sqlCR);
-        tempSb.append("" + CommConstants.sqlCR);
-        if ( screen.equals(CommConstants.screen_naverConversation) ) {
-            CurrentSb.append(tempSb.toString());
-        } else {
-            allSb.append(tempSb.toString());
-        }
-
-        tempSb.delete(0, tempSb.length());
-        tempSb.append("* 네이버 회화 상세" + CommConstants.sqlCR);
-        tempSb.append("- 네이버 회화를 카테고리 별로 보실 수 있습니다." + CommConstants.sqlCR);
-        tempSb.append(" .클릭하시면 베트남 문장을 보실 수 있습니다." + CommConstants.sqlCR);
-        tempSb.append(" .상단 버튼을 클릭하시면 전체 베트남 문장을 보시거나, 숨길 수 있습니다." + CommConstants.sqlCR);
-        tempSb.append("" + CommConstants.sqlCR);
-        if ( screen.equals(CommConstants.screen_naverConversationView) ) {
             CurrentSb.append(tempSb.toString());
         } else {
             allSb.append(tempSb.toString());

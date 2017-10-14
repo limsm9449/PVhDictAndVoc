@@ -44,7 +44,7 @@ public class CategoryActivity extends AppCompatActivity {
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setVisibility(View.GONE);
 
-        ActionBar ab = (ActionBar) getSupportActionBar();
+        ActionBar ab = getSupportActionBar();
         ab.setHomeButtonEnabled(true);
         ab.setDisplayHomeAsUpEnabled(true);
 
@@ -79,6 +79,8 @@ public class CategoryActivity extends AppCompatActivity {
         ((TextView)v).setTextSize(fontSize);
 
         changeListView();
+
+        DicUtils.setAdView(this);
     }
 
     @Override
@@ -129,6 +131,7 @@ public class CategoryActivity extends AppCompatActivity {
             Cursor cur = (Cursor) adapter.getItem(position);
 
             Bundle bundle = new Bundle();
+            bundle.putString("KIND", cur.getString(cur.getColumnIndexOrThrow("KIND")));
             bundle.putString("CATEGORY", cur.getString(cur.getColumnIndexOrThrow("CATEGORY")));
             bundle.putString("SAMPLES", cur.getString(cur.getColumnIndexOrThrow("SAMPLES")));
 

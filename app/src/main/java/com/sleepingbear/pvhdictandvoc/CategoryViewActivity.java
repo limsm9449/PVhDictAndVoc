@@ -2,6 +2,7 @@ package com.sleepingbear.pvhdictandvoc;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -16,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -39,35 +41,69 @@ public class CategoryViewActivity extends AppCompatActivity {
 
         Bundle b = this.getIntent().getExtras();
 
-        ActionBar ab = (ActionBar) getSupportActionBar();
+        ActionBar ab = getSupportActionBar();
         ab.setTitle(b.getString("CATEGORY"));
         ab.setHomeButtonEnabled(true);
         ab.setDisplayHomeAsUpEnabled(true);
 
         ArrayList<CategoryViewItem> al = new ArrayList<CategoryViewItem>();
-        String[] samples = b.getString("SAMPLES").split("\n");
-        String words = "";
-        for ( int i = 0; i < samples.length; i++ ) {
-            if ( !"".equals(samples[i]) ) {
-                String[] row = samples[i].split(":");
-                words += ("".equals(words) ? "" : ",") + row[0].trim();
-            }
-        }
-        HashMap wordsInfo = DicDb.getWordsInfo(db, words);
+        if ( "C04".equals(b.getString("KIND")) ) {
+            StringBuffer sql = new StringBuffer();
+            sql.append("SELECT  SENTENCE1, SENTENCE2" + CommConstants.sqlCR);
+            sql.append("FROM    NAVER_CONVERSATION" + CommConstants.sqlCR);
+            sql.append("WHERE   CATEGORY = '" + b.getString("CATEGORY") +"'" + CommConstants.sqlCR);
+            sql.append("ORDER   BY ORD" + CommConstants.sqlCR);
+            DicUtils.dicSqlLog(sql.toString());
 
-        for ( int i = 0; i < samples.length; i++ ) {
-            if ( !"".equals(samples[i]) ) {
-                String[] row = samples[i].split(":");
-                if (row.length == 1) {
-                    al.add(new CategoryViewItem(row[0].trim(), "", (String)wordsInfo.get(row[0].trim() + "_SPELLING"), (String)wordsInfo.get(row[0].trim() + "_ENTRY_ID")));
-                } else if (row.length == 2) {
-                    al.add(new CategoryViewItem(row[0].trim(), row[1].trim(), (String)wordsInfo.get(row[0].trim() + "_SPELLING"), (String)wordsInfo.get(row[0].trim() + "_ENTRY_ID")));
+            Cursor cursor = db.rawQuery(sql.toString(), null);
+            while ( cursor.moveToNext() ) {
+                al.add(new CategoryViewItem(cursor.getString(cursor.getColumnIndexOrThrow("SENTENCE1")), cursor.getString(cursor.getColumnIndexOrThrow("SENTENCE2")), "", ""));
+            }
+        } else if ( "C05".equals(b.getString("KIND")) || "C06".equals(b.getString("KIND")) ) {
+            String[] lvl = b.getString("CATEGORY").split("-");
+            StringBuffer sql = new StringBuffer();
+            sql.append("SELECT  SENTENCE1, SENTENCE2" + CommConstants.sqlCR);
+            sql.append("FROM    VSL" + CommConstants.sqlCR);
+            sql.append("WHERE   LVL1 = '" + lvl[0] +"'" + CommConstants.sqlCR);
+            sql.append("AND     LVL2 = '" + lvl[1] +"'" + CommConstants.sqlCR);
+            sql.append("AND     LVL3 = 'D'" + CommConstants.sqlCR);
+            sql.append("ORDER   BY SEQ" + CommConstants.sqlCR);
+            DicUtils.dicSqlLog(sql.toString());
+
+            Cursor cursor = db.rawQuery(sql.toString(), null);
+            while ( cursor.moveToNext() ) {
+                if ( cursor.getString(cursor.getColumnIndexOrThrow("SENTENCE1")).length() > 5 &&
+                        !"FILE:".equals(cursor.getString(cursor.getColumnIndexOrThrow("SENTENCE1")).substring(0,5)) ) {
+                    al.add(new CategoryViewItem(cursor.getString(cursor.getColumnIndexOrThrow("SENTENCE1")), cursor.getString(cursor.getColumnIndexOrThrow("SENTENCE2")), "", ""));
+                }
+            }
+        } else {
+            String[] samples = b.getString("SAMPLES").split("\n");
+            String words = "";
+            for (int i = 0; i < samples.length; i++) {
+                if (!"".equals(samples[i])) {
+                    String[] row = samples[i].split(":");
+                    words += ("".equals(words) ? "" : ",") + row[0].trim();
+                }
+            }
+            HashMap wordsInfo = DicDb.getWordsInfo(db, words.toLowerCase());
+
+            for (int i = 0; i < samples.length; i++) {
+                if (!"".equals(samples[i])) {
+                    String[] row = samples[i].split(":");
+                    if (row.length == 1) {
+                        al.add(new CategoryViewItem(row[0].trim(), "", (String) wordsInfo.get(row[0].trim().toLowerCase() + "_SPELLING"), (String) wordsInfo.get(row[0].trim().toLowerCase() + "_ENTRY_ID")));
+                    } else if (row.length == 2) {
+                        al.add(new CategoryViewItem(row[0].trim(), row[1].trim(), (String) wordsInfo.get(row[0].trim().toLowerCase() + "_SPELLING"), (String) wordsInfo.get(row[0].trim().toLowerCase() + "_ENTRY_ID")));
+                    }
                 }
             }
         }
 
         CategoryViewAdapter m_adapter = new CategoryViewAdapter(this, R.layout.content_category_view_item, al);
         ((ListView) this.findViewById(R.id.my_lv)).setAdapter(m_adapter);
+
+        DicUtils.setAdView(this);
     }
 
     @Override
@@ -122,7 +158,7 @@ class CategoryViewAdapter extends ArrayAdapter<CategoryViewItem> {
             ((TextView) v.findViewById(R.id.my_tv_line2)).setText(p.getLine2());
 
             if ( "".equals(p.getSpelling()) ) {
-                ((TextView) v.findViewById(R.id.my_tv_spelling)).setVisibility(View.GONE);
+                v.findViewById(R.id.my_tv_spelling).setVisibility(View.GONE);
             } else {
                 ((TextView) v.findViewById(R.id.my_tv_spelling)).setText(p.getSpelling());
             }

@@ -36,9 +36,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
-
 import java.util.Locale;
 
 public class DictionaryActivity extends AppCompatActivity implements View.OnClickListener, TextToSpeech.OnInitListener {
@@ -120,6 +117,8 @@ public class DictionaryActivity extends AppCompatActivity implements View.OnClic
         findViewById(R.id.my_cb_tone).setOnClickListener(this);
         findViewById(R.id.my_iv_web).setOnClickListener(this);
         findViewById(R.id.my_dictionary_rl_web).setVisibility(View.GONE);
+
+        DicUtils.setAdView(this);
     }
 
     @Override

@@ -83,14 +83,12 @@ public class FileChooser {
         this.currentPath = path;
         if (path.exists()) {
             File[] dirs = path.listFiles(new FileFilter() {
-                @Override
-                public boolean accept(File file) {
+                @Override public boolean accept(File file) {
                     return (file.isDirectory() && file.canRead());
                 }
             });
             File[] files = path.listFiles(new FileFilter() {
-                @Override
-                public boolean accept(File file) {
+                @Override public boolean accept(File file) {
                     if (!file.isDirectory()) {
                         if (!file.canRead()) {
                             return false;
@@ -126,8 +124,7 @@ public class FileChooser {
             dialog.setTitle(currentPath.getPath());
             list.setAdapter(new ArrayAdapter(activity,
                     android.R.layout.simple_list_item_1, fileList) {
-                @Override
-                public View getView(int pos, View view, ViewGroup parent) {
+                @Override public View getView(int pos, View view, ViewGroup parent) {
                     view = super.getView(pos, view, parent);
                     ((TextView) view).setSingleLine(true);
                     return view;

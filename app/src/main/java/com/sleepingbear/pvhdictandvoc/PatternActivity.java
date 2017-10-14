@@ -39,7 +39,7 @@ public class PatternActivity extends AppCompatActivity {
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setVisibility(View.GONE);
 
-        ActionBar ab = (ActionBar) getSupportActionBar();
+        ActionBar ab = getSupportActionBar();
         ab.setHomeButtonEnabled(true);
         ab.setDisplayHomeAsUpEnabled(true);
 
@@ -47,6 +47,8 @@ public class PatternActivity extends AppCompatActivity {
         db = dbHelper.getWritableDatabase();
 
         changeListView();
+
+        DicUtils.setAdView(this);
     }
 
     @Override

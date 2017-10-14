@@ -35,7 +35,7 @@ public class GrammarActivity extends AppCompatActivity {
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setVisibility(View.GONE);
 
-        ActionBar ab = (ActionBar) getSupportActionBar();
+        ActionBar ab = getSupportActionBar();
         ab.setTitle("문법");
         ab.setHomeButtonEnabled(true);
         ab.setDisplayHomeAsUpEnabled(true);
@@ -44,6 +44,8 @@ public class GrammarActivity extends AppCompatActivity {
         db = dbHelper.getWritableDatabase();
 
         changeListView();
+
+        DicUtils.setAdView(this);
     }
 
     public void changeListView() {

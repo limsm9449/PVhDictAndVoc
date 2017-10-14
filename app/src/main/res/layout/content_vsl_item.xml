@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:paddingLeft="10dp"
+    android:paddingTop="8dp"
+    android:paddingRight="5dp"
+    android:paddingBottom="8dp"
+    android:descendantFocusability="blocksDescendants">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Foreign"
+        android:id="@+id/my_tv_foreign"
+        android:layout_alignParentBottom="false"
+        android:layout_alignParentRight="false"
+        android:layout_alignParentEnd="false"
+        android:textColor="@color/my_text_word"
+        android:textSize="13dp"
+        android:layout_alignParentLeft="false"
+        android:layout_alignWithParentIfMissing="false"
+        android:layout_alignParentTop="false"
+        android:gravity="center_vertical|left" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Han"
+        android:id="@+id/my_tv_han"
+        android:layout_alignParentLeft="true"
+        android:textColor="@color/my_text_mean"
+        android:textSize="15dp"
+        android:textStyle="normal|bold"
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/my_tv_foreign" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/my_tv_han"
+        android:id="@+id/my_rl_button">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/my_iv_download"
+            android:layout_marginLeft="10dp"
+            app:srcCompat="@drawable/ic_file_download_black_24dp"
+            android:layout_centerVertical="true" />
+
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/my_s_speed"
+            android:layout_toRightOf="@+id/my_iv_download"
+            android:layout_toLeftOf="@+id/my_iv_pause"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/my_iv_play"
+            android:layout_alignParentLeft="false"
+            android:layout_alignParentRight="false"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="10dp"
+            app:srcCompat="@drawable/ic_play_light"
+            android:layout_centerVertical="true" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/my_iv_pause"
+            android:layout_toLeftOf="@+id/my_iv_play"
+            android:layout_marginRight="30dp"
+            app:srcCompat="@drawable/ic_pause_light"
+            android:layout_centerVertical="true"
+            android:layout_centerInParent="false" />
+    </RelativeLayout>
+
+</RelativeLayout>

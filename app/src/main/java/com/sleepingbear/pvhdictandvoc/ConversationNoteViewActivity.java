@@ -26,6 +26,7 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import java.util.HashMap;
 import java.util.Locale;
 
@@ -57,14 +58,14 @@ public class ConversationNoteViewActivity extends AppCompatActivity implements V
         Bundle b = this.getIntent().getExtras();
         kind = b.getString("kind");
 
-        ((ImageView)this.findViewById(R.id.my_iv_all)).setOnClickListener(this);
-        ((ImageView)this.findViewById(R.id.my_iv_delete)).setOnClickListener(this);
-        ((ImageView)this.findViewById(R.id.my_iv_copy)).setOnClickListener(this);
-        ((ImageView)this.findViewById(R.id.my_iv_move)).setOnClickListener(this);
+        this.findViewById(R.id.my_iv_all).setOnClickListener(this);
+        this.findViewById(R.id.my_iv_delete).setOnClickListener(this);
+        this.findViewById(R.id.my_iv_copy).setOnClickListener(this);
+        this.findViewById(R.id.my_iv_move).setOnClickListener(this);
 
-        ((RelativeLayout) this.findViewById(R.id.my_c_rl_tool)).setVisibility(View.GONE);
+        this.findViewById(R.id.my_c_rl_tool).setVisibility(View.GONE);
 
-        ActionBar ab = (ActionBar) getSupportActionBar();
+        ActionBar ab = getSupportActionBar();
         ab.setTitle(b.getString("kindName"));
         ab.setHomeButtonEnabled(true);
         ab.setDisplayHomeAsUpEnabled(true);
@@ -73,6 +74,8 @@ public class ConversationNoteViewActivity extends AppCompatActivity implements V
         db = dbHelper.getWritableDatabase();
 
         changeListView();
+
+        DicUtils.setAdView(this);
     }
 
     public void changeListView() {
@@ -205,7 +208,7 @@ public class ConversationNoteViewActivity extends AppCompatActivity implements V
                 }
 
                 return true;
-            };
+            }
         });
         listView.setSelection(0);
     }
@@ -221,19 +224,19 @@ public class ConversationNoteViewActivity extends AppCompatActivity implements V
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         if (isEditing) {
-            ((MenuItem) menu.findItem(R.id.action_edit)).setVisible(false);
-            ((MenuItem) menu.findItem(R.id.action_exit)).setVisible(true);
+            menu.findItem(R.id.action_edit).setVisible(false);
+            menu.findItem(R.id.action_exit).setVisible(true);
         } else {
-            ((MenuItem) menu.findItem(R.id.action_edit)).setVisible(true);
-            ((MenuItem) menu.findItem(R.id.action_exit)).setVisible(false);
+            menu.findItem(R.id.action_edit).setVisible(true);
+            menu.findItem(R.id.action_exit).setVisible(false);
         }
 
         if ( isForeignView ) {
-            ((MenuItem) menu.findItem(R.id.action_view)).setVisible(false);
-            ((MenuItem) menu.findItem(R.id.action_hide)).setVisible(true);
+            menu.findItem(R.id.action_view).setVisible(false);
+            menu.findItem(R.id.action_hide).setVisible(true);
         } else {
-            ((MenuItem) menu.findItem(R.id.action_view)).setVisible(true);
-            ((MenuItem) menu.findItem(R.id.action_hide)).setVisible(false);
+            menu.findItem(R.id.action_view).setVisible(true);
+            menu.findItem(R.id.action_hide).setVisible(false);
         }
 
         return super.onPrepareOptionsMenu(menu);
@@ -249,7 +252,7 @@ public class ConversationNoteViewActivity extends AppCompatActivity implements V
             isEditing = true;
             invalidateOptionsMenu();
 
-            ((RelativeLayout) this.findViewById(R.id.my_c_rl_tool)).setVisibility(View.VISIBLE);
+            this.findViewById(R.id.my_c_rl_tool).setVisibility(View.VISIBLE);
 
             adapter.editChange(isEditing);
             adapter.notifyDataSetChanged();
@@ -257,7 +260,7 @@ public class ConversationNoteViewActivity extends AppCompatActivity implements V
             isEditing = false;
             invalidateOptionsMenu();
 
-            ((RelativeLayout) this.findViewById(R.id.my_c_rl_tool)).setVisibility(View.GONE);
+            this.findViewById(R.id.my_c_rl_tool).setVisibility(View.GONE);
 
             adapter.editChange(isEditing);
             adapter.notifyDataSetChanged();
@@ -293,11 +296,7 @@ public class ConversationNoteViewActivity extends AppCompatActivity implements V
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.my_iv_all :
-                if ( isAllCheck ) {
-                    isAllCheck = false;
-                } else {
-                    isAllCheck = true;
-                }
+                isAllCheck = !isAllCheck;
                 adapter.allCheck(isAllCheck);
                 break;
             case R.id.my_iv_delete :
@@ -515,9 +514,9 @@ class ConversationNoteViewCursorAdapter extends CursorAdapter {
         }
 
         if ( isEditing ) {
-            ((RelativeLayout) view.findViewById(R.id.my_rl_left)).setVisibility(View.VISIBLE);
+            view.findViewById(R.id.my_rl_left).setVisibility(View.VISIBLE);
         } else {
-            ((RelativeLayout) view.findViewById(R.id.my_rl_left)).setVisibility(View.GONE);
+            view.findViewById(R.id.my_rl_left).setVisibility(View.GONE);
         }
 
         //사이즈 설정

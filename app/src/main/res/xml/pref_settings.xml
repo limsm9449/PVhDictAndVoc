@@ -9,6 +9,15 @@
         android:negativeButtonText="@null"
         android:positiveButtonText="@null"/>
 
+    <ListPreference
+        android:defaultValue="3"
+        android:key="key_webViewFontSize"
+        android:title="영어뉴스 폰트 사이즈"
+        android:entries="@array/webViewFontSize"
+        android:entryValues="@array/webViewFontSize"
+        android:negativeButtonText="@null"
+        android:positiveButtonText="@null"/>
+
     <PreferenceCategory android:title="백업 / 복구">
         <Preference
             android:key="key_backup"
@@ -37,6 +46,10 @@
             android:key="key_voc_clear"
             android:title="단어장 초기화"
             android:summary="모든 단어장을 삭제합니다."/>
+        <Preference
+            android:key="key_news_clear"
+            android:title="뉴스 초기화"
+            android:summary="모든 뉴스 데이타를 삭제합니다."/>
     </PreferenceCategory>
 
     <PreferenceCategory android:title="개발자">

@@ -33,6 +33,7 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import java.util.HashMap;
 import java.util.Locale;
 
@@ -59,7 +60,7 @@ public class ConversationActivity extends AppCompatActivity implements View.OnCl
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setVisibility(View.GONE);
 
-        ActionBar ab = (ActionBar) getSupportActionBar();
+        ActionBar ab = getSupportActionBar();
         ab.setHomeButtonEnabled(true);
         ab.setDisplayHomeAsUpEnabled(true);
 
@@ -83,15 +84,17 @@ public class ConversationActivity extends AppCompatActivity implements View.OnCl
             }
         });
 
-        ((ImageView)findViewById(R.id.my_iv_clear)).setOnClickListener(this);
-        ((ImageButton) findViewById(R.id.my_ib_search)).setOnClickListener(this);
-        ((ImageView) findViewById(R.id.my_iv_random)).setOnClickListener(this);
-        ((ImageView) findViewById(R.id.my_iv_view)).setOnClickListener(this);
-        ((ImageView) findViewById(R.id.my_iv_hide)).setOnClickListener(this);
+        findViewById(R.id.my_iv_clear).setOnClickListener(this);
+        findViewById(R.id.my_ib_search).setOnClickListener(this);
+        findViewById(R.id.my_iv_random).setOnClickListener(this);
+        findViewById(R.id.my_iv_view).setOnClickListener(this);
+        findViewById(R.id.my_iv_hide).setOnClickListener(this);
         
-        ((ImageView) findViewById(R.id.my_iv_hide)).setVisibility(View.GONE);
+        findViewById(R.id.my_iv_hide).setVisibility(View.GONE);
 
         changeListView(false);
+
+        DicUtils.setAdView(this);
     }
 
     @Override
@@ -122,7 +125,7 @@ public class ConversationActivity extends AppCompatActivity implements View.OnCl
     
     public void changeListView(boolean isKeyin) {
         if ( isKeyin ) {
-            ((RelativeLayout)findViewById(R.id.my_f_conv_rl_msg)).setVisibility(View.GONE);
+            findViewById(R.id.my_f_conv_rl_msg).setVisibility(View.GONE);
 
             if (task != null) {
                 return;
@@ -292,16 +295,16 @@ public class ConversationActivity extends AppCompatActivity implements View.OnCl
                 adapter.notifyDataSetChanged();
             }
 
-            ((ImageView) findViewById(R.id.my_iv_view)).setVisibility(View.GONE);
-            ((ImageView) findViewById(R.id.my_iv_hide)).setVisibility(View.VISIBLE);
+            findViewById(R.id.my_iv_view).setVisibility(View.GONE);
+            findViewById(R.id.my_iv_hide).setVisibility(View.VISIBLE);
         } else if (v.getId() == R.id.my_iv_hide) {
             if (adapter != null) {
                 adapter.setForeignView(false);
                 adapter.notifyDataSetChanged();
             }
 
-            ((ImageView) findViewById(R.id.my_iv_view)).setVisibility(View.VISIBLE);
-            ((ImageView) findViewById(R.id.my_iv_hide)).setVisibility(View.GONE);
+            findViewById(R.id.my_iv_view).setVisibility(View.VISIBLE);
+            findViewById(R.id.my_iv_hide).setVisibility(View.GONE);
         }  else if ( v.getId() == R.id.my_iv_random) {
             et_search.setText("");
             isRandom = true;
@@ -363,8 +366,8 @@ public class ConversationActivity extends AppCompatActivity implements View.OnCl
             if( isRandom ) {
                 Toast.makeText(ConversationActivity.this, "Random으로 200개의 예문을 조회하였습니다.", Toast.LENGTH_SHORT).show();
             }
-            ((ImageView) findViewById(R.id.my_iv_hide)).setVisibility(View.GONE);
-            ((ImageView) findViewById(R.id.my_iv_view)).setVisibility(View.VISIBLE);
+            findViewById(R.id.my_iv_hide).setVisibility(View.GONE);
+            findViewById(R.id.my_iv_view).setVisibility(View.VISIBLE);
 
             pd.dismiss();
             task = null;

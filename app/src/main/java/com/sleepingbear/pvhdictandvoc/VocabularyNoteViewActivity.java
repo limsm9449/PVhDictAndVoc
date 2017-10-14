@@ -57,7 +57,7 @@ public class VocabularyNoteViewActivity extends AppCompatActivity implements Vie
         Bundle b = this.getIntent().getExtras();
         kind = b.getString("kind");
 
-        ActionBar ab = (ActionBar) getSupportActionBar();
+        ActionBar ab = getSupportActionBar();
         ab.setTitle(b.getString("kindName"));
         ab.setHomeButtonEnabled(true);
         ab.setDisplayHomeAsUpEnabled(true);
@@ -65,16 +65,16 @@ public class VocabularyNoteViewActivity extends AppCompatActivity implements Vie
         dbHelper = new DbHelper(this);
         db = dbHelper.getWritableDatabase();
 
-        ((RelativeLayout) this.findViewById(R.id.my_c_rl_tool)).setVisibility(View.GONE);
+        this.findViewById(R.id.my_c_rl_tool).setVisibility(View.GONE);
 
-        ((RadioButton)this.findViewById(R.id.my_a_voc_rb_all)).setOnClickListener(this);
-        ((RadioButton)this.findViewById(R.id.my_a_voc_rb_m)).setOnClickListener(this);
-        ((RadioButton)this.findViewById(R.id.my_a_voc_rb_m_not)).setOnClickListener(this);
+        this.findViewById(R.id.my_a_voc_rb_all).setOnClickListener(this);
+        this.findViewById(R.id.my_a_voc_rb_m).setOnClickListener(this);
+        this.findViewById(R.id.my_a_voc_rb_m_not).setOnClickListener(this);
 
-        ((ImageView)this.findViewById(R.id.my_iv_all)).setOnClickListener(this);
-        ((ImageView)this.findViewById(R.id.my_iv_delete)).setOnClickListener(this);
-        ((ImageView)this.findViewById(R.id.my_iv_copy)).setOnClickListener(this);
-        ((ImageView)this.findViewById(R.id.my_iv_move)).setOnClickListener(this);
+        this.findViewById(R.id.my_iv_all).setOnClickListener(this);
+        this.findViewById(R.id.my_iv_delete).setOnClickListener(this);
+        this.findViewById(R.id.my_iv_copy).setOnClickListener(this);
+        this.findViewById(R.id.my_iv_move).setOnClickListener(this);
 
         Spinner spinner = (Spinner) this.findViewById(R.id.my_a_voc_s_ord);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.dicOrderValue, android.R.layout.simple_spinner_item);
@@ -87,7 +87,7 @@ public class VocabularyNoteViewActivity extends AppCompatActivity implements Vie
                 mOrder = parent.getSelectedItemPosition();
 
                 if ( mOrder == 6 ) {
-                    Toast.makeText(getApplicationContext(), "Random으로 조회시 암기여부를 체크할때 정렬이 다시 되기 때문에 보여지는 것이 틀려집니다.", Toast.LENGTH_LONG).show();
+                    db.execSQL(DicQuery.updVocRandom());
                 }
 
                 getListView();
@@ -98,6 +98,8 @@ public class VocabularyNoteViewActivity extends AppCompatActivity implements Vie
             }
         });
         spinner.setSelection(0);
+
+        DicUtils.setAdView(this);
     }
 
     public void getListView() {
@@ -129,7 +131,7 @@ public class VocabularyNoteViewActivity extends AppCompatActivity implements Vie
         } else if ( mOrder == 5 ) {
             sql.append(" ORDER BY B.MEAN" + CommConstants.sqlCR);
         } else if ( mOrder == 6 ) {
-            sql.append(" ORDER BY RANDOM()" + CommConstants.sqlCR);
+            sql.append(" ORDER BY A.RANDOM_SEQ" + CommConstants.sqlCR);
         }
         DicUtils.dicSqlLog(sql.toString());
 
@@ -178,17 +180,13 @@ public class VocabularyNoteViewActivity extends AppCompatActivity implements Vie
             mMemorization = "N";
             getListView();
         } else if (v.getId() == R.id.my_iv_all ) {
-            if ( isAllCheck ) {
-                isAllCheck = false;
-            } else {
-                isAllCheck = true;
-            }
+            isAllCheck = !isAllCheck;
             adapter.allCheck(isAllCheck);
         } else if (v.getId() == R.id.my_iv_delete ) {
             if ( !adapter.isCheck() ) {
                 Toast.makeText(this, "선택된 데이타가 없습니다.", Toast.LENGTH_SHORT).show();
             } else {
-                new android.app.AlertDialog.Builder(this)
+                new android.support.v7.app.AlertDialog.Builder(this)
                         .setTitle("알림")
                         .setMessage("삭제하시겠습니까?")
                         .setPositiveButton("확인", new DialogInterface.OnClickListener() {
@@ -297,11 +295,11 @@ public class VocabularyNoteViewActivity extends AppCompatActivity implements Vie
         getMenuInflater().inflate(R.menu.menu_vocabulary, menu);
 
         if (isEditing) {
-            ((MenuItem) menu.findItem(R.id.action_edit)).setVisible(false);
-            ((MenuItem) menu.findItem(R.id.action_exit)).setVisible(true);
+            menu.findItem(R.id.action_edit).setVisible(false);
+            menu.findItem(R.id.action_exit).setVisible(true);
         } else {
-            ((MenuItem) menu.findItem(R.id.action_edit)).setVisible(true);
-            ((MenuItem) menu.findItem(R.id.action_exit)).setVisible(false);
+            menu.findItem(R.id.action_edit).setVisible(true);
+            menu.findItem(R.id.action_exit).setVisible(false);
         }
 
         return true;
@@ -317,8 +315,8 @@ public class VocabularyNoteViewActivity extends AppCompatActivity implements Vie
             isEditing = true;
             invalidateOptionsMenu();
 
-            ((RelativeLayout) this.findViewById(R.id.my_c_rl_tool)).setVisibility(View.VISIBLE);
-            ((RelativeLayout) this.findViewById(R.id.my_c_rl_condi)).setVisibility(View.GONE);
+            this.findViewById(R.id.my_c_rl_tool).setVisibility(View.VISIBLE);
+            this.findViewById(R.id.my_c_rl_condi).setVisibility(View.GONE);
 
             adapter.editChange(isEditing);
             adapter.notifyDataSetChanged();
@@ -326,8 +324,8 @@ public class VocabularyNoteViewActivity extends AppCompatActivity implements Vie
             isEditing = false;
             invalidateOptionsMenu();
 
-            ((RelativeLayout) this.findViewById(R.id.my_c_rl_tool)).setVisibility(View.GONE);
-            ((RelativeLayout) this.findViewById(R.id.my_c_rl_condi)).setVisibility(View.VISIBLE);
+            this.findViewById(R.id.my_c_rl_tool).setVisibility(View.GONE);
+            this.findViewById(R.id.my_c_rl_condi).setVisibility(View.VISIBLE);
 
             adapter.editChange(isEditing);
             adapter.notifyDataSetChanged();
@@ -494,9 +492,9 @@ class VocabularyNoteViewCursorAdapter extends CursorAdapter {
         }
 
         if ( isEditing ) {
-            ((RelativeLayout) view.findViewById(R.id.my_rl_left)).setVisibility(View.VISIBLE);
+            view.findViewById(R.id.my_rl_left).setVisibility(View.VISIBLE);
         } else {
-            ((RelativeLayout) view.findViewById(R.id.my_rl_left)).setVisibility(View.GONE);
+            view.findViewById(R.id.my_rl_left).setVisibility(View.GONE);
         }
 
         ((CheckBox)view.findViewById(R.id.my_cb_check)).setChecked(isCheck[cursor.getPosition()]);

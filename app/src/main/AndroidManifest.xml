@@ -85,7 +85,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <service android:name=".MySpeechService">
             <intent-filter>
-                <action android:name="com.sleepingbear.vhdictandvoc.MySpeechService" />
+                <action android:name="com.sleepingbear.pvhdictandvoc.MySpeechService" />
             </intent-filter>
         </service>
         <activity
@@ -167,6 +167,18 @@
         <activity
             android:name=".CategoryViewActivity"
             android:label="@string/title_activity_category_view"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".VslActivity"
+            android:label="@string/title_activity_vsl"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".News2Activity"
+            android:label="@string/title_activity_news2"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".News2ViewActivity"
+            android:label="@string/title_activity_news2_view"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

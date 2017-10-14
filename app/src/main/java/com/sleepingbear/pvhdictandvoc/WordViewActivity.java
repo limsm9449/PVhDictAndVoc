@@ -34,6 +34,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+
 import java.util.Arrays;
 import java.util.Locale;
 
@@ -78,7 +79,7 @@ public class WordViewActivity extends AppCompatActivity implements View.OnClickL
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setVisibility(View.GONE);
 
-        ActionBar ab = (ActionBar) getSupportActionBar();
+        ActionBar ab = getSupportActionBar();
         ab.setTitle("단어 상세");
         ab.setHomeButtonEnabled(true);
         ab.setDisplayHomeAsUpEnabled(true);
@@ -102,6 +103,8 @@ public class WordViewActivity extends AppCompatActivity implements View.OnClickL
         webView.setWebViewClient(new WordViewActivity.MyWebViewClient());
 
         webDictionaryLoad();
+
+        DicUtils.setAdView(this);
     }
 
     public void getWordInfo() {
@@ -362,7 +365,7 @@ public class WordViewActivity extends AppCompatActivity implements View.OnClickL
 
     public void onInit(int status) {
         Locale loc = new Locale("en");
-        Log.i("-------------", Arrays.toString(loc.getAvailableLocales()));
+        Log.i("-------------", Arrays.toString(Locale.getAvailableLocales()));
 
         if (status == TextToSpeech.SUCCESS) {
             int result = myTTS.setLanguage(new Locale("vi", "VN"));

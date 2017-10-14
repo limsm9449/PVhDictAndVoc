@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
@@ -54,6 +55,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         checkPermission();
 
+        //20일 이전 오늘의 단어 데이타 삭제
+        String delDate = DicUtils.getDelimiterDate(DicUtils.getAddDay(DicUtils.getCurrentDate(), -20), ".");
+        DicDb.delOldToday(db, delDate);
+
+        //5일 이전 뉴스 데이타 삭제
+        delDate = DicUtils.getDelimiterDate(DicUtils.getAddDay(DicUtils.getCurrentDate(), -5), ".");
+        DicDb.delOldNews(db, delDate);
+
+
         findViewById(R.id.my_b_foreign_dic).setOnClickListener(this);
         findViewById(R.id.my_b_dic_history).setOnClickListener(this);
 
@@ -61,6 +71,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.my_b_web_dic).setOnClickListener(this);
 
         findViewById(R.id.my_b_news).setOnClickListener(this);
+        findViewById(R.id.my_b_news2).setOnClickListener(this);
         findViewById(R.id.my_b_news_word).setOnClickListener(this);
 
         findViewById(R.id.my_b_conversation_study).setOnClickListener(this);
@@ -69,12 +80,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.my_b_conv_note).setOnClickListener(this);
 
         findViewById(R.id.my_b_grammar).setOnClickListener(this);
+        findViewById(R.id.my_b_vsl).setOnClickListener(this);
         findViewById(R.id.my_b_category).setOnClickListener(this);
-        findViewById(R.id.my_b_naver_conv).setOnClickListener(this);
 
         findViewById(R.id.my_b_today).setOnClickListener(this);
         findViewById(R.id.my_b_voc).setOnClickListener(this);
         findViewById(R.id.my_b_voc_study).setOnClickListener(this);
+
+        DicUtils.setAdView(this);
     }
 
     @Override
@@ -92,8 +105,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (id == R.id.action_share) {
             Intent msg = new Intent(Intent.ACTION_SEND);
             msg.addCategory(Intent.CATEGORY_DEFAULT);
-            msg.putExtra(Intent.EXTRA_SUBJECT, "최고의 베트남어 학습(유류) 어플");
-            msg.putExtra(Intent.EXTRA_TEXT, "베트남어.. 참 어렵죠? '최고의 베트남어 학습(유료)' 어플을 사용해 보세요. https://play.google.com/store/apps/details?id=com.sleepingbear.pvhdictandvoc ");
+            msg.putExtra(Intent.EXTRA_SUBJECT, "최고의 베트남어 학습 어플");
+            msg.putExtra(Intent.EXTRA_TEXT, "베트남어.. 참 어렵죠? '최고의 베트남어 학습' 어플을 사용해 보세요. https://play.google.com/store/apps/details?id=com.sleepingbear.pvhdictandvoc ");
             msg.setType("text/plain");
             startActivity(Intent.createChooser(msg, "어플 공유"));
 
@@ -153,6 +166,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 startActivity(newsIntent);
 
                 break;
+            case R.id.my_b_news2:
+                Intent news2Intent = new Intent(getApplication(), News2Activity.class);
+                news2Intent.putExtras(bundle);
+                startActivity(news2Intent);
+
+                break;
             case R.id.my_b_news_word:
                 Intent newClickWordIntent = new Intent(getApplication(), NewsClickWordActivity.class);
                 newClickWordIntent.putExtras(bundle);
@@ -175,8 +194,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.my_b_grammar:
                 startActivity(new Intent(getApplication(), GrammarActivity.class));
                 break;
-            case R.id.my_b_naver_conv:
-                startActivity(new Intent(getApplication(), NaverConversationActivity.class));
+            case R.id.my_b_vsl:
+                startActivity(new Intent(getApplication(), VslActivity.class));
                 break;
             case R.id.my_b_today:
                 startActivity(new Intent(getApplication(), TodayActivity.class));
@@ -189,9 +208,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             case R.id.my_b_voc_study:
                 startActivity(new Intent(getApplication(), StudyActivity.class));
-
                 break;
-
         }
     }
 

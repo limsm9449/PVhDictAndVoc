@@ -18,6 +18,8 @@
     <string name="action_share">어플 공유</string>
     <string name="action_patch">패치 내역</string>
     <string name="action_sentence_write">aa</string>
+    <string name="action_no_ad">광고 제거 어플(유료)</string>
+    <string name="action_web">웹페이지</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->
@@ -39,7 +41,7 @@
     <string name="title_activity_naver_conversation">네이버 회화</string>
     <string name="title_activity_naver_conversation_view">네이버 회화 상세</string>
     <string name="title_activity_dictionary">베트남 사전</string>
-    <string name="title_activity_dictionary_history">검색 History</string>
+    <string name="title_activity_dictionary_history">사전 검색 History</string>
     <string name="title_activity_web_dictionary">웹 사전</string>
     <string name="title_activity_conversation">회화 검색</string>
     <string name="title_activity_conversation_study">회화 학습</string>
@@ -55,4 +57,9 @@
     <string name="title_activity_today">오늘의 단어</string>
     <string name="title_activity_category">카테고리별</string>
     <string name="title_activity_category_view">카테고리별 상세</string>
+
+    <string name="banner_ad_unit_id">ca-app-pub-3860766380986792/1647308662</string>
+    <string name="title_activity_vsl">VSL 학습</string>
+    <string name="title_activity_news2">News2Activity</string>
+    <string name="title_activity_news2_view">News2ViewActivity</string>
 </resources>

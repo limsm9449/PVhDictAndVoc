@@ -20,6 +20,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
+        android:layout_above="@+id/adView"
         android:layout_marginBottom="5dp">
 
         <LinearLayout
@@ -36,7 +37,7 @@
                 android:id="@+id/my_b_foreign_dic"
                 android:background="@drawable/my_button"
                 android:layout_weight="1"
-                android:layout_marginRight="3dp" />
+                android:layout_marginRight="3dp"/>
 
             <Button
                 android:text="사전 검색\nHistory"
@@ -45,7 +46,7 @@
                 android:id="@+id/my_b_dic_history"
                 android:background="@drawable/my_button"
                 android:layout_weight="1"
-                android:layout_marginLeft="2dp"/>
+                android:layout_marginLeft="2dp" />
 
         </LinearLayout>
 
@@ -88,6 +89,16 @@
                 android:id="@+id/my_b_news"
                 android:background="@drawable/my_button"
                 android:layout_weight="1"
+                android:layout_marginRight="3dp" />
+
+            <Button
+                android:text="베트남 뉴스\nVer.2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/my_b_news2"
+                android:background="@drawable/my_button"
+                android:layout_weight="1"
+                android:layout_marginLeft="2dp"
                 android:layout_marginRight="3dp" />
 
             <Button
@@ -165,23 +176,23 @@
                 android:layout_marginRight="3dp" />
 
             <Button
-                android:text="카테고리별"
+                android:text="VSL"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/my_b_category"
+                android:id="@+id/my_b_vsl"
                 android:background="@drawable/my_button"
                 android:layout_weight="1"
                 android:layout_marginLeft="2dp"
                 android:layout_marginRight="3dp" />
 
             <Button
-                android:text="네이버\n회화"
+                android:text="카테고리별"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/my_b_naver_conv"
+                android:id="@+id/my_b_category"
                 android:background="@drawable/my_button"
                 android:layout_weight="1"
-                android:layout_marginLeft="2dp"/>
+                android:layout_marginLeft="2dp" />
 
         </LinearLayout>
 
@@ -223,4 +234,12 @@
 
     </LinearLayout>
 
+    <com.google.android.gms.ads.AdView
+        xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/adView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        ads:adSize="BANNER"
+        ads:adUnitId="@string/banner_ad_unit_id"
+        android:layout_alignParentBottom="true" />
 </RelativeLayout>

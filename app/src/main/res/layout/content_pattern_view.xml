@@ -33,7 +33,16 @@
         android:layout_gravity="center_horizontal"
         android:divider="@color/my_divider"
         android:dividerHeight="0.5dp"
+        android:layout_above="@+id/adView"
         android:layout_below="@+id/my_h_split_line" />
 
 
+    <com.google.android.gms.ads.AdView
+        xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/adView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        ads:adSize="BANNER"
+        ads:adUnitId="@string/banner_ad_unit_id"
+        android:layout_alignParentBottom="true" />
 </RelativeLayout>
