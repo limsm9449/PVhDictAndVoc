@@ -138,7 +138,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
             filechooser.setExtension("txt");
             filechooser.showDialog();
         } else if ( preference.getKey().equals("key_voc_clear") ) {
-            new AlertDialog.Builder(this)
+            new android.support.v7.app.AlertDialog.Builder(this)
                     .setTitle("알림")
                     .setMessage("단어장을 초기화 하시겠습니까?\n초기화 후에는 복구할 수 없습니다.")
                     .setPositiveButton("확인", new DialogInterface.OnClickListener() {
@@ -155,7 +155,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
                     })
                     .show();
         } else if ( preference.getKey().equals("key_my_conv_clear") ) {
-            new AlertDialog.Builder(this)
+            new android.support.v7.app.AlertDialog.Builder(this)
                     .setTitle("알림")
                     .setMessage("My 회화를 초기화 하시겠습니까?\n초기화 후에는 복구할 수 없습니다.")
                     .setPositiveButton("확인", new DialogInterface.OnClickListener() {
@@ -172,7 +172,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
                     })
                     .show();
         } else if ( preference.getKey().equals("key_conv_clear") ) {
-            new AlertDialog.Builder(this)
+            new android.support.v7.app.AlertDialog.Builder(this)
                     .setTitle("알림")
                     .setMessage("학습 회화를 초기화 하시겠습니까?\n초기화 후에는 복구할 수 없습니다.")
                     .setPositiveButton("확인", new DialogInterface.OnClickListener() {
@@ -189,7 +189,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
                     })
                     .show();
         } else if ( preference.getKey().equals("key_today_clear") ) {
-            new AlertDialog.Builder(this)
+            new android.support.v7.app.AlertDialog.Builder(this)
                     .setTitle("알림")
                     .setMessage("오늘의 단어를 초기화 하시겠습니까?\n초기화 후에는 복구할 수 없습니다.")
                     .setPositiveButton("확인", new DialogInterface.OnClickListener() {
