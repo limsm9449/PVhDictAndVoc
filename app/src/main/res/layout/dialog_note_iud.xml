@@ -167,7 +167,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="해당 회화 노트를 enconversation 디렉토리로 내보냅니다."
+                android:text="해당 회화 노트를 vhdictandvoc 디렉토리로 내보냅니다."
                 android:id="@+id/textView10"
                 android:layout_centerInParent="true"
                 android:layout_alignParentLeft="true"
