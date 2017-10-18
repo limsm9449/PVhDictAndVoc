@@ -29,8 +29,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_toLeftOf="@+id/my_dc_b_save">
+            android:layout_alignParentLeft="true">
 
             <EditText
                 android:layout_width="match_parent"
