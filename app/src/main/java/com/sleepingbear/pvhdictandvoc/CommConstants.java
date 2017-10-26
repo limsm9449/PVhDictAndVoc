@@ -86,4 +86,6 @@ public class CommConstants {
     public static String news_laoDongNews = "N03";
     public static String news_vnexpressNews = "N04";
     public static String news_vietnamNetNews = "N05";
+
+    public final static int a_vocabulary = 1;
 }

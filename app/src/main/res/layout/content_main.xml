@@ -83,7 +83,7 @@
             android:layout_marginBottom="5dp">
 
             <Button
-                android:text="베트남 뉴스"
+                android:text="베트남 뉴스\nVer.1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/my_b_news"

@@ -131,7 +131,7 @@ public class VocabularyNoteActivity extends AppCompatActivity implements View.On
             Intent intent = new Intent(getApplication(), VocabularyNoteViewActivity.class);
             intent.putExtras(bundle);
 
-            startActivity(intent);
+            startActivityForResult(intent, CommConstants.a_vocabulary);
         }
     };
 
@@ -370,6 +370,17 @@ public class VocabularyNoteActivity extends AppCompatActivity implements View.On
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        DicUtils.dicLog("onActivityResult : " + requestCode + " : " + resultCode);
+
+        switch ( requestCode ) {
+            case CommConstants.a_vocabulary :
+                changeListView();
+
+                break;
+        }
     }
 }
 
