@@ -31,6 +31,7 @@ public class Decompress {
                 if (ze.isDirectory()) {
                     _dirChecker(ze.getName());
                 } else {
+                    /*
                     FileOutputStream fout = new FileOutputStream(_location + ze.getName());
                     BufferedInputStream in = new BufferedInputStream(zin);
                     BufferedOutputStream out = new BufferedOutputStream(fout);
@@ -42,6 +43,17 @@ public class Decompress {
 
                     zin.closeEntry();
                     fout.close();
+                    */
+                    FileOutputStream fileoutputstream = new FileOutputStream(_location + ze.getName());
+
+                    int n;
+                    byte[] buf = new byte[1024];
+                    while ((n = zin.read(buf, 0, 1024)) > -1) {
+                        fileoutputstream.write(buf, 0, n);
+                    }
+
+                    fileoutputstream.close();
+                    zin.closeEntry();
                 }
             }
             zin.close();
@@ -59,6 +71,5 @@ public class Decompress {
         }
     }
 }
-
 
 

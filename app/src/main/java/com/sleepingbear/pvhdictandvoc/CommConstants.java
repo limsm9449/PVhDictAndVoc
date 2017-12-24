@@ -53,6 +53,8 @@ public class CommConstants {
     public static String screen_news2 = "SCREEN_NEWS2";
     public static String screen_news2View = "SCREEN_NEWS2_VIEW";
     public static String screen_vsl = "SCREEN_VSL";
+    public static String screen_caption = "SCREEN_CAPTION";
+    public static String screen_captionView = "SCREEN_CAPTION_VIEW";
 
 
     public static int studyKind1 = 0;
