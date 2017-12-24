@@ -30,10 +30,11 @@ public class PatchActivity extends AppCompatActivity {
         StringBuffer patch = new StringBuffer();
 
         patch.append("* 신규 패치" + CommConstants.sqlCR);
-        patch.append("- 단어장의 단어를 추가, 삭제할 경우 메인의 단어 갯수가 변경이 안되는 문제점 수정" + CommConstants.sqlCR);
+        patch.append("- 미드 자막 학습 기능 추가" + CommConstants.sqlCR);
         patch.append("" + CommConstants.sqlCR);
         patch.append("" + CommConstants.sqlCR);
 
+        patch.append("- 단어장의 단어를 추가, 삭제할 경우 메인의 단어 갯수가 변경이 안되는 문제점 수정" + CommConstants.sqlCR);
         patch.append("- 베트남 뉴스 Ver.2 기능 추가" + CommConstants.sqlCR);
         patch.append("- VSL 기능 추가" + CommConstants.sqlCR);
         patch.append("- 회화학습에서 단어 버튼의 크기를 변경" + CommConstants.sqlCR);
