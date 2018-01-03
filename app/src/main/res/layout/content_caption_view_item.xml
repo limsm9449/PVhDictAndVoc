@@ -25,8 +25,8 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Han"
-            android:id="@+id/my_tv_han"
+            android:text="Foreign"
+            android:id="@+id/my_tv_foreign"
             android:layout_alignParentBottom="false"
             android:layout_alignParentRight="false"
             android:layout_alignParentEnd="false"
@@ -40,14 +40,14 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Foreign"
-            android:id="@+id/my_tv_foreign"
+            android:text="Han"
+            android:id="@+id/my_tv_han"
             android:layout_alignParentLeft="true"
             android:textColor="@color/my_text_word"
             android:textSize="13dp"
             android:textStyle="normal|bold"
             android:layout_marginTop="3dp"
-            android:layout_below="@+id/my_tv_han" />
+            android:layout_below="@+id/my_tv_foreign" />
     </RelativeLayout>
 
 </RelativeLayout>

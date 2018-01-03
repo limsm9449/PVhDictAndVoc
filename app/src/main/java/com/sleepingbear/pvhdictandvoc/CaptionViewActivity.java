@@ -23,7 +23,7 @@ import android.widget.TextView;
 
 public class CaptionViewActivity extends AppCompatActivity implements View.OnClickListener  {
 
-    private CaptionDbHelper dbHelper;
+    private DbHelper dbHelper;
     private SQLiteDatabase db;
     private CaptionViewCursorAdapter adapter;
     private ListView listView;
@@ -47,7 +47,7 @@ public class CaptionViewActivity extends AppCompatActivity implements View.OnCli
         ab.setDisplayHomeAsUpEnabled(true);
         ab.setTitle(b.getString("TITLE"));
 
-        dbHelper = new CaptionDbHelper(this);
+        dbHelper = new DbHelper(this);
         db = dbHelper.getWritableDatabase();
 
         findViewById(R.id.my_rb_all).setOnClickListener(this);
@@ -60,7 +60,7 @@ public class CaptionViewActivity extends AppCompatActivity implements View.OnCli
     }
 
     public void getListView() {
-        Cursor cursor = db.rawQuery(CaptionQuery.getCategoryCaptionList(code), null);
+        Cursor cursor = db.rawQuery(CaptionQuery.getDramaCaptionList(code), null);
         listView = (ListView) this.findViewById(R.id.my_lv);
         adapter = new CaptionViewCursorAdapter(getApplicationContext(), cursor, this);
         listView.setAdapter(adapter);

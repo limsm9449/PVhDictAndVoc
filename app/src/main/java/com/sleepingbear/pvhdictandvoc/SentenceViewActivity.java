@@ -53,8 +53,8 @@ public class SentenceViewActivity extends AppCompatActivity implements View.OnCl
         db = dbHelper.getWritableDatabase();
 
         Bundle b = getIntent().getExtras();
-        notHan = b.getString("foreign");
-        han = b.getString("han");
+        notHan = b.getString("foreign").replaceAll("'"," ");
+        han = b.getString("han").replaceAll("'"," ");
         sampleSeq = b.getString("sampleSeq");
         if ( sampleSeq == null ) {
             sampleSeq = DicDb.getSampleSeq(db, notHan);

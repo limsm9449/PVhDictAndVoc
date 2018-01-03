@@ -22,7 +22,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.regex.Matcher;
@@ -1395,4 +1397,19 @@ public class DicUtils {
 
         return (isWifiAvailable && isWifiConnect) || (isMobileAvailable && isMobileConnect);
     }
+
+    public static String getUrlText(String url) {
+        StringBuffer sb = new StringBuffer();
+        try {
+            InputStream inputStream = new URL(url).openStream();
+            byte[] b = new byte[1024];
+            int c = 0;
+            while ((c = inputStream.read(b)) != -1) {
+                sb.append(new String(b, 0, c));
+            }
+        } catch ( Exception e ) {
+        }
+        return sb.toString();
+    }
+
 }
